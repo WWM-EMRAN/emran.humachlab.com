@@ -82,46 +82,96 @@ function DownloadFile(elem, url)
 
 
 ////////// Portfolio / Diary swipe
+// // const swiperElement = document.querySelector('.portfolio-details-slider.swiper.init-swiper');
+// const swiperElement = document.querySelector('.photo-slide');
+//
+// // If a configuration is provided inside the element, parse and initialize Swiper
+// if (swiperElement) {
+//     const configElement = swiperElement.querySelector('.swiper-config');
+//     const swiperConfig = JSON.parse(configElement.textContent);
+//
+//     // Initialize Swiper with the configuration
+//     new Swiper(swiperElement, swiperConfig);
+// }
+
+// MODIFIED: extra_functions.js (Around line 104)
+////////// Portfolio / Diary swipe
 // const swiperElement = document.querySelector('.portfolio-details-slider.swiper.init-swiper');
 const swiperElement = document.querySelector('.photo-slide');
 
-
-// If a configuration is provided inside the element, parse and initialize Swiper
+// If the Swiper element is found, attempt to initialize it safely.
 if (swiperElement) {
     const configElement = swiperElement.querySelector('.swiper-config');
-    const swiperConfig = JSON.parse(configElement.textContent);
 
-    // Initialize Swiper with the configuration
-    new Swiper(swiperElement, swiperConfig);
+    // CRITICAL FIX: Check if the configuration element exists before trying to parse its content
+    if (configElement) {
+        try {
+            // Added try...catch for safety in case JSON parsing fails
+            const swiperConfig = JSON.parse(configElement.textContent);
+            // Initialize Swiper with the configuration
+            new Swiper(swiperElement, swiperConfig);
+        } catch (e) {
+            console.error("Error parsing Swiper configuration JSON:", e);
+        }
+    }
 }
 
 
+// ///////////////// For background change //////////////////
+// document.addEventListener("DOMContentLoaded", () => {
+//     // const heroImage = document.querySelector('img[data-aos="fade-in"]');
+//     const heroImage = document.querySelector('.hero-bg-image');
+//     const imageListContainer = document.querySelector('.image-list');
+//
+//     // Retrieve the image paths from the spans in the image-list div
+//     const images = Array.from(imageListContainer.querySelectorAll('span')).map(span => span.textContent.trim());
+//
+//     let currentIndex = 0;
+//
+//     // Function to change the image with a smooth transition
+//     function changeImage() {
+//         heroImage.style.opacity = 0; // Fade out the current image
+//
+//         setTimeout(() => {
+//             currentIndex = (currentIndex + 1) % images.length;
+//             heroImage.src = images[currentIndex]; // Change the image source
+//             heroImage.style.opacity = 1; // Fade in the new image
+//         }, 750); // Wait for the fade-out transition duration
+//     }
+//
+//     // Change image every 10 seconds
+//     setInterval(changeImage, 10000);
+// });
+
+
+// MODIFIED: extra_functions.js (Starting around line 125)
 ///////////////// For background change //////////////////
 document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll('#printable_cv .main-area .section');
-    if (!sections || sections.length === 0) return;
     // const heroImage = document.querySelector('img[data-aos="fade-in"]');
     const heroImage = document.querySelector('.hero-bg-image');
     const imageListContainer = document.querySelector('.image-list');
 
-    // Retrieve the image paths from the spans in the image-list div
-    const images = Array.from(imageListContainer.querySelectorAll('span')).map(span => span.textContent.trim());
+    // CRITICAL FIX: Only run background change logic if required elements exist
+    if (heroImage && imageListContainer) {
+        // Retrieve the image paths from the spans in the image-list div
+        const images = Array.from(imageListContainer.querySelectorAll('span')).map(span => span.textContent.trim());
 
-    let currentIndex = 0;
+        let currentIndex = 0;
 
-    // Function to change the image with a smooth transition
-    function changeImage() {
-        heroImage.style.opacity = 0; // Fade out the current image
+        // Function to change the image with a smooth transition
+        function changeImage() {
+            heroImage.style.opacity = 0; // Fade out the current image
 
-        setTimeout(() => {
-            currentIndex = (currentIndex + 1) % images.length;
-            heroImage.src = images[currentIndex]; // Change the image source
-            heroImage.style.opacity = 1; // Fade in the new image
-        }, 750); // Wait for the fade-out transition duration
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % images.length;
+                heroImage.src = images[currentIndex]; // Change the image source
+                heroImage.style.opacity = 1; // Fade in the new image
+            }, 750); // Wait for the fade-out transition duration
+        }
+
+        // Change image every 10 seconds
+        setInterval(changeImage, 10000);
     }
-
-    // Change image every 10 seconds
-    setInterval(changeImage, 10000);
 });
 
 
