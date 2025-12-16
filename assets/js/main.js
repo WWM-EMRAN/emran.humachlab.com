@@ -154,41 +154,79 @@
 // });
 
 
+    // window.addEventListener("load", () => {
+    //   // // DEALING WITH FAV ICON ANIM
+    //   // const gifFavicon = document.createElement("link");
+    //   // gifFavicon.rel = "icon";
+    //   // gifFavicon.type = "image/gif";
+    //   // gifFavicon.href = "assets/img/Emran_Ali_Logo_Fav.gif"; // path to your animated GIF
+    //   // document.head.appendChild(gifFavicon);
+    //
+    //   // DEALING WITH PRELOADER LOGO
+    //   const logo = document.getElementById("logo");
+    //   const preloader = document.getElementById("preloader");
+    //
+    //   // Calculate how long the page took to load
+    //   const pageLoadTime = performance.now(); // in ms
+    //   const transitionDuration = Math.min(Math.max(pageLoadTime, 500), 2000); // Clamp between 0.5s and 3s
+    //
+    //   // Determine extra delay based on page
+    //   const path = window.location.pathname;
+    //   const extraDelay = (path === "/" || path.endsWith("/index.html")) ? 3000 : 1000;
+    //
+    //   // Trigger color transition
+    //   logo.style.filter = "none";
+    //
+    //   // Fade out preloader after color transition
+    //   setTimeout(() => {
+    //     preloader.style.transition = "opacity 0.6s ease";
+    //     preloader.style.opacity = "0";
+    //     setTimeout(() => {
+    //       preloader.style.display = "none";
+    //       mainContent.style.display = "flex";
+    //     }, 500);
+    //   }, transitionDuration+extraDelay); // Wait for filter transition to complete
+    // });
+
+
+    // MODIFIED: main.js (Starting around line 178 - inside the load listener)
     window.addEventListener("load", () => {
-      // // DEALING WITH FAV ICON ANIM
-      // const gifFavicon = document.createElement("link");
-      // gifFavicon.rel = "icon";
-      // gifFavicon.type = "image/gif";
-      // gifFavicon.href = "assets/img/Emran_Ali_Logo_Fav.gif"; // path to your animated GIF
-      // document.head.appendChild(gifFavicon);
+        // // DEALING WITH FAV ICON ANIM
+        // const gifFavicon = document.createElement("link");
+        // ... (rest of the favicon code)
 
-      // DEALING WITH PRELOADER LOGO
-      const logo = document.getElementById("logo");
-      const preloader = document.getElementById("preloader");
+        // DEALING WITH PRELOADER LOGO
+        const logo = document.getElementById("logo");
+        const preloader = document.getElementById("preloader");
 
-      // Calculate how long the page took to load
-      const pageLoadTime = performance.now(); // in ms
-      const transitionDuration = Math.min(Math.max(pageLoadTime, 500), 2000); // Clamp between 0.5s and 3s
+        // CRITICAL FIX: Define mainContent using the 'main' tag selector
+        const mainContent = document.querySelector('main');
+        // End CRITICAL FIX
 
-      // Determine extra delay based on page
-      const path = window.location.pathname;
-      const extraDelay = (path === "/" || path.endsWith("/index.html")) ? 3000 : 1000;
+        // Calculate how long the page took to load
+        const pageLoadTime = performance.now(); // in ms
+        const transitionDuration = Math.min(Math.max(pageLoadTime, 500), 2000); // Clamp between 0.5s and 3s
 
-      // Trigger color transition
-      logo.style.filter = "none";
+        // Determine extra delay based on page
+        const path = window.location.pathname;
+        const extraDelay = (path === "/" || path.endsWith("/index.html")) ? 3000 : 1000;
 
-      // Fade out preloader after color transition
-      setTimeout(() => {
-        preloader.style.transition = "opacity 0.6s ease";
-        preloader.style.opacity = "0";
+        // Trigger color transition
+        logo.style.filter = "none";
+
+        // Fade out preloader after color transition
         setTimeout(() => {
-          preloader.style.display = "none";
-          // mainContent.style.display = "flex";
-        }, 500);
-      }, transitionDuration+extraDelay); // Wait for filter transition to complete
+            preloader.style.transition = "opacity 0.6s ease";
+            preloader.style.opacity = "0";
+            setTimeout(() => {
+                preloader.style.display = "none";
+                // // Safety check: Only set display if mainContent was found
+                // if (mainContent) {
+                //     mainContent.style.display = "flex";
+                // }
+            }, 500);
+        }, transitionDuration+extraDelay); // Wait for filter transition to complete
     });
-
-
 
 
 
@@ -231,6 +269,8 @@
   /**
    * Init typed.js
    */
+
+  /*
   const selectTyped = document.querySelector('.typed');
   if (selectTyped) {
     let typed_strings = selectTyped.getAttribute('data-typed-items');
@@ -243,6 +283,48 @@
       backDelay: 2000
     });
   }
+   */
+
+    // /**
+    //  * Global function to initialize Typed.js animation.
+    //  * This MUST be defined outside any local scopes/wrappers.
+    //  */
+    // function initTypedAnimation() {
+    //     const selectTyped = document.querySelector('.typed');
+    //
+    //     // Only proceed if the element exists AND has data-typed-items defined
+    //     if (selectTyped && selectTyped.getAttribute('data-typed-items')) {
+    //         let typed_strings = selectTyped.getAttribute('data-typed-items');
+    //         typed_strings = typed_strings.split(',');
+    //
+    //         // Check if the instance already exists and destroy it before creating a new one
+    //         if (selectTyped.typed) {
+    //             selectTyped.typed.destroy();
+    //         }
+    //
+    //         // Initialize new Typed instance
+    //         selectTyped.typed = new Typed('.typed', {
+    //             strings: typed_strings,
+    //             loop: true,
+    //             typeSpeed: 100,
+    //             backSpeed: 50,
+    //             backDelay: 2000
+    //         });
+    //     }
+    // }
+
+// ----------------------------------------------------
+// Theme Initialization Logic (Ensure this calls the function)
+// ----------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+        // ... other theme initializations ...
+
+        // 1. Call the new Typed.js function on initial load
+        initTypedAnimation();
+    });
+
+
+
 
   /**
    * Initiate Pure Counter
@@ -541,6 +623,33 @@
 
 
 
+/**
+ * Global function to initialize Typed.js animation.
+ * This MUST be defined outside any local scopes/wrappers.
+ */
+function initTypedAnimation() {
+    const selectTyped = document.querySelector('.typed');
+
+    // Only proceed if the element exists AND has data-typed-items defined
+    if (selectTyped && selectTyped.getAttribute('data-typed-items')) {
+        let typed_strings = selectTyped.getAttribute('data-typed-items');
+        typed_strings = typed_strings.split(',');
+
+        // Check if the instance already exists and destroy it before creating a new one
+        if (selectTyped.typed) {
+            selectTyped.typed.destroy();
+        }
+
+        // Initialize new Typed instance
+        selectTyped.typed = new Typed('.typed', {
+            strings: typed_strings,
+            loop: true,
+            typeSpeed: 100,
+            backSpeed: 50,
+            backDelay: 2000
+        });
+    }
+}
 
 
 

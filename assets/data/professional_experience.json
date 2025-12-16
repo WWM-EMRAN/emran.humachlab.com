@@ -1,0 +1,313 @@
+{
+  "section_info": {
+    "title": "Professional Experiences",
+    "details": "I am a dedicated and quick-learning professional with proven expertise in both industry and academia. My unique background enables me to bridge the gap between academic research and practical industrial applications through extensive hands-on experience in research and development. I bring over 3 years of experience in software development and project management, alongside approximately 12 years of academic engagement, including research, teaching, and industry collaboration. My journey reflects a deep passion for innovation, solution-driven thinking, and interdisciplinary integration. I am particularly enthusiastic about advancing health informatics through the development of AI- and ML-based methods, devices, and applications, with a focus on optimisation, real-world impact, and scientific rigour.",
+    "icon_class": "bx bx-briefcase"
+  },
+
+  "summary": {
+    "title": "Summary",
+    "expertise_list": [
+      {
+        "title": "Areas of Expertise",
+        "areas_of_expertise": [
+          "Teaching and Training",
+          "Application of AI, ML and DL",
+          "Applied Research in Health Informatics, Business Analytics, System Automation & Sustainable Environment",
+          "Industries-Academia Collaboration",
+          "Software Development, Team Management & Project Management"
+        ]
+      },
+      {
+        "title": "Research Interests",
+        "research_interests_columns": [
+          ["Data Science", "Machine (Deep) Learning", "Generative AI and Agentic AI", "Interpretability", "Optimisation"],
+          ["Biomedical Science", "Health Informatics", "Disease Detection and Prediction", "Time series Data Analysis", "Biosignal Analysis"],
+          ["Hypnogram EEG and Brain Signal Analysis", "Epilepsy", "Sleep*", "Aging*", "Air Quality"]
+        ]
+      }
+    ]
+  },
+
+  "experiences": [
+    {
+      "category": "Research Experiences",
+      "icon_class": "bx bxs-flask",
+      "organization": "Deakin University",
+      "location": "Melbourne, Australia",
+      "link": "https://www.deakin.edu.au/",
+      "roles": [
+        {
+          "title": "Graduate Researcher (PhD Student)",
+          "timeframe_details": "Jan. 2023 – Present | Full-time | 3 years",
+          "description_list": [
+            "Sleep disorder detection using Hypnogram",
+            "Efficacy of sleep dynamics for sleep disorder detection",
+            "Analysis of age in sleep analysis",
+            "Impact of noise in Hypnogram in sleep analysis"
+          ],
+          "responsibilities_list": [
+            "Studying research methodology and strategy",
+            "Conducting experiments and evaluations",
+            "Preparing documentation and publishing articles"
+          ],
+          "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Biomedical Sciences · Signal Processing · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Engineering · LaTeX · Programming · Algorithms · GitHub"
+        },
+        {
+          "title": "Research Assistant",
+          "timeframe_details": "Oct. 2024 – Nov. 2024, Oct. 2023 – Dec. 2023 | Casual/Contract | 2+3 months",
+          "description_list": [
+            "Feasibility analysis of Generative AI solutions for ECG-based heart disease detection",
+            "Security analysis and risk assessment for agentic AI-based healthcare platforms"
+          ],
+          "responsibilities_list": [
+            "Studying research methodology and strategy",
+            "Conducting experiments and evaluations",
+            "Preparing documentation and publishing articles"
+          ],
+          "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Biomedical Sciences · Signal Processing · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Engineering · LaTeX · Programming · Algorithms · GitHub"
+        },
+        {
+          "title": "Graduate Researcher (MRes Student)",
+          "timeframe_details": "Feb. 2020 – Oct. 2022 | Full-time | ~2.75 years",
+          "description_list": [
+            "Epileptic seizure detection using EEG",
+            "Seizure detection using single and multi-channel EEG",
+            "Factors influencing a real-world seizure detection system",
+            "EEG channel minimisation for seizure detection"
+          ],
+          "responsibilities_list": [
+            "Studying research methodology and strategy",
+            "Conducting experiments and evaluations",
+            "Preparing documentation and publishing articles"
+          ],
+          "related_skills": "Research · Health Informatics · Machine Learning · Biomedical Sciences · Signal Processing · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Engineering · LaTeX · Programming · Algorithms · GitHub"
+        },
+        {
+          "title": "Research Assistant",
+          "timeframe_details": "Aug. 2020 – Sep. 2022 | Casual/Contract | 2 years",
+          "description_list": [
+            "Research collaboration with Alfred hospital for real-world healthcare application",
+            "Epileptic seizure detection in critical setting of ICU"
+          ],
+          "responsibilities_list": [
+            "Research and collaboration with Monash University and Alfred Health in the initial design of a seizure detection system for ICU patients. ",
+            "Data pre-processing and result post-processing.",
+            "ML and DL model evaluation, testing, and visualisation.",
+            "Worked as an official (funded) employee from Aug 2021 to Dec 2021 and the rest of the period as a volunteer. "
+          ],
+          "related_skills": "Research · Health Informatics · Machine Learning · Biomedical Sciences · Signal Processing · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Engineering · LaTeX · Programming · Algorithms · GitHub"
+        },
+        {
+          "title": "Research Assistant",
+          "timeframe_details": "Mar. 2022 – Sep. 2022 | Casual/Contract | approximately 2.5 years",
+          "description_list": [
+            "Research collaboration with AETMOS for real-world sustainable environment application",
+            "Air quality and air temperature prediction for indoor settings"
+          ],
+          "responsibilities_list": [
+            "A MAAP linkage ARC project funded by the Australian Research Council (ARC).",
+            "Research and collaboration with Monash University and AETMOS (https://aetmos.com.au/) for Air Quality Prediction. ",
+            "Air Quality and Indoor Air Temperature Prediction from meteorological and traffic data. ",
+            "Effect of indoor and outdoor temperature on people's health.",
+            "Application of Deep Learning (DL)."
+          ],
+          "related_skills": "Research · Machine Learning · Signal Processing · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Programming · GitHub · Project Management"
+        }
+      ]
+    },
+
+
+    {
+      "category": "Research Experiences",
+      "icon_class": "bx bxs-flask",
+      "organization": "Hajee Mohammad Danesh Science and Technology University (HSTU)",
+      "location": "Dinajpur, Bangladesh",
+      "link": "https://www.hstu.ac.bd/",
+      "roles": [
+        {
+          "title": "Research Supervisor",
+          "timeframe_details": "Sep. 2014 – Jan. 2025 | Full-time | ~12 years",
+          "description_list": [],
+          "responsibilities_list": [
+            "Research conduction.",
+            "Research supervision of undergraduate students."
+          ],
+          "related_skills": "Research · Machine Learning · Programming · Algorithms · Teaching · OOP · Database Design · Educational Technology · C · C++ · Java · University Teaching · Public Speaking · Programming Languages"
+        }
+      ]
+    },
+
+
+    {
+      "category": "Training Experiences",
+      "icon_class": "bi bi-person-video",
+      "organization": "Intersect Australia",
+      "location": "Sydney, Australia",
+      "link": "https://www.intersect.org.au/",
+      "roles": [
+        {
+          "title": "Digital Research Trainer",
+          "timeframe_details": "Mar. 2023 – Present | Casual/Contract | ~3 years",
+          "description_list": [],
+          "responsibilities_list": [
+            "Training the researchers.",
+            "Training assistance. ",
+            "Training content creation and modification."
+          ],
+          "course_involvement": [
+            "PYTHON101: Introduction to Programming: Python",
+            "PYTHON203: Data Manipulation and Visualisation",
+            "PYTHON205: Introduction to Machine Learning: Regression",
+            "PYTHON206: Introduction to Machine Learning: Classification",
+            "PYTHON207: Introduction to Machine Learning: Unsupervised Learning"
+          ],
+          "related_skills": "Programming · Machine Learning · Data Science · Deep Learning · Python (Programming Language) · Teaching · Database Design · Training · Assistance · Demonstration"
+        }
+      ]
+    },
+
+
+    {
+      "category": "Teaching Experiences",
+      "icon_class": "bx bx-pen",
+      "organization": "Deakin University",
+      "location": "Melbourne, Australia",
+      "link": "https://www.deakin.edu.au/",
+      "roles": [
+        {
+          "title": "Graduate Reserach Teaching Fellow (GRTF)",
+          "timeframe_details": "Feb. 2025 – Present | Part-time/Contract | ~1 years",
+          "description_list": [],
+          "responsibilities_list": [
+            "Course (sessional) assistance.",
+            "Assistance in examination process and evaluation."
+          ],
+          "course_involvement": [
+            "MIS140-Introduction to Machine Learning || Python, ML, AI || T2-2025",
+            "SIT107+SIT720-Machine Learning || Python, ML, AI || T1-2025",
+            "SIT719-Analytics for Security and Privacy || Linux, Computer Security, Security Analytics || T1-2025",
+            "SIT103+SIT772-Database Fundamentals || Database Management, SQL || T1-2025"
+          ],
+          "related_skills": "Machine Learning · Data Science · Deep Learning · Python (Programming Language) · Programming · Security · Computer Security · Data Security · Database · SQL · Teaching · Database Design · Educational Technology · University Teaching"
+        },
+        {
+          "title": "Sessional Academic Staff",
+          "timeframe_details": "Mar. 2020 – Present | Casual/Contract | ~5 years",
+          "description_list": [],
+          "responsibilities_list": [
+            "Course assistance.",
+            "Assistance in examination process and evaluation.",
+            "Assistance in student HelpHub."
+          ],
+          "course_involvement": [
+            "SIT107+SIT720-Machine Learning || Python, ML, AI || T2-2020, T2-2021, T1-2022, T2-2022, T2-2023, T2-2024",
+            "MIS781-Business Intelligence and Database || Database, SQL, Power BI || T1-2023",
+            "MIS710-Machine Learning in Business || Python, ML, Business use case analysis: || T2-2023, T1-2024, T2-2024, T1-2025",
+            "MIS384-Marketing Analytics || Database, SQL, BigQuery, GCP || T1-2024",
+            "Other miscellaneous courses: Database, Computer programming (C, C++, C#)"
+          ],
+          "related_skills": "Machine Learning · Data Science · Deep Learning · Python (Programming Language) · Programming · Teaching · Database Design · Educational Technology · University Teaching"
+        }
+      ]
+    },
+
+    {
+      "category": "Teaching Experiences",
+      "icon_class": "bx bx-pen",
+      "organization": "Hajee Mohammad Danesh Science and Technology University (HSTU)",
+      "location": "Dinajpur, Bangladesh",
+      "link": "https://www.hstu.ac.bd/",
+      "roles": [
+        {
+          "title": "Assistant Professor",
+          "timeframe_details": "Sep. 2017 – Present | Full-time | ~9 years",
+          "description_list": [],
+          "responsibilities_list": [
+            "Course (theory and sessional) conduction, examination process and evaluation.",
+            "Research conduction and supervision.",
+            "Currently on leave for higher studies since February 2020."
+          ],
+          "related_skills": "Research · Machine Learning · Programming · Algorithms · Teaching · OOP · Database Design · Educational Technology · C · C++ · Java · University Teaching · Public Speaking · Programming Languages"
+        },
+        {
+          "title": "Lecturer",
+          "timeframe_details": "Sep. 2014 – Aug. 2017 | Full-time | 3 years",
+          "description_list": [],
+          "responsibilities_list": [
+            "Course (theory and sessional) conduction, examination process and evaluation.",
+            "Research conduction and supervision."
+          ],
+          "related_skills": "Research · Machine Learning · Programming · Algorithms · Teaching · OOP · Database Design · Educational Technology · C · C++ · Java · University Teaching · Public Speaking · Programming Languages"
+        }
+      ]
+    },
+
+    {
+      "category": "Industrial (Software Development) Experiences",
+      "icon_class": "bi bi-terminal",
+      "organization": "Advanced Apps Bangladesh (AAPBD) Ltd.",
+      "location": "Dhaka, Bangladesh",
+      "link": "https://www.aapbd.com/",
+      "roles": [
+        {
+          "title": "Project Development Manager & Senior Software Engineer",
+          "timeframe_details": "Jan. 2014 – Aug. 2014 | Full-time | 8 months",
+          "description_list": [],
+          "responsibilities_list": [
+            "AAPBD previously was DROIDBD, and currently working as AppBajar and The Borak.",
+            "Project Management: Project management, app design, app testing, and client management. ",
+            "Involved in the development of more than 50 apps.",
+            "iOS application design, development, implementation, testing and instructing new members. ",
+            "Other platforms: Android apps, web apps using PHP, MySQL, JS etc"
+          ],
+          "related_skills": "Programming · Algorithms · iOS Development · Swift (Programming Language) · Xcode · GitHub · Software Engineering · Mobile Applications · Android Development · Software Project Management · Project Management · Software Design · Web Services · OOP · iOS · Objective-C · iOS Application Development"
+        }
+      ]
+    },
+
+    {
+      "category": "Industrial (Software Development) Experiences",
+      "icon_class": "bi bi-terminal",
+      "organization": "Droid Bangladesh (DROIDBD) Ltd.",
+      "location": "Dhaka, Bangladesh",
+      "link": "https://www.linkedin.com/company/droid-bangladesh-limited/",
+      "roles": [
+        {
+          "title": "Senior Software Engineer",
+          "timeframe_details": "May. 2012 – Dec. 2013 | Full-time | 1.75 years",
+          "description_list": [],
+          "responsibilities_list": [
+            "iOS application design ",
+            "iOS application development & implementation ",
+            "iOS application testing ",
+            "iOS application training new members "
+          ],
+          "related_skills": "Programming · Algorithms · iOS Development · Xcode · GitHub · Software Engineering · Mobile Applications · Software Design · Web Services · OOP · iOS · Objective-C · iOS Application Development"
+        }
+      ]
+    },
+
+    {
+      "category": "Industrial (Software Development) Experiences",
+      "icon_class": "bi bi-terminal",
+      "organization": "Kento Studios Ltd.",
+      "location": "Dhaka, Bangladesh",
+      "link": "https://www.linkedin.com/company/kento-studios-ltd./",
+      "roles": [
+        {
+          "title": "Programmer",
+          "timeframe_details": "Feb. 2012 – May. 2012 | Full-time | 4 months",
+          "description_list": [],
+          "responsibilities_list": [
+            "iOS application design ",
+            "iOS application development ",
+            "iOS application testing ",
+            "iOS Game design "
+          ],
+          "related_skills": "Programming · Algorithms · iOS Development · Xcode · GitHub · Software Engineering · Mobile Applications · Software Design · Web Services · OOP · iOS · Objective-C · iOS Application Development"
+        }
+      ]
+    }
+  ]
+}
