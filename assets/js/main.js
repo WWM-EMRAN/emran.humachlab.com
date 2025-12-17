@@ -45,7 +45,7 @@
     });
   });
 
-  /* XXX */
+  /*  */
 // dropdown.addEventListener('click', function() {
 //     this.classList.toggle('active');
 //     this.querySelector('i').classList.toggle('rotate');
