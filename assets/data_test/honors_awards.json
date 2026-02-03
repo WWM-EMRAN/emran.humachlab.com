@@ -1,0 +1,249 @@
+{
+  "section_info": {
+    "title": "Honors and Awards_XX",
+    "details": "_XXFormal recognition of scholarly merit and technical innovation, highlighting significant achievements in health informatics and software development. These distinctions underscore a high standard of excellence maintained throughout a multidisciplinary career spanning both academia and industry.",
+    "icon_class": "bi bi-award",
+    "hashtag": "honors_awards"
+  },
+  "honorsawards": [
+    {
+      "id_ref": "aw_ber_ngtb",
+      "title": "_XXBertelsmann Next Generation Tech Booster Scholarship",
+      "icon_class": "bi bi-award",
+      "date": "Jun. 09, 2024",
+      "short_description": "_XXNext Generation Tech Booster Scholarship (Phase 1+2) from Bertelsmann for a Udacity Nanodegree program, valued over $1,500",
+      "issuer_organization": {
+        "name": "_XXBertelsmann",
+        "location": "",
+        "link": "https://www.bertelsmann.com/"
+      },
+      "associated_organization": {
+        "name": "Udacity",
+        "location": "",
+        "link": "https://www.udacity.com/"
+      },
+      "description_full": "_XXThis scholarship, offered by Bertelsmann in collaboration with Udacity, aims to support emerging tech professionals. In 2023, I was selected for Phase 1 to pursue the Enterprise Security Nanodegree but was not shortlisted for Phase 2. In 2024, I was again selected, this time for the Foundations of Generative AI Nanodegree. The scholarship covered a program worth over $1,500. Completion of the course included a Certification Assessment (CA) which determined eligibility for Phase 2 and awarded a certificate of completion.",
+      "image_path": "",
+      "award_link": "https://www.udacity.com/blog/2023/09/announcing-the-next-generation-tech-booster-a-new-bertelsmann-scholarship.html"
+    },
+    {
+      "id_ref": "aw_awsaiml2",
+      "title": "AWS AI/ML Scholarship (Phase 2)",
+      "icon_class": "bi bi-award",
+      "date": "Feb. 23, 2024",
+      "short_description": "AWS AI/ML Scholarships (Phases 2) to pursue an Udacity Nanodegree program valued at over $5,000",
+      "issuer_organization": {
+        "name": "Amazon Web Services (AWS)",
+        "location": "",
+        "link": "https://aws.amazon.com/"
+      },
+      "associated_organization": {
+        "name": "Udacity",
+        "location": "",
+        "link": "https://www.udacity.com/"
+      },
+      "description_full": "The AWS AI/ML Scholarship, offered in partnership with Udacity, supports learners interested in applying artificial intelligence and machine learning using AWS technologies. I was awarded both Phase 2 of this scholarship, enabling me to pursue a Nanodegree programs worth the value of over $5,000. In Phase 2 shortlisted the top 500 performers in the programm arranged for Phase 1 scholarship. The Udacity Nanodegree entitled 'AWS Machine Learning Foundation' that helped learners to hone their theoretical and practical knowledge in Amazon's AWS technologies available for ML application development.",
+      "image_path": "",
+      "award_link": "https://www.udacity.com/scholarships/aws-ai-ml-scholars"
+    },
+    {
+      "id_ref": "aw_awsaiml1",
+      "title": "AWS AI/ML Scholarship (Phase 1)",
+      "icon_class": "bi bi-award",
+      "date": "Jun. 05, 2023",
+      "short_description": "AWS AI/ML Scholarships (Phases 1) to pursue an Udacity Nanodegree program valued at over $3,000",
+      "issuer_organization": {
+        "name": "Amazon Web Services (AWS)",
+        "location": "",
+        "link": "https://aws.amazon.com/"
+      },
+      "associated_organization": {
+        "name": "Udacity",
+        "location": "",
+        "link": "https://www.udacity.com/"
+      },
+      "description_full": "The AWS AI/ML Scholarship, offered in partnership with Udacity, supports learners interested in applying artificial intelligence and machine learning using Python programming. I was awarded Phase 1 of this scholarship, enabling me to pursue a Nanodegree programs worth the value of over $3,000. In Phase 1 I was selected selected the top 2,000 global applicants. The Udacity Nanodegree entitled 'AI Programming with Python' that helped learners to hone their theoretical and practical knowledge in Python programming to make them prepare for AI and ML programming.",
+      "image_path": "",
+      "award_link": "https://www.udacity.com/scholarships/aws-ai-ml-scholars"
+    },
+    {
+      "id_ref": "aw_cotutellest",
+      "title": "Cotutelle Studentship",
+      "icon_class": "bi bi-mortarboard",
+      "date": "Jan. 15, 2023 (Ongoing)",
+      "short_description": "Cotutelle (joint) Studentship as part of the joint doctoral program at Deakin and Coventry University",
+      "issuer_organization": {
+        "name": "Coventry University",
+        "location": "Coventry, United Kingdom",
+        "link": "https://www.coventry.ac.uk/"
+      },
+      "associated_organization": {
+        "name": "Deakin University",
+        "location": "Melbourne, Australia",
+        "link": "https://www.deakin.edu.au/"
+      },
+      "description_full": "Awarded as part of the joint Ph.D. program between Deakin University, Australia and Coventry University, United Kingdom, this studentship provides comprehensive support including return airfare, tuition fees, health insurance, and a living stipend for the research duration at Coventry University.",
+      "image_path": "",
+      "award_link": "https://www.coventry.ac.uk/research/research-opportunities/research-students/cotutelle-phd-programmes/"
+    },
+    {
+      "id_ref": "aw_duprs",
+      "title": "DUPR Scholarship_XX",
+      "icon_class": "bi bi-mortarboard",
+      "date": "Jan. 15, 2023 (Ongoing)",
+      "short_description": "_XXFullly funded DUPR Scholarship for Joint PhD research at Deakin and Coventry University",
+      "issuer_organization": {
+        "name": "Deakin University",
+        "location": "Melbourne, Australia",
+        "link": "https://www.deakin.edu.au/"
+      },
+      "associated_organization": {
+        "name": "Coventry University",
+        "location": "Coventry, United Kingdom",
+        "link": "https://www.coventry.ac.uk/"
+      },
+      "description_full": "_XXThe Deakin University Postgraduate Research Scholarship (DUPRS) supports my joint doctoral study with Coventry University. The scholarship includes full tuition coverage, health insurance, and a living stipend during the study period at Deakin University",
+      "image_path": "",
+      "award_link": "https://www.deakin.edu.au/study/fees-and-scholarships/scholarships/find-a-scholarship/rtp-and-duprs"
+    },
+    {
+      "id_ref": "aw_dubestpres",
+      "title": "Best Presentation Award",
+      "icon_class": "bi bi-award",
+      "date": "Dec. 19, 2021",
+      "short_description": "Annual School Conference - School of IT, Deakin University",
+      "issuer_organization": {
+        "name": "Deakin University (School of IT)",
+        "location": "Melbourne, Australia",
+        "link": "https://www.deakin.edu.au/"
+      },
+      "associated_organization": {
+        "name": "",
+        "location": "",
+        "link": ""
+      },
+      "description_full": "Received this award for delivering the best presentation at the Annual School Conference organized by the School of IT, Deakin University in 2021. The recognition included a prize of AUD 200.",
+      "image_path": "",
+      "award_link": "https://drive.google.com/file/d/1LEzm1WLVP_XSevjWjaTH4YkkNbu5WXgR/view"
+    },
+    {
+      "id_ref": "aw_bdbstf",
+      "title": "Science and Technology Fellowship (STF)",
+      "icon_class": "bi bi-mortarboard",
+      "date": "Feb. 21, 2020",
+      "short_description": "Fully funded fellowship for higher education - STF Trust, Ministry of Science and Technology, Bangladesh",
+      "issuer_organization": {
+        "name": "STF Trust, Ministry of Science and Technology, Bangladesh",
+        "location": "Dhaka, Bangladesh",
+        "link": "https://www.deakin.edu.au/"
+      },
+      "associated_organization": {
+        "name": "Deakin University (School of IT)",
+        "location": "Melbourne, Australia",
+        "link": "https://www.deakin.edu.au/"
+      },
+      "description_full": "The Science and Technology Fellowship (STF), awarded by the Ministry of Science and Technology in Bangladesh, supports postgraduate study in information technology at globally recognized institutions. Initially awarded for studies at Wageningen University, the fellowship was redirected toward my studies at Deakin University, Australia.",
+      "image_path": "",
+      "award_link": ""
+    },
+    {
+      "id_ref": "aw_kskauds",
+      "title": "King Abdulaziz Scholarships",
+      "icon_class": "bi bi-mortarboard",
+      "date": "Dec. 15, 2019",
+      "short_description": "Fully funded scholarship for higher education (for Master's Program) - King Abdulaziz University, Saudi Arabia",
+      "issuer_organization": {
+        "name": "King Abdulaziz University, Saudi Arabia",
+        "location": "Jeddah, Saudi Arabia",
+        "link": "https://www.kau.edu.sa/en"
+      },
+      "associated_organization": {
+        "name": "",
+        "location": "",
+        "link": ""
+      },
+      "description_full": "King Abdulaziz Scholarships is a postgraduate scholarship awarded by King Abdulaziz University, Saudi Arabia to support students pursuing a Master's degree in Computer Science. The scholarship covers tuition fees, living stipend, health insurance and travel expenses including families.",
+      "image_path": "",
+      "award_link": ""
+    },
+    {
+      "id_ref": "aw_aapbdbestemp",
+      "title": "Best Employee Award",
+      "icon_class": "bi bi-star",
+      "date": "Jul. 15, 2014",
+      "short_description": "Best employee of year 2014 - Advanced Apps Bangladesh (AAPBD) Ltd., Bangladesh",
+      "issuer_organization": {
+        "name": "Advanced Apps Bangladesh (AAPBD) Ltd.",
+        "location": "Dhaka, Bangladesh",
+        "link": "https://www.aapbd.com/"
+      },
+      "associated_organization": {
+        "name": "",
+        "location": "",
+        "link": ""
+      },
+      "description_full": "Recognized as the Best Employee of the Year (2014) at Advanced Apps Bangladesh (AAPBD) Ltd. for exceptional contributions in software development, application testing, project coordination, client liaison, and team leadership.",
+      "image_path": "",
+      "award_link": ""
+    },
+    {
+      "id_ref": "aw_saucountrytop",
+      "title": "Country Topper (Bangladesh)",
+      "icon_class": "bi bi-trophy",
+      "date": "Apr. 23, 2013",
+      "short_description": "Post-graduation Entrance Exam - South Asian University (SAU), New Dehli, India",
+      "issuer_organization": {
+        "name": "South Asian University (SAU)",
+        "location": "New Dehli, India",
+        "link": "https://sau.int/"
+      },
+      "associated_organization": {
+        "name": "",
+        "location": "",
+        "link": ""
+      },
+      "description_full": "Achieved the top rank from Bangladesh in the entrance exam for the Master's in Computer Science program at South Asian University (SAU), New Dehli. Only the top three students from each South Asian country were selected under the regional quota system.",
+      "image_path": "",
+      "award_link": ""
+    },
+    {
+      "id_ref": "aw_hstubsctop",
+      "title": "Undergraduate Department Topper",
+      "icon_class": "bi bi-trophy",
+      "date": "Mar. 2, 2012",
+      "short_description": "First Place from the undergrad batch (CSE) - HSTU, Bangladesh",
+      "issuer_organization": {
+        "name": "Hajee Mohammad Danesh University of Science and Technology University (HSTU)",
+        "location": "Dinajpur, Bangladesh",
+        "link": "https://www.hstu.ac.bd/"
+      },
+      "associated_organization": {
+        "name": "",
+        "location": "",
+        "link": ""
+      },
+      "description_full": "Secured first place in the undergraduate Computer Science and Engineering batch of 35 students at Hajee Mohammad Danesh Science and Technology University (HSTU). Maintained consistent academic excellence across eight semesters.",
+      "image_path": "",
+      "award_link": ""
+    },
+    {
+      "id_ref": "aw_hstuiupc2009champ",
+      "title": "InUPC Champion",
+      "icon_class": "bi bi-award",
+      "date": "Feb. 16, 2009",
+      "short_description": "Intra-University Programming Contest (InUPC) Champion - HSTU, Bangladesh",
+      "issuer_organization": {
+        "name": "Hajee Mohammad Danesh University of Science and Technology University (HSTU)",
+        "location": "Dinajpur, Bangladesh",
+        "link": "https://www.hstu.ac.bd/"
+      },
+      "associated_organization": {
+        "name": "",
+        "location": "",
+        "link": ""
+      },
+      "description_full": "Became the champion of the Intra-University Programming Contest (InUPC) held during HSTU IT Fest 2009. Competed as part of a three-member team while pursuing a B.Sc. in Computer Science and Engineering at HSTU.",
+      "award_link": ""
+    }
+  ]
+}

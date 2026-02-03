@@ -1,0 +1,190 @@
+{
+  "section_info": {
+    "title": "Projects_XX",
+    "details": "_XXA versatile collection of academic and commercial projects illustrating technical expertise in data science, deep learning, and system automation. This work showcases the effective integration of complex data analytics with user-centric design to address critical needs in the biomedical and ICT industries.",
+    "icon_class": "bx bx-bulb",
+    "hashtag": "projects"
+  },
+  "projects": [
+    {
+      "id_ref": "prj_ducuphdres",
+      "title": "_XXA Machine Learning-based Analysis of Sleep Patterns in Healthy Ageing using Physiological Signals.",
+      "role": "Graduate Researcher_XX",
+      "icon_class": "bi bi-activity",
+      "basic_details": "PhD Cotutelle Research_XX",
+      "timeframe_details": {
+        "start_date": "Jan. 1, 2023",
+        "end_date": "Present"
+      },
+      "status": "Ongoing",
+      "short_description": "_XXInvestigating the relationship between sleep dynamics (Hypnogram) and healthy ageing using interpretable machine learning models.",
+      "long_description": "_XXThis ongoing PhD research focuses on leveraging machine learning techniques to investigate age-related variations in sleep dynamics using physiological signals such as EEG, ECG, and PPG. The study aims to identify discriminative features and biomarkers that can assist in understanding sleep degradation with aging, enabling early detection and intervention for sleep-related disorders in elderly populations.",
+      "funding": "Cotutelle program studentship_XX",
+      "funding_organization": [
+        {
+          "name": "_XXDeakin University",
+          "location": "Melbourne, Australia",
+          "link": "https://www.deakin.edu.au/"
+        }
+      ],
+      "collaboration_organization": [
+        {
+          "name": "_XXDeakin University",
+          "location": "Melbourne, Australia",
+          "link": "https://www.deakin.edu.au/"
+        },
+        {
+          "name": "_XXCoventry University",
+          "location": "Coventry, United Kingdom",
+          "link": "https://www.coventry.ac.uk/"
+        }
+      ],
+      "image_path": "assets/img/organisation/dc.png",
+      "url_link": ""
+    },
+    {
+      "id_ref": "prj_duaqp",
+      "title": "_XXAir Quality Prediction (Temperature Prediction) for Indoor Environments in Different Cities of Australia.",
+      "role": "Research Assistant_XX",
+      "icon_class": "bi bi-clouds",
+      "basic_details": "ARC Collaboration Research_XX",
+      "timeframe_details": {
+        "start_date": "Mar. 1, 2022",
+        "end_date": "Feb. 28, 2023"
+      },
+      "status": "Phase 1 Completed",
+      "short_description": "_XXPrediction of indoor air temperature and quality metrics using meteorological data and deep ensemble machine learning models.",
+      "long_description": "_XXContributed as a Research Assistant to a MAAP linkage project funded by the Australian Research Council. This project involved collaboration with Monash University and AETMOS, focusing on predicting indoor air temperature and air quality using meteorological data. The work explored deep learning architectures to evaluate health impacts of environmental conditions, and proposed predictive models for smart urban sustainability.",
+      "funding": "ARC MAAP linkage project fund_XX",
+      "funding_organization": [
+        {
+          "name": "_XXAustralian Research Council (ARC)",
+          "location": "Sydney, Australia",
+          "link": "https://www.arc.gov.au/"
+        }
+      ],
+      "collaboration_organization": [
+        {
+          "name": "_XXDeakin University",
+          "location": "Melbourne, Australia",
+          "link": "https://www.deakin.edu.au/"
+        },
+        {
+          "name": "_XXMonash University",
+          "location": "Melbourne, Australia",
+          "link": "https://www.monash.edu.au/"
+        },
+        {
+          "name": "_XXAETMOS Australia",
+          "location": "Melbourne, Australia",
+          "link": "http://aetmos.com.au/"
+        }
+      ],
+      "image_path": "assets/img/organisation/dma.png",
+      "url_link": "#publications"
+    },
+    {
+      "id_ref": "prj_duamdszicu",
+      "title": "Channel minimisation and epileptic seizure detection using single channels using Deep Learning from continuous iEEG of ICU patients.",
+      "role": "Research Assistant_XX",
+      "icon_class": "bi bi-diagram-3",
+      "basic_details": "Industry Collaboration Research_XX",
+      "timeframe_details": {
+        "start_date": "Apr. 1, 2020",
+        "end_date": "Mar. 31, 2022"
+      },
+      "status": "Phase 1 Completed",
+      "short_description": "Channel minimisation and epileptic seizure detection using single channels using Deep Learning from continuous iEEG of ICU patients.",
+      "long_description": "This voluntary research focused on minimizing the number of EEG channels required for accurate epileptic seizure detection. Leveraging deep learning on continuous iEEG signals, the study aimed to optimize detection performance while reducing computational and clinical complexity, contributing to more accessible and efficient seizure monitoring systems.",
+      "funding": "No funding. This is a voluntary collaboration research work.",
+      "funding_organization": [
+        {
+          "name": "",
+          "location": "",
+          "link": ""
+        }
+      ],
+      "collaboration_organization": [
+        {
+          "name": "_XXDeakin University",
+          "location": "Melbourne, Australia",
+          "link": "https://www.deakin.edu.au/"
+        },
+        {
+          "name": "_XXMonash University",
+          "location": "Melbourne, Australia",
+          "link": "https://www.monash.edu.au/"
+        },
+        {
+          "name": "_XXAlfred Health",
+          "location": "Melbourne, Australia",
+          "link": "https://www.alfredhealth.org.au/"
+        }
+      ],
+      "image_path": "assets/img/organisation/amd.png",
+      "url_link": ""
+    },
+    {
+      "id_ref": "prj_irthstu3lnp",
+      "title": "Designing a 3-layer network security technique in servers for the prevention of DDoS attack.",
+      "role": "Project Research Associate_XX",
+      "icon_class": "bi bi-shield-lock",
+      "basic_details": "University Internal Research_XX",
+      "timeframe_details": {
+        "start_date": "Jul. 1, 2018",
+        "end_date": "Jun. 30, 2019"
+      },
+      "status": "Completed",
+      "short_description": "Designing a 3-Layer Network Security Technique in Servers for Prevention of DDoS Attack.",
+      "long_description": "This project proposed a novel three-layered security framework to mitigate DDoS attacks targeting server infrastructures. The system design integrated preventive, detection, and response mechanisms to enhance cybersecurity resilience and ensure uninterrupted service availability. The project was funded by HSTU through the IRT Annual Research Grant.",
+      "funding": "IRT Annual Research Fund",
+      "funding_organization": [
+        {
+          "name": "Institute of Research and Training (IRT), Hajee Mohammad Danesh Science and Technology University (HSTU)",
+          "location": "Dinajpur, Bangladesh",
+          "link": "https://www.hstu.ac.bd/"
+        }
+      ],
+      "collaboration_organization": [
+        {
+          "name": "Institute of Research and Training (IRT), Hajee Mohammad Danesh Science and Technology University (HSTU)",
+          "location": "Dinajpur, Bangladesh",
+          "link": "https://www.hstu.ac.bd/"
+        }
+      ],
+      "image_path": "assets/img/organisation/hstu.png",
+      "url_link": ""
+    },
+    {
+      "id_ref": "prj_irthstubsmnat",
+      "title": "_XXAnalysis and design of a non-invasive way of measuring and monitoring blood-sodium concentration level using near-infrared spectroscopy.",
+      "role": "Project Research Associate_XX",
+      "icon_class": "bi bi-lightbulb",
+      "basic_details": "University Internal Research_XX",
+      "timeframe_details": {
+        "start_date": "Jul. 1, 2018",
+        "end_date": "Jun. 30, 2019"
+      },
+      "status": "Completed",
+      "short_description": "_XXAnalysis and Design of a Non-Invasive Way of Measuring and Monitoring Blood-Sodium Concentration Level Using Near-Infrared Spectroscopy.",
+      "long_description": "_XXThis project explored the feasibility of developing a non-invasive technique to monitor blood sodium concentration using near-infrared spectroscopy. The research involved signal processing, optical modeling, and preliminary prototype design to assess potential applications in real-time clinical diagnostics. It was supported by HSTU’s IRT Annual Research Fund.",
+      "funding": "IRT Annual Research Fund_XX",
+      "funding_organization": [
+        {
+          "name": "Institute of Research and Training (IRT), Hajee Mohammad Danesh Science and Technology University (HSTU)",
+          "location": "Dinajpur, Bangladesh",
+          "link": "https://www.hstu.ac.bd/"
+        }
+      ],
+      "collaboration_organization": [
+        {
+          "name": "Institute of Research and Training (IRT), Hajee Mohammad Danesh Science and Technology University (HSTU)",
+          "location": "Dinajpur, Bangladesh",
+          "link": "https://www.hstu.ac.bd/"
+        }
+      ],
+      "image_path": "assets/img/organisation/hstu.png",
+      "url_link": ""
+    }
+  ]
+}

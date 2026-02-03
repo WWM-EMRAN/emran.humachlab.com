@@ -1,0 +1,3104 @@
+:root {
+  /* ==========================================================================
+     1. GLOBAL THEME COLORS
+     Core colors used for the primary visual identity across all pages.
+     ========================================================================== */
+  --background-color: #ffffff;           /* Base page background */
+  --default-color: #000000;              /* Primary text color */
+  --heading-color: #040404;              /* Color for all h1-h6 headings */
+  --accent-color: #149ddd;               /* Primary brand blue for links and icons */
+  --accent-color-rgb: #74adfd;           /* Light blue for hover states and badge backgrounds */
+  --surface-color: #ffffff;              /* Card background color */
+  --contrast-color: #ffffff;             /* Text color for use on dark backgrounds */
+
+  /* ==========================================================================
+     2. NAVIGATION & PRELOADER
+     Colors for the sidebar menu and the initial site loading screen.
+     ========================================================================== */
+  --nav-color: #a8a9b4;                  /* Inactive sidebar link text */
+  --nav-hover-color: #ffffff;            /* Active/Hover sidebar link text */
+  --nav-menu-icon-color: #6f7180;        /* Sidebar icon color */
+  --dot-loader-color: #f6310f;           /* Red color for the preloader animation */
+
+  /* ==========================================================================
+     3. SECTION & CV LAYOUT COLORS
+     Used specifically in the Resume, Education, and Printable CV pages.
+     ========================================================================== */
+  --light-background-color: #f4fafd;     /* Tinted background for the Stats section */
+  --resume-text-muted-color: #999999;    /* Muted grey for dates and secondary labels */
+  --cv-wrapper-background-color: #f8f9fa;/* Paper background for CV printable modes */
+  --cv-title-border-color: #dee2e6;      /* Subtle border below section titles */
+
+  /* ==========================================================================
+     4. INTERACTIVE FEEDBACK (JS STATES)
+     Variables to standardize colors manipulated by scripts.js.
+     ========================================================================== */
+  --copy-success-bg: #dc3545;            /* Red color for "Copied" button alert state */
+
+  /* ==========================================================================
+     5. DYNAMIC COMPONENT SCALING (SITE-LOADER)
+     Extracted from site-loader.js to replace hardcoded inline font sizes.
+     ========================================================================== */
+  --cv-one-page-body-fs: 9px;            /* Core text size for One-Page CV mode */
+  --cv-one-page-summary-fs: 8px;         /* Tighter text for summary grids in CV */
+  --cv-one-page-sidebar-fs: 6px;         /* Tighter text for sidebar in CV */
+  --badge-details-fs: 11px;              /* Font size for "More Details" button toggles */
+  --map-fixed-height: 300px;             /* Standard height for contact/location maps */
+  --map-filter: grayscale(0.3) contrast(1.1); /* FIXED: Missing filter for iframes */
+  --progress-bar-init-width: 1px;        /* Initial width for skill bar animation trigger */
+
+  /* ==========================================================================
+     6. GLOBAL TYPOGRAPHY
+     The three primary font families defined in the site design.
+     ========================================================================== */
+  --default-font: "Titillium Web", system-ui, -apple-system, sans-serif;
+  --heading-font: "Oswald", sans-serif;
+  --nav-font: "Oswald", sans-serif;
+}
+
+
+/*--------------------------------------------------------------
+# 2. GENERAL STYLING
+# Baseline styles applied globally across all pages (Index, CV, Details, 404).
+--------------------------------------------------------------*/
+body {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  font-family: var(--default-font), serif;
+  margin: 0;
+}
+
+/* Hyperlink Defaults */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: var(--accent-color-rgb);
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+/* Standard Heading Styles */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  font-family: var(--heading-font), serif;
+  margin-top: 0;
+}
+
+/* Paragraph Text Alignment */
+p {
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/*--------------------------------------------------------------
+# 3. SHARED UTILITY CLASSES
+# Reusable classes to replace hardcoded inline styles in site-loader.js.
+--------------------------------------------------------------*/
+
+/* Text Alignment & Spacing */
+.text-justify { text-align: justify !important; }
+.text-center-force { text-align: center !important; }
+.ls-1 { letter-spacing: 1px; }
+.lh-1-2 { line-height: 1.2 !important; }
+
+/* Flexbox Layout Helpers */
+.flex-center-middle {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/* Interaction & Feedback */
+.cursor-pointer { cursor: pointer !important; }
+.cursor-zoom { cursor: zoom-in !important; }
+
+/* Media Content Handling */
+.object-fit-cover { object-fit: cover !important; }
+.object-fit-contain { object-fit: contain !important; }
+
+/* Standardized Image Components */
+.logo-sm {
+    height: 20px !important;
+    vertical-align: middle;
+}
+
+.cv-profile-img-border {
+    border: 1px solid #808080 !important;
+}
+
+.error-logo {
+    height: 130px !important;
+    width: auto;
+}
+
+
+/*--------------------------------------------------------------
+# 4. PRELOADER
+# The full-screen loading overlay that appears before the site is ready.
+# Transition logic is handled by scripts.js.
+--------------------------------------------------------------*/
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background-color: var(--default-color); /* Dark background from design */
+  display: flex;
+  justify-content: center; /* Horizontally center logo and dots */
+  align-items: center;     /* Vertically center logo and dots */
+}
+
+.preloader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;               /* Space between logo and animation dots */
+}
+
+#preloadLogo {
+  width: 150px;            /* Standardized preloader logo width */
+  display: block;
+}
+
+/* Triple-dot bouncing animation */
+.dot-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dot-loader span {
+  width: 12px;
+  height: 12px;
+  background-color: var(--dot-loader-color); /* Defined in :root */
+  border-radius: 50%;
+  margin: 0 5px;
+  display: inline-block;
+  animation: bounce 1.2s infinite ease-in-out;
+}
+
+.dot-loader span:nth-child(2) { animation-delay: 0.2s; }
+.dot-loader span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/*--------------------------------------------------------------
+# 5. SIDEBAR HEADER
+# The fixed 350px sidebar containing profile info, logo, and social links.
+--------------------------------------------------------------*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 350px;
+  background: var(--default-color);
+  z-index: 997;
+  padding: 0 15px;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Profile Image Styling */
+.header .profile-img img {
+  width: 120px;
+  margin: 15px auto;
+  display: block;
+  border: 8px solid rgba(255, 255, 255, 0.15); /* Semi-transparent border per design */
+}
+
+/* Logo and Site Title */
+.header .logo {
+  line-height: 1;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.header .logo h1 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 700;
+  color: var(--contrast-color);
+  font-family: var(--heading-font), serif;
+  text-transform: uppercase;
+}
+
+/* Small icons inside the logo/nav bar */
+.header .logo img {
+  max-height: 20px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
+/* Sidebar Social Icons */
+.header .social-links {
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--accent-color); /* Blue underline */
+}
+
+.header .social-links a {
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  margin: 0 2px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  transition: 0.3s;
+}
+
+.header .social-links a:hover {
+  background: var(--accent-color);
+}
+
+
+/*--------------------------------------------------------------
+# 6. NAVIGATION MENU
+# Vertical menu structure located within the sidebar.
+# Logic for active states and dynamic rendering is in site-loader.js.
+--------------------------------------------------------------*/
+.navmenu {
+  flex-grow: 1;              /* Allows the menu to fill available sidebar space */
+  overflow-y: auto;          /* Enables scrolling if the menu is long */
+  padding: 10px 0;
+  scrollbar-width: none;     /* Hides scrollbar for Firefox */
+  z-index: 999;
+  /*border: 1px solid var(--accent-color);*/
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.navmenu::-webkit-scrollbar {
+  display: none;
+}
+
+.navmenu ul {
+  list-style: none;
+  padding: 0 0 20px 0;
+  margin: 0;
+}
+
+/* Main Navigation Links */
+.navmenu a {
+  display: flex;
+  align-items: center;
+  color: var(--nav-color);    /* Muted color from :root */
+  padding: 15px 10px;
+  font-family: var(--nav-font), serif;
+  font-size: 14px;
+  font-weight: 400;
+  transition: 0.3s;
+  width: 100%;
+}
+
+/* Navigation Icons */
+.navmenu a .navicon {
+  font-size: 20px;
+  margin-right: 10px;
+  color: var(--nav-menu-icon-color);
+  transition: 0.3s;
+}
+
+/*!* Hover and Active states *!*/
+/*.navmenu a:hover,*/
+/*.navmenu .active,*/
+/*.navmenu li:hover > a {*/
+/*    !*color: var(--nav-hover-color) !important; !* White color from :root *!*!*/
+/*    !*font-weight: 500 !important;*!*/
+/*    !*color: var(--background-color) !important; !* Forces the highlight color *!*!*/
+/*    color: var(--accent-color) !important; !* Forces the highlight color *!*/
+/*    font-weight: 500 !important;              !* Changed from 450 to 600 for better support *!*/
+/*    !*background: var(--accent-color);    !* Adds a subtle background for clarity *!*!*/
+/*    !*background: var(--background-color);    !* Adds a subtle background for clarity *!*!*/
+/*    !*border-radius: 10px;*!*/
+/*}*/
+
+.navmenu a:hover .navicon,
+.navmenu .active .navicon,
+.navmenu li:hover > a .navicon,
+.navmenu li.active > a {
+  color: var(--accent-color) !important;     /* Highlight icon in blue */
+  /*font-weight: 500 !important;*/
+}
+
+
+/* --- High-Specificity Active State Fix --- */
+
+/* 1. Target the link directly when it has the .active class */
+.navmenu a:hover > a,
+/*.navmenu a:hover,*/
+.navmenu a.active > a,
+.navmenu li:hover > a,
+/*.navmenu li:hover,*/
+.navmenu li.active > a {
+    color: var(--background-color) !important; /* Forces the contrast color */
+    /*color: var(--accent-color) !important;     !* Highlight icon in blue *!*/
+    /*font-weight: 500 !important;              !* Use 700 (Bold) for guaranteed visibility *!*/
+    background: rgba(255, 255, 255, 0.15) !important; /* Slight background to make it 'pop' */
+    /*border-radius: 4px;*/
+    border-radius: 10px;
+}
+
+/* 2. Ensure icons also inherit the highlight color */
+.navmenu a.active i,
+.navmenu li.active > a i {
+    color: var(--background-color) !important;
+}
+
+/* 3. Dropdown Parent fix: Ensure "Expertise" stays bold when a sub-item is active */
+.navmenu li.dropdown:hover > a,
+.navmenu li.dropdown.active> a {
+    /*font-weight: 500 !important;*/
+    color: var(--background-color) !important;
+}
+
+
+/* Ensure the sub-menu displays when EITHER class is present */
+.navmenu .dropdown.active > ul,
+.navmenu .dropdown.dropdown-active > ul {
+  display: block !important;
+}
+
+/* Ensure the arrow rotates for both */
+.navmenu .dropdown.active > a .toggle-dropdown,
+.navmenu .dropdown.dropdown-active > a .toggle-dropdown {
+  transform: rotate(180deg);
+  background-color: var(--accent-color) !important;
+}
+
+
+/*--------------------------------------------------------------
+# 7. DROPDOWN SUBMENUS
+# Used for categorized sections like 'Personal Information' or 'CV Modes'.
+--------------------------------------------------------------*/
+.navmenu .dropdown ul {
+  margin: 5px 20px;
+  padding: 5px 10px;
+  display: none;              /* Hidden by default */
+  background-color: rgba(0, 0, 0, 0.4);
+  /*background-color: rgba(255, 0, 0, 0.4);*/
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
+}
+
+/*!* Display dropdown when active *!*/
+/*.navmenu .dropdown.dropdown-active > ul {*/
+/*  display: block;*/
+/*}*/
+
+/* Dropdown Toggle Arrow */
+.navmenu a .toggle-dropdown {
+  font-size: 14px;
+  margin-left: auto;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  /*background-color: rgba(0, 0, 0, 0.4);*/
+  background-color: rgba(255, 255, 255, 0.1);
+  /*background-color: rgba(255, 255, 255, 1);*/
+  transition: 0.3s;
+}
+
+.navmenu .dropdown.dropdown-active > a .toggle-dropdown {
+  transform: rotate(180deg);  /* Rotate arrow when open */
+  background-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+}
+
+/*--------------------------------------------------------------
+# 8. MOBILE NAVIGATION TOGGLE
+# Floating button visible only on smaller screens (< 1200px).
+--------------------------------------------------------------*/
+.header-toggle {
+  color: var(--contrast-color);
+  background-color: var(--accent-color);
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 99999;
+  transition: 0.3s;
+}
+
+/* Mobile Visibility Logic */
+@media (min-width: 1200px) {
+  .header-toggle {
+    display: none;            /* Hidden on desktop */
+  }
+}
+
+/*--------------------------------------------------------------
+# 8.1 MOBILE SIDEBAR BEHAVIOR
+# Controls the entrance and exit of the sidebar on mobile.
+--------------------------------------------------------------*/
+@media (max-width: 1199px) {
+  /* 1. Hide the sidebar off-screen by default */
+  .header {
+    left: -100%; /* Fully off-screen */
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* 2. Slide it in when the toggle is active */
+  .mobile-nav-active .header {
+    left: 0;
+  }
+
+  /* 3. Shift the main content slightly (optional) or dim it */
+  .mobile-nav-active .main {
+    margin-left: 0;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# 9. MAIN CONTENT LAYOUT
+# Shifts the content to the right on desktop to accommodate the fixed sidebar.
+--------------------------------------------------------------*/
+.main {
+  background-color: var(--background-color);
+  transition: all 0.3s;
+}
+
+/* Desktop layout adjustment */
+@media (min-width: 1200px) {
+  .main {
+    margin-left: 350px; /* Matches the sidebar width */
+  }
+}
+
+/*--------------------------------------------------------------
+# 10. GLOBAL SECTION STYLES
+# Standard padding and separators for content blocks.
+--------------------------------------------------------------*/
+.section {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--accent-color); /* Distinct blue separator */
+}
+
+/* Remove border from the last section to keep the footer clean */
+.section:last-of-type {
+  border-bottom: none;
+}
+
+/*--------------------------------------------------------------
+# 11. SECTION TITLES
+# The primary header style with an animated underline effect.
+--------------------------------------------------------------*/
+.section-title {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+.section-title h2 {
+  font-size: 22px;
+  /*font-size: 24px;*/
+  font-weight: 700;
+  padding-bottom: 10px;
+  position: relative;
+  font-family: var(--heading-font), serif;
+  display: inline-block;
+  color: var(--accent-color); /* Primary blue title */
+  text-transform: uppercase;
+}
+
+/* The Accent Underline */
+.section-title h2:after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: var(--accent-color);
+  bottom: 0;
+  left: 0;
+}
+
+/* Sub-headings within a section */
+.section-title .content h3 {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--heading-color);
+  font-family: var(--heading-font), serif;
+  margin-bottom: 1px;
+}
+
+.section-title p {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  font-size: 16px;
+}
+
+
+/*--------------------------------------------------------------
+# 12. HERO SECTION
+# Full-screen landing area for the index page.
+# Uses a background image with a dark overlay to ensure text contrast.
+--------------------------------------------------------------*/
+.hero {
+  width: 100%;
+  min-height: 100vh;           /* Ensures full-screen height */
+  position: relative;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;         /* Vertically center content */
+  justify-content: center;     /* Horizontally center content */
+  overflow: hidden;
+}
+
+/* Hero section is border-less to maintain a cinematic feel */
+.hero.section {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* Background Image Layer */
+.hero img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* Prevents distortion */
+  z-index: 1;                  /* Lowest layer */
+}
+
+/* Semi-Transparent Overlay */
+/* This ensures white text is readable regardless of the background image colors. */
+.hero:before {
+  content: "";
+  background: color-mix(in srgb, var(--default-color), transparent 65%);
+  position: absolute;
+  inset: 0;
+  z-index: 2;                  /* Sits between image and text */
+}
+
+/* Hero Text Container */
+.hero .container {
+  position: relative;
+  z-index: 3;                  /* Highest layer for visibility */
+  min-width: 300px;
+  padding-top: 80px;
+  text-align: center;
+}
+
+/*--------------------------------------------------------------
+# 13. HERO TYPOGRAPHY
+# Specialized font scaling and styling for the primary landing text.
+--------------------------------------------------------------*/
+.hero h2 {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--contrast-color); /* White text from :root */
+  font-family: var(--heading-font), serif; /* Oswald */
+  text-transform: uppercase;
+}
+
+.hero p {
+  margin: 5px 0 0 0;
+  font-size: 18px;
+  color: var(--contrast-color);
+  font-family: var(--default-font), serif; /* Titillium Web */
+}
+
+.typed-cursor {
+  color: var(--accent-color); /* Blinking cursor matches your blue theme */
+  font-size: 24px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+/* Animated Text Styling (Typed.js) */
+/* The span with an underline highlights your roles (Educator, Researcher, etc.) */
+.hero p span {
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--accent-color); /* Blue underline */
+}
+
+/* Hero Social Icons */
+.hero .social-links {
+  margin-top: 25px;
+}
+
+.hero .social-links a {
+  font-size: 16px;
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.5); /* Semi-transparent icons */
+  line-height: 1;
+  margin-right: 20px;
+  transition: 0.3s;
+}
+
+.hero .social-links a:hover {
+  color: var(--accent-color);   /* Glow blue on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero h2 {
+    font-size: 22px;            /* Scale down for tablets/mobile */
+  }
+  .hero p {
+    font-size: 14px;
+  }
+}
+
+
+/*--------------------------------------------------------------
+# 14. ABOUT SECTION
+# Standard layout for personal bio and structured information lists.
+--------------------------------------------------------------*/
+.about .content h3 {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--heading-color);
+  font-family: var(--heading-font), serif;
+  margin-bottom: 1px;
+}
+
+/* Base list styling for personal details */
+.about ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about ul li {
+  font-size: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start; /* Aligns icon with the top of multi-line text */
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* About Section Icons */
+.about ul i {
+  font-size: 18px;
+  margin-right: 12px;
+  color: var(--accent-color);
+  flex-shrink: 0;           /* Prevents icon from squishing on wrap */
+  margin-top: 2px;          /* Vertical alignment with first line of text */
+}
+
+/* Handling labels (e.g., "Degree:", "City:") */
+.about ul li strong {
+  color: var(--heading-color);
+  margin-right: 5px;
+  white-space: nowrap;      /* Keeps label on one line */
+}
+
+.about .content p {
+  font-size: 14px;
+}
+
+/* Profile Image Hover Effect (Glightbox) */
+.about .glightbox img {
+  transition: transform 0.3s ease-in-out;
+}
+
+.about .glightbox:hover img {
+  transform: scale(1.05);
+}
+
+/*--------------------------------------------------------------
+# 15. STATS SECTION (KEY INFORMATION)
+# Displays numerical metrics with animated counters.
+--------------------------------------------------------------*/
+.stats {
+  padding: 60px 0;
+}
+
+.light-background {
+  background-color: var(--light-background-color); /* Soft tint from :root */
+}
+
+.stats .stats-item {
+  padding: 20px;
+  width: 100%;
+}
+
+/* Icon placement for metric boxes */
+.stats .stats-item i {
+  display: block;
+  font-size: 24px;
+  color: var(--accent-color);
+  float: left;
+  line-height: 0;
+}
+
+/* Animated number styling */
+.stats .stats-item .purecounter {
+  font-size: 35px;
+  line-height: 30px;
+  display: block;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-left: 40px;
+}
+
+/* Metric description text */
+.stats .stats-item p {
+  padding: 10px 0 0 0;
+  margin: 0 0 0 40px;
+  font-family: var(--heading-font), sans-serif;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+}
+
+
+/*--------------------------------------------------------------
+# 16. RESUME GENERAL
+# Baseline styling for the timeline structure used in Education
+# and Professional Experience sections.
+--------------------------------------------------------------*/
+/* Ensure all text inside the details expansion is uniform */
+.details-box .ps-3 p,
+.details-box .ps-3 li,
+.details-box .ps-3 strong,
+.details-box .ps-3 span,
+.details-box .ps-3 div {
+    font-size: 15px !important; /* Adjust this number to your preference */
+    line-height: 1.6;
+    color: var(--default-color);
+}
+
+/* Specifically target the Research and Projects lists */
+.details-box ol li,
+.details-box ul li {
+    margin-bottom: 8px;
+    font-size: 15px !important; /* Forces lists to match paragraphs */
+}
+
+/* Ensure icons scale with the text */
+.details-box i {
+    font-size: 1.1em;
+}
+
+.resume .resume-title {
+  color: var(--heading-color);
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-family: var(--heading-font), serif;
+}
+
+.resume .resume-item {
+  padding: 0 0 20px 20px;
+  margin-top: -2px;
+  border-left: 2px solid var(--accent-color); /* The vertical timeline line */
+  position: relative;
+}
+
+/* The Timeline Circle Dot */
+.resume .resume-item::before {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  left: -7px;
+  top: 0;
+  background: var(--background-color);
+  border: 2px solid var(--accent-color);
+}
+
+.resume .resume-item h2 {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 5px;
+  font-family: var(--heading-font), serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.resume .resume-item h4 {
+  line-height: 1.4;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-family: var(--heading-font), serif;
+  margin-bottom: 10px;
+}
+
+/*--------------------------------------------------------------
+# 17. SPECIALIZED RESUME COMPONENTS
+# Formatting for interactive details and research collaboration boxes.
+--------------------------------------------------------------*/
+/* Container for research or industry collaboration snippets */
+.collab-box {
+  background-color: rgba(116, 173, 253, 0.05); /* Matches --accent-color-rgb */
+  border-left: 3px solid var(--accent-color);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Interactive detail summary used in site-loader.js */
+.details-box {
+  cursor: pointer;
+  font-size: 0.8rem;
+  margin-bottom: 15px;
+  display: block;
+  width: 100%;
+}
+
+/*--------------------------------------------------------------
+# 18. PROFESSIONAL EXPERIENCE TIMELINE
+# Custom logic to ensure a continuous line when one organization
+# has multiple role entries.
+--------------------------------------------------------------*/
+#professionalExperiences .resume-item {
+    position: relative;
+    border-left: none !important; /* Overriding general resume border for custom line */
+}
+
+/* The continuous vertical segment */
+#professionalExperiences .resume-item::after {
+    content: "";
+    position: absolute;
+    left: -21px;
+    width: 2px;
+    background: var(--accent-color);
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+/* Ensures the line starts exactly at the center of the first bubble */
+#professionalExperiences .resume-item:first-child::after {
+    top: 10px;
+}
+
+/* Custom Bubbles for Professional Experience */
+#professionalExperiences .resume-item::before {
+    content: "";
+    position: absolute;
+    left: -26px !important;
+    top: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--background-color) !important;
+    border: 2px solid var(--accent-color);
+    z-index: 2;
+}
+
+
+/*--------------------------------------------------------------
+# 19. SKILLS & TOOLS SECTION
+# Animated progress bars used on the index page to visualize
+# proficiency levels. Initial width (1px) allows for AOS animation.
+--------------------------------------------------------------*/
+.skills .progress {
+  height: 60px;
+  display: block;
+  background: none;
+  border-radius: 0;
+  margin-bottom: 20px;
+}
+
+.skills .progress .skill {
+  padding: 0;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  display: block;
+  font-weight: 700;
+  font-family: var(--heading-font), sans-serif; /* Oswald */
+  color: var(--heading-color);
+  font-size: 13px;
+}
+
+.skills .progress .skill .val {
+  float: right;
+  font-style: normal;
+}
+
+.skills .progress-bar-wrap {
+  background: rgba(0, 0, 0, 0.08);
+  height: 10px;
+  overflow: hidden;
+}
+
+.skills .progress-bar {
+  width: var(--progress-bar-init-width); /* Uses 1px from :root for animation */
+  height: 10px;
+  transition: 2s ease-in-out;           /* Smooth growth animation */
+  background-color: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
+# 20. HONORS & AWARDS (SERVICES)
+# Grid cards used to display formal recognitions and awards.
+--------------------------------------------------------------*/
+.services .service-item {
+  position: relative;
+  padding: 20px;
+  transition: 0.3s;
+  height: 100%;
+}
+
+.services .service-item:hover {
+  background: var(--surface-color);
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+}
+
+.services .service-item .icon {
+  margin-right: 20px;
+  width: 48px;
+  height: 48px;
+  background: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  flex-shrink: 0;
+}
+
+.services .service-item .icon i {
+  color: var(--contrast-color);
+  font-size: 24px;
+  line-height: 0;
+}
+
+.services .service-item:hover .icon i {
+  color: var(--accent-color);
+}
+
+.services .service-item:hover .icon {
+  background: var(--surface-color);
+}
+
+.services .service-item .title {
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-family: var(--heading-font), sans-serif;
+  text-transform: uppercase;
+}
+
+.services .service-item .description {
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 0;
+  color: var(--default-color);
+  text-align: justify;
+}
+
+/* Meta Information (Date & Organization) */
+.services .service-item small {
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  color: color-mix(in srgb, var(--default-color), transparent 40%) !important;
+}
+
+/*--------------------------------------------------------------
+# 21. GLOBAL BADGE SYSTEM
+# Standardized label styles used across all pages for categorized data.
+# Each badge uses "white-space: normal" to allow wrapping on mobile.
+--------------------------------------------------------------*/
+.badge-dates {
+  background-color: #56952f !important; /* Green */
+  color: var(--contrast-color) !important;
+}
+
+.badge-duration {
+  background-color: #646464 !important; /* Grey */
+  color: var(--contrast-color) !important;
+}
+
+.badge-type {
+  background-color: #0aacac !important; /* Teal */
+  color: var(--contrast-color) !important;
+}
+
+.badge-status {
+  background-color: #e164e1 !important; /* Magenta/Purple */
+  color: var(--contrast-color) !important;
+}
+
+.badge-institute {
+  background-color: #2046ce !important; /* Deep Blue */
+  color: var(--contrast-color) !important;
+}
+
+.badge-important {
+  background-color: #e73a6b !important; /* Pink/Red */
+  color: var(--contrast-color) !important;
+}
+
+/* Specialized badge for Language sub-skills (LRWS) */
+.badge-lrws {
+    font-size: 0.7rem;
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: var(--default-color) !important;
+    font-weight: 400;
+}
+
+/* Common badge behavior for wrapping and display */
+.badge-dates, .badge-duration, .badge-type, .badge-status, .badge-institute, .badge-important {
+  white-space: normal !important;
+  overflow-wrap: break-word;
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  text-align: left;
+}
+
+/* Ensure all links within badges are white */
+.badge-dates a,
+.badge-duration a,
+.badge-type a,
+.badge-status a,
+.badge-institute a,
+.badge-important a {
+    color: var(--background-color) !important;
+    text-decoration: none; /* Keeps it clean */
+}
+
+/* Optional: Add a slight hover effect so users know it is clickable */
+.badge-dates a:hover,
+.badge-duration a:hover,
+.badge-type a:hover,
+.badge-status a:hover,
+.badge-institute a:hover,
+.badge-important a:hover {
+    color: var(--background-color) !important;
+    text-decoration: underline !important;
+}
+
+
+
+/*--------------------------------------------------------------
+# 22. PORTFOLIO & CERTIFICATES (GENERAL)
+# Layout for the interactive grid used in Courses, Trainings,
+# and technical Portfolios.
+--------------------------------------------------------------*/
+.portfolio .portfolio-filters {
+  padding: 0;
+  margin: 0 auto 20px auto;
+  list-style: none;
+  text-align: center;
+}
+
+.portfolio .portfolio-filters li {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--default-color);
+  font-family: var(--heading-font), sans-serif;
+  transition: all 0.3s ease-in-out;
+  margin: 0 4px 10px 4px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+/* Hover and Active Filter States */
+.portfolio .portfolio-filters li:hover,
+.portfolio .portfolio-filters li.filter-active {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+}
+
+/*--------------------------------------------------------------
+# 23. PORTFOLIO ITEM CARDS
+# Standardized card structure with image zoom and info overlay.
+--------------------------------------------------------------*/
+.portfolio .portfolio-content {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio .portfolio-content img {
+  transition: 0.3s;
+  width: 100%;
+}
+
+/* Hover Zoom Effect */
+.portfolio .portfolio-content:hover img {
+  transform: scale(1.1);
+}
+
+/*--------------------------------------------------------------
+# 24. PORTFOLIO OVERLAY & LINKS
+# Hidden by default, appears on hover to show details and links.
+--------------------------------------------------------------*/
+.portfolio .portfolio-info {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  transition: all ease-in-out 0.3s;
+  background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent overlay */
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.portfolio .portfolio-content:hover .portfolio-info {
+  opacity: 1;
+}
+
+.portfolio .portfolio-info h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  padding: 8px 16px;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.portfolio .portfolio-info p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Overlay Link Buttons (Preview & Details) */
+.portfolio .portfolio-info .portfolio-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.portfolio .portfolio-info .preview-link,
+.portfolio .portfolio-info .details-link {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.portfolio .portfolio-info .preview-link:hover,
+.portfolio .portfolio-info .details-link:hover {
+  background: var(--contrast-color);
+  color: var(--accent-color);
+}
+
+
+/*--------------------------------------------------------------
+# 25. PUBLICATIONS GENERAL
+# Standard layout for academic outputs including Journals,
+# Conferences, and Posters.
+--------------------------------------------------------------*/
+/* Category headers within the publications section */
+.pub-category-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 5px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-family: var(--heading-font), serif;
+}
+
+/* Individual publication item container */
+.pub-item {
+  margin-bottom: 30px;
+  padding-left: 15px;
+  border-left: 3px solid rgba(20, 157, 221, 0.2); /* Faded accent line */
+  transition: 0.3s;
+}
+
+.pub-item:hover {
+  border-left-color: var(--accent-color); /* Brightens on hover */
+}
+
+/*--------------------------------------------------------------
+# 26. CITATION & ABSTRACT STYLING
+# Clean typography for citations and collapsible abstract containers.
+--------------------------------------------------------------*/
+/* Citation text formatting */
+.pub-citation {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--default-color);
+  margin-bottom: 12px;
+}
+
+/* Highlighting the author name in citations */
+.pub-citation strong {
+  color: var(--heading-color);
+  font-weight: 700;
+}
+
+/* Collapsible Abstract Box */
+.pub-abstract-box {
+  background-color: rgba(0, 0, 0, 0.03); /* Very light grey background */
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 13px;
+  text-align: justify;
+}
+
+/* Abstract Label/Header */
+.pub-abstract-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--accent-color);
+  display: block;
+  margin-bottom: 5px;
+}
+
+/*--------------------------------------------------------------
+# 27. PUBLICATION INTERACTION
+# Button groups for "Copy Citation" and "View Paper".
+--------------------------------------------------------------*/
+.pub-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Specialized badge-style buttons for publication actions */
+.btn-pub-action {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--accent-color);
+  background-color: transparent;
+  color: var(--accent-color);
+}
+
+.btn-pub-action:hover {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+
+
+/*--------------------------------------------------------------
+# 28. CONTACT SECTION
+# Layout for contact information items and the interactive map.
+# Used on the Index page and Contact Detail pages.
+--------------------------------------------------------------*/
+.contact .info-item {
+  background-color: var(--surface-color);
+  padding: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: 0.3s;
+}
+
+.contact .info-item:hover {
+  transform: translateY(-5px); /* Subtle lift on hover */
+}
+
+/* Contact Icon Box */
+.contact .info-item i {
+  font-size: 20px;
+  color: var(--accent-color);
+  float: left;
+  width: 44px;
+  height: 44px;
+  background: rgba(20, 157, 221, 0.1); /* Faded accent color background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact .info-item:hover i {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+}
+
+.contact .info-item h4 {
+  padding: 0 0 0 60px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: var(--heading-color);
+  font-family: var(--heading-font), serif;
+}
+
+.contact .info-item p {
+  padding: 0 0 0 60px;
+  margin-bottom: 0;
+  font-size: 14px;
+  color: var(--default-color);
+}
+
+/*--------------------------------------------------------------
+# 29. MAP & LOCATION STYLING
+# Standardized iframe appearance and container heights.
+--------------------------------------------------------------*/
+/* The container that holds the Google Maps iframe */
+.map-container {
+  width: 100%;
+  height: var(--map-fixed-height); /* Uses 300px from :root */
+  overflow: hidden;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* The Iframe itself */
+.map-iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: var(--map-filter); /* Grayscale/Contrast filter from :root */
+}
+
+/* Button to open the map in a new tab */
+.btn-map-action {
+  background-color: var(--accent-color);
+  border: none;
+  padding: 10px 20px;
+  color: var(--contrast-color);
+  font-size: 14px;
+  border-radius: 4px;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.btn-map-action:hover {
+  background-color: color-mix(in srgb, var(--accent-color), black 15%);
+}
+
+
+
+/*--------------------------------------------------------------
+# 30. CV MODE SWITCHING SYSTEM
+# Controls visibility between the dynamic modes in site-loader.js.
+--------------------------------------------------------------*/
+/* Mode Toggling Logic */
+/* Standard CV Mode */
+body.mode-standard #standard-page-section {
+    display: block !important;
+}
+body.mode-standard #one-page-section {
+    display: none !important;
+}
+
+/* One-Page CV Mode */
+body.mode-one-page #standard-page-section {
+    display: none !important;
+}
+/*body.mode-one-page #one-page-section {*/
+/*    display: flex !important; !* One-page uses flex for the sidebar layout *!*/
+/*}*/
+
+/*!* Global CV Wrapper (The Page Background) *!*/
+/*.cv-bg-wrapper {*/
+/*    !*background-color: var(--cv-wrapper-background-color);*!*/
+/*    padding: 40px 0;*/
+/*    min-height: 100vh;*/
+/*    background-color: red;*/
+
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
+
+/* style.css Section 30 */
+.cv-bg-wrapper {
+    background-color: var(--cv-wrapper-background-color);
+    /*background-color: red;*/
+    padding: 40px 0;
+    min-height: 100vh;
+    display: flex !important;
+    flex-direction: column !important; /* Stack any content vertically */
+    align-items: center !important;    /* Forces horizontal centering */
+    width: 100% !important;
+}
+
+/* --- 1. RESPONSIVE PAPER SHEET --- */
+.cv-paper-sheet {
+    width: 100% !important; /* Allow it to shrink */
+    max-width: 850px;       /* Keep desktop size bound */
+    min-height: auto !important; /* Remove fixed A4 height on web view */
+    /*width: 210mm; !* A4 Width *!*/
+    /*min-height: 297mm; !* A4 Height *!*/
+    margin: 0 auto;
+    padding: 40px;          /* Default desktop padding */
+    background: #ffffff;
+    color: #000000;
+    /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);*/
+    /*box-shadow: 0 0 15px rgba(255, 5, 5, 1);*/
+}
+
+/* --- 2. MOBILE OVERRIDES (< 768px) --- */
+@media (max-width: 767px) {
+    /*!* Shrink padding so content has more room *!*/
+    /*.cv-paper-sheet {*/
+    /*    padding: 20px 15px !important;*/
+    /*}*/
+
+    /* Standard CV: stack contact grids */
+    #contact-grid .col-4 {
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+
+    /* One-Page CV: stack sidebar and main body */
+    body.mode-one-page #cv-page-section {
+        flex-direction: column !important;
+    }
+
+    .cv-sidebar {
+        /*flex: 0 0 100% !important;*/
+        /*width: 100% !important;*/
+        /*min-width: 100% !important;*/
+
+        font-size: var(--cv-one-page-sidebar-fs);
+        flex: 0 0 30% !important;
+        width: 30% !important;
+        min-width: 30% !important;
+    }
+
+    .cv-main-body {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        padding: 20px 15px !important;
+    }
+
+    /* Adjust the sticky bar buttons for mobile */
+    .cv-sticky-bar .btn-sm {
+        padding: 5px 10px !important;
+        font-size: 10px !important;
+    }
+
+
+    /* Stack the sidebar on top of the main body */
+    body.mode-one-page #one-page-section {
+        flex-direction: column !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Sidebar becomes full width and adjusts padding */
+    body.mode-one-page .cv-sidebar {
+        /*flex: 0 0 100% !important;*/
+        /*width: 100% !important;*/
+        /*min-width: 100% !important;*/
+        font-size: var(--cv-one-page-sidebar-fs);
+        flex: 0 0 30% !important;
+        width: 30% !important;
+        min-width: 40% !important;
+        padding: 20px !important;
+    }
+
+    /* Sidebar becomes full width and adjusts padding */
+    body.mode-one-page .cv-main-body {
+        /*flex: 0 0 100% !important;*/
+        /*width: 100% !important;*/
+        /*min-width: 100% !important;*/
+        flex: 0 0 70% !important;
+        width: 70% !important;
+        min-width: 70% !important;
+        padding: 20px !important;
+    }
+
+    /* Main body becomes full width and adjusts padding */
+    body.mode-one-page .cv-main-body {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        padding: 20px 15px !important;
+    }
+
+    /* Ensure the profile image scales well on small screens */
+    body.mode-one-page .cv-sidebar img {
+        width: 100px !important;
+        margin: 0 auto 15px auto;
+    }
+}
+
+
+
+/*--------------------------------------------------------------
+# 31. STANDARD & DETAILED CV (FULL WIDTH)
+# Used for Standard/Detailed modes. Focuses on clarity and spacing.
+--------------------------------------------------------------*/
+/*#standard-page-section .cv-paper-sheet {*/
+/*    padding: 50px;*/
+/*}*/
+
+.cv-name-header {
+    color: var(--heading-color);
+    font-family: var(--heading-font), serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cv-accent-subtitle {
+    color: var(--accent-color);
+    font-weight: 600;
+    font-family: var(--heading-font), serif;
+    display: block;
+    width: 100%;
+}
+
+.cv-section-title {
+    color: var(--accent-color) !important;
+    background: rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--cv-title-border-color);
+    padding: 5px 10px;
+    border-left: 5px solid var(--accent-color);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: var(--heading-font), serif;
+    font-size: 18px;
+}
+
+/*--------------------------------------------------------------
+# 32. ONE-PAGE CV (SIDEBAR SPLIT)
+# Tightly packed 2-column layout (30% Sidebar / 70% Body).
+--------------------------------------------------------------*/
+/* Sidebar - Dark/Charcoal Theme */
+.cv-sidebar {
+    background-color: var(--default-color) !important;
+    font-size: var(--cv-one-page-sidebar-fs);
+    flex: 0 0 30%;
+    min-width: 30%;
+    padding: 25px 15px;
+    color: #ffffff !important;
+    border-color: 1px solid var(--accent-color) !important;
+}
+
+/*!* Section 32: One-Page Proportions *!*/
+/*.cv-sidebar {*/
+/*    !*background-color: var(--default-color) !important;*!*/
+/*    flex: 0 0 30% !important;*/
+/*    max-width: 30% !important;*/
+/*    padding: 25px 15px;*/
+/*    !*color: #ffffff !important;*!*/
+/*}*/
+
+.cv-main-body {
+    flex: 0 0 70% !important;
+    max-width: 70% !important;
+    /*padding: 25px 30px;*/
+}
+
+.cv-sidebar a { color: #ffffff !important; }
+
+.sidebar-title {
+    font-size: 12px !important;
+    text-transform: uppercase;
+    font-weight: 600;
+    /*color: var(--accent-color-rgb);*/
+    color: var(--accent-color);
+    /*border-bottom: 1px solid rgba(255,255,255,0.2);*/
+    border-bottom: 1px solid var(--accent-color);
+    /*margin-top: 15px;*/
+    margin-top: 5px;
+    padding-bottom: 3px;
+}
+
+.sidebar-list {
+    line-height: 1.5;
+    font-size: var(--cv-one-page-summary-fs); /* 8px */
+}
+
+/*!* Main Body - Clean White Theme *!*/
+/*.cv-main-body {*/
+/*    flex: 0 0 70%;*/
+/*    background-color: #ffffff !important;*/
+/*    padding: 25px 30px;*/
+/*}*/
+
+.one-page-name {
+    font-size: 20px !important;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--heading-color);
+}
+
+.main-section-title {
+    font-size: 12px !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--heading-color);
+    border-bottom: 2px solid var(--accent-color);
+    margin-top: 12px;
+    margin-bottom: 5px;
+    padding-bottom: 2px;
+}
+
+/* High-Density Typography Tweaks */
+.cv-one-page-body {
+    font-size: var(--cv-one-page-body-fs); /* 9px */
+    line-height: 1.25;
+}
+
+.small-date {
+    font-size: 8.5px;
+    color: #6c757d;
+}
+
+/*--------------------------------------------------------------
+# 33. PDF & PRINT OPTIMIZATION
+# Ensures charcoal sidebar and blue accents appear in PDF exports.
+--------------------------------------------------------------*/
+/*@media print {*/
+/*    .no-print, .cv-sticky-bar, #header, #footer { display: none !important; }*/
+
+/*    body { background: white !important; }*/
+
+/*    .cv-bg-wrapper { padding: 0 !important; }*/
+
+/*    .cv-paper-sheet {*/
+/*        box-shadow: none !important;*/
+/*        width: 100% !important;*/
+/*        max-width: none !important;*/
+/*    }*/
+
+/*    !* TWEAK: Force colors to print in Chrome/Safari/Edge *!*/
+/*    * {*/
+/*        -webkit-print-color-adjust: exact !important;*/
+/*        print-color-adjust: exact !important;*/
+/*    }*/
+/*}*/
+
+
+
+/*--------------------------------------------------------------
+# 34. 404 ERROR PAGE
+# Full-screen centered layout for the Page Not Found error.
+# Uses a high-contrast dark theme consistent with the preloader.
+--------------------------------------------------------------*/
+#notfound-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;      /* Matches site sidebar/preloader */
+    text-align: center;
+    padding: 0 20px;
+}
+
+.error-content {
+    max-width: 600px;
+}
+
+/* The "404" large text */
+.error-content h1 {
+    font-family: var(--heading-font), sans-serif; /* Oswald */
+    font-size: 100px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--dot-loader-color); /* The red highlight from :root */
+    line-height: 1;
+}
+
+/* Error subtitle (e.g., "PAGE NOT FOUND") */
+.error-content h2 {
+    font-family: var(--heading-font), sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--contrast-color);
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+/* Error message text */
+.error-content p {
+    font-size: 18px;
+    color: var(--contrast-color);
+    margin: 20px 0 30px 0;
+    text-align: center;
+}
+
+/*--------------------------------------------------------------
+# 35. 404 INTERACTIVE ELEMENTS
+# Styling for the return button and background decoration.
+--------------------------------------------------------------*/
+.btn-back-home {
+    background: var(--accent-color);
+    color: var(--contrast-color);
+    padding: 12px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-back-home:hover {
+    background: color-mix(in srgb, var(--accent-color), black 15%);
+    color: var(--contrast-color);
+    box-shadow: 0 8px 20px rgba(20, 157, 221, 0.2);
+}
+
+/* Decorative error icon */
+.error-icon {
+    font-size: 60px;
+    height: 130px;
+    color: var(--dot-loader-color);
+    margin-bottom: 20px;
+    opacity: 0.3; /* Subtle background appearance */
+}
+
+
+/*--------------------------------------------------------------
+# 36. SIDEBAR FOOTER (#menu_footer)
+--------------------------------------------------------------*/
+#menu_footer {
+    margin-top: auto;
+    padding: 20px 0; /* Standardized vertical padding */
+    background-color: var(--default-color);
+    border-top: 1px solid var(--accent-color);
+    text-align: center;
+}
+
+#menu_footer .copyright p,
+#menu_footer .credits {
+    font-size: 13px;
+    color: var(--nav-color);
+    margin-bottom: 0; /* REMOVED: 5px margin to keep it tight */
+    line-height: 1.5;
+    text-align: center;
+    align-items: center;
+}
+
+/*--------------------------------------------------------------
+# 37. MAIN PAGE FOOTER (#footer)
+--------------------------------------------------------------*/
+#footer {
+    padding: 20px 0; /* MATCHED: 20px instead of 30px */
+    font-size: 13px; /* MATCHED: 13px instead of 14px */
+    background-color: var(--default-color);
+    color: var(--background-color);
+    border-top: 1px solid var(--accent-color);
+    width: 100%;
+    transition: all 0.3s;
+}
+
+/* Zero out any default paragraph margins from Bootstrap */
+#footer p {
+    margin-bottom: 0 !important;
+}
+
+#footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Desktop layout adjustment for the footer */
+@media (min-width: 1200px) {
+    #footer {
+        padding-left: 350px;
+    }
+}
+
+
+
+/*--------------------------------------------------------------
+# 38. SCROLL TOP BUTTON
+# The floating button that appears when the user scrolls down.
+# Visibility is toggled by adding/removing the .active class via JS.
+--------------------------------------------------------------*/
+.scroll-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: 15px;
+  z-index: 99999;
+  background-color: var(--accent-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.scroll-top i {
+  font-size: 24px;
+  color: var(--contrast-color);
+  line-height: 0;
+}
+
+.scroll-top:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+  color: var(--contrast-color);
+}
+
+/* The class added by scripts.js when the user scrolls down ~100px */
+.scroll-top.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*--------------------------------------------------------------
+# 39. SMOOTH SCROLL BEHAVIOR
+# Ensures that clicking "Back to top" or nav links slides smoothly
+# instead of jumping instantly.
+--------------------------------------------------------------*/
+html {
+  scroll-behavior: smooth;
+}
+
+
+/*--------------------------------------------------------------
+# 41. DYNAMIC DETAILS TOGGLE
+# Ensures the Summary button looks identical to other badges.
+--------------------------------------------------------------*/
+.details-box summary {
+    font-size: 13px !important;    /* Matches date/status badges */
+    padding: 5px 15px !important;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;              /* Hides the default browser arrow */
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
+    background-color: var(--accent-color);
+    color: var(--contrast-color);
+    transition: 0.3s;
+}
+
+/* Hide the default arrow in Safari */
+.details-box summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Optional: Change color when expanded to give visual feedback */
+.details-box[open] summary {
+    background-color: var(--heading-color);
+}
+
+/* Hover state */
+.details-box summary:hover {
+    background-color: color-mix(in srgb, var(--accent-color), black 15%);
+}
+
+
+
+/*!*--------------------------------------------------------------*/
+/*# 40. SMOOTH SCROLL BEHAVIOR*/
+/*# Ensures that clicking "any menu link" or nav links slides smoothly*/
+/*# instead of jumping instantly.*/
+/*--------------------------------------------------------------*!*/
+/*html {*/
+/*  scroll-behavior: smooth;*/
+/*}*/
+
+/*!*!* IMPORTANT: If you have a sticky header, use this to stop*!*/
+/*!*   the header from covering your section titles *!*!*/
+/*!*section {*!*/
+/*!*  scroll-margin-top: 80px; !* Adjust this value to match your header height *!*!*/
+/*!*}*!*/
+
+
+
+
+
+/*--------------------------------------------------------------
+# 41. CV Page basic settings
+# Ensures that clicking "any menu link" or nav links slides smoothly
+# instead of jumping instantly.
+--------------------------------------------------------------*/
+
+/* Dark Sticky Bar Styling */
+.cv-sticky-bar {
+    background-color: var(--heading-color) !important; /* Professional dark/black background */
+    border-bottom: 1px solid var(--accent-color);
+    color: #ffffff !important;
+    z-index: 1000;
+    min-height: 70px;
+    /*z-index: 1020;*/
+    transition: all 0.3s ease;
+}
+
+/* Bigger Title Text in Sticky Bar */
+.cv-nav-title {
+    font-size: 1.25rem !important; /* Increased size */
+    font-weight: 700;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Ensure Sticky Bar text and icons are white */
+.cv-sticky-bar i,
+.cv-sticky-bar span {
+    color: #ffffff !important;
+}
+
+/* Adjust Select Menu for dark background */
+#cvTypeSelector.form-select {
+    background-color: #2c3136;
+    border-color: var(--accent-color);
+    color: #ffffff;
+}
+
+#cvTypeSelector option {
+    background-color: #1a1e23;
+    color: #ffffff;
+}
+
+/* Ensure the Home button stays visible */
+.cv-sticky-bar .btn-primary {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+
+/*!* --- CV Page General Layout --- *!*/
+/*.all_cv_wrapper {*/
+/*    background-color: var(--cv-wrapper-background-color);*/
+/*    padding: 30px 0;*/
+/*}*/
+
+/*.cv-bg-wrapper {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
+
+
+/* --- Standard CV Specifics --- */
+.cv-name-header {
+    font-family: var(--heading-font);
+    font-weight: 700;
+    color: var(--heading-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.cv-accent-subtitle {
+    color: var(--accent-color);
+    font-weight: 600;
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+
+.cv-paper-sheet img {
+    border: 1px solid gray !important;
+}
+
+/* --- One-Page CV Specifics --- */
+/*.cv-sidebar {*/
+/*    width: 250px;*/
+/*    background-color: #343a40; !* Dark sidebar *!*/
+/*    min-height: 100%;*/
+/*}*/
+
+/*.cv-main-body {*/
+/*    flex: 1;*/
+/*}*/
+
+/*.sidebar-title {*/
+/*    font-size: 12px;*/
+/*    border-bottom: 1px solid rgba(255,255,255,0.2);*/
+/*    padding-bottom: 5px;*/
+/*    margin-top: 10px;*/
+/*    font-weight: 600;*/
+/*}*/
+
+.sidebar-list {
+    font-size: 11px;
+    margin-bottom: 15px;
+}
+
+.one-page-name {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 0;
+}
+
+.one-page-subtitle {
+    font-size: 16px;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.one-page-summary {
+    font-size: 10px;
+    /*color: var(--accent-color);*/
+    /*font-weight: 600;*/
+}
+
+.main-section-title {
+    border-bottom: 1px solid #333;
+    font-size: 12px;
+    margin-top: 15px;
+    padding-bottom: 3px;
+}
+
+/* Print/A4 Optimization Classes */
+.font-size-8 { font-size: 8px !important; line-height: 1.1; }
+.font-size-9 { font-size: 9px !important; line-height: 1.2; }
+.font-size-8-5 { font-size: 8.5px !important; line-height: 1.2; }
+
+.small-date {
+    font-size: 10px;
+    color: #6c757d;
+}
+
+
+
+/* ==========================================================================
+   REVISED PRINT ENGINE: FIXED MARGINS & FLEX INTEGRITY
+   ========================================================================== */
+/*@media print {*/
+/*    !* 1. Hide Web UI *!*/
+/*    .no-print, .cv-sticky-bar, #header, #footer, .scroll-top, .header-toggle, #preloader {*/
+/*        display: none !important;*/
+/*    }*/
+
+/*    !* 2. Physical Page Setup *!*/
+/*    @page {*/
+/*        size: A4;*/
+/*        !*margin: 15mm; !* Forces a safety margin on EVERY physical page *!*!*/
+/*        !*margin: 5mm; !* Forces a safety margin on EVERY physical page *!*!*/
+/*        margin: 8mm; !* Forces a safety margin on EVERY physical page *!*/
+/*    }*/
+
+/*    !* 3. Global Reset *!*/
+/*    body {*/
+/*        background: white !important;*/
+/*        margin: 0 !important;*/
+/*        padding: 0 !important;*/
+/*        width: 100% !important;*/
+/*        -webkit-print-color-adjust: exact !important;*/
+/*        print-color-adjust: exact !important;*/
+/*    }*/
+
+/*    !* 4. Preserve Flex Layout (Side-by-Side) *!*/
+/*    .main, .all_cv_wrapper, #standard-page-section, .cv-bg-wrapper {*/
+/*        display: block !important; !* Wrapper stays block *!*/
+/*        !*width: 100% !important;*!*/
+/*        !*margin: 0 !important;*!*/
+/*        !*padding: 0 !important;*!*/
+/*        width: 100% !important;*/
+/*        margin: 0 !important;*/
+/*        padding: 0 !important;*/
+/*    }*/
+
+/*    !* IMPORTANT: Do NOT force .row or .col to block. Let Bootstrap Flex work *!*/
+/*    .row { display: flex !important; flex-wrap: wrap !important; }*/
+/*    .col-2, .col-4, .col-6, .col-10 { display: block !important; }*/
+
+/*    !* 5. The Paper Sheet: Responsive to Page Margins *!*/
+/*    #standard-page-section .cv-paper-sheet {*/
+/*        !*width: 100% !important; !* Scales to fit inside the 15mm @page margin *!*!*/
+/*        !*max-width: none !important;*!*/
+/*        !*margin: 0 !important;*!*/
+/*        padding: 0 !important; !* Internal padding is now handled by @page margin *!*/
+/*        box-shadow: none !important;*/
+/*        border: none !important;*/
+/*        background: transparent !important;*/
+/*        width: 140% !important; !* Scales to fit inside the 15mm @page margin *!*/
+/*        max-width: none !important;*/
+/*        margin: 0mm -20mm -8mm -26mm !important;*/
+/*    }*/
+
+/*    !* 6. Fix Backgrounds & Avoid Messy Breaks *!*/
+/*    .cv-section-title {*/
+/*        background-color: #f8f9fa !important;*/
+/*        -webkit-print-color-adjust: exact !important;*/
+/*    }*/
+
+/*    !*section, .resume-item, .cv-item-compact {*!*/
+/*    !*    page-break-inside: avoid; !* Prevents splitting a single entry across two pages *!*!*/
+/*    !*}*!*/
+
+/*    !*section, .resume-item, .cv-item-compact {*!*/
+/*    !*    page-break-inside: inherit; !* Prevents splitting a single entry across two pages - avoid | auto | inherit *!*!*/
+/*    !*}*!*/
+/*}*/
+
+
+/* ==========================================================================
+   GENERALIZED HYBRID PRINT ENGINE
+   ========================================================================== */
+@media print {
+    /* 1. Universal Hide */
+    .no-print, .cv-sticky-bar, #header, #footer, .scroll-top, .header-toggle, #preloader {
+        display: none !important;
+    }
+
+    /* 2. Physical Page Reset */
+    body {
+        background: white !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* 3. Layout Integrity (Flexbox) */
+    .row { display: flex !important; flex-wrap: wrap !important; }
+    .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-9, .col-10 { display: block !important; }
+
+    /* --------------------------------------------------------------
+       MODE A: STANDARD CV (Based on your working settings)
+       -------------------------------------------------------------- */
+    @page { size: A4; margin: 8mm; } /* Your preferred 8mm safety margin */
+
+    body.mode-standard .main,
+    body.mode-standard .all_cv_wrapper,
+    body.mode-standard #standard-page-section,
+    body.mode-standard .cv-bg-wrapper {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body.mode-standard #standard-page-section .cv-paper-sheet {
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        width: 140% !important; /* Your custom scaling */
+        max-width: none !important;
+        margin: 0mm -20mm -8mm -26mm !important; /* Your specific offsets */
+    }
+
+    /* --------------------------------------------------------------
+       MODE B: ONE-PAGE CV (Zero Margin / Full Bleed)
+       -------------------------------------------------------------- */
+    body.mode-one-page { margin: 0 !important; }
+
+    /*body.mode-one-page .all_cv_wrapper,*/
+    /*body.mode-one-page #one-page-section,*/
+    /*body.mode-one-page .cv-bg-wrapper {*/
+    /*    !*!*display: flex !important;*!*!*/
+    /*    !*width: 210mm !important; !* Locked to A4 *!*!*/
+    /*    !*height: 297mm !important;*!*/
+    /*    !*!*margin: -8mm !important; !* Negates the @page margin for full bleed *!*!*!*/
+    /*    !*padding: 0 !important;*!*/
+
+    /*    display: block !important;*/
+    /*    width: 100% !important;*/
+    /*    margin: 0 !important;*/
+    /*    padding: 0 !important;*/
+    /*}*/
+
+    /*body.mode-one-page #one-page-section {*/
+    /*    width: 210mm !important;*/
+    /*    height: 297mm !important;*/
+    /*    margin: -8mm 0 0 -8mm !important;*/
+    /*}*/
+
+    /*body.mode-one-page .cv-paper-sheet {*/
+    /*    display: flex !important;*/
+    /*    width: 100% !important;*/
+    /*    padding: 0 !important;*/
+    /*    margin: 0 !important;*/
+    /*    box-shadow: none !important;*/
+    /*}*/
+
+    body.mode-one-page #one-page-section .cv-paper-sheet {
+        font-size: var(--cv-one-page-sidebar-fs);
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        width: 140% !important; /* Your custom scaling */
+        max-width: none !important;
+        /*margin: 0mm 0mm -8mm -26mm !important; !* Your specific offsets *!*/
+        margin: -10mm 0mm -8mm -28mm !important; /* Your specific offsets */
+    }
+
+    body.mode-one-page .cv-sidebar {
+        background-color: var(--default-color) !important;
+        /*width: 100%;*/
+        -webkit-print-color-adjust: exact !important;
+
+        font-size: var(--cv-one-page-sidebar-fs);
+        flex: 0 0 30% !important;
+        width: 30% !important;
+        min-width: 30% !important;
+        padding: 20px !important;
+    }
+
+    /* --------------------------------------------------------------
+       4. TYPOGRAPHY & FINISHING
+       -------------------------------------------------------------- */
+    .cv-section-title {
+        background-color: #f8f9fa !important;
+        -webkit-print-color-adjust: exact !important;
+    }
+
+    /*!* Keeps entries together *!*/
+    /*section, .resume-item, .cv-item-compact {*/
+    /*    page-break-inside: inherit;*/
+    /*}*/
+
+}
+
+
+
+
+
+/* Ensure the mobile menu slides ABOVE the sticky CV bar */
+@media (max-width: 1199px) {
+    /* The main sidebar menu */
+    #header {
+        z-index: 2000 !important; /* Higher than the sticky-top's 1020 */
+    }
+
+    /* The hamburger menu toggle button */
+    .header-toggle {
+        z-index: 2001 !important; /* Must be even higher to remain clickable */
+    }
+}
+
+/* Optional: Lower the sticky bar's priority just in case */
+.cv-sticky-bar.sticky-top {
+    z-index: 1010 !important; /* Slightly lower than default to stay behind the menu */
+}
+
+
+
+
+/* --------------------------------------------------------------
+   MODE B: ONE-PAGE CV (FIXED ALIGNMENT & FULL BLEED)
+   -------------------------------------------------------------- */
+body.mode-one-page {
+    margin: 0 !important;
+    display: block !important;
+}
+
+/*body.mode-one-page .all_cv_wrapper,*/
+/*body.mode-one-page .cv-bg-wrapper {*/
+/*!*    !*display: flex !important;*!*!*/
+/*!*    justify-content: center !important; !* FORCES CENTERING ON THE PAGE *!*!*/
+/*!*    align-items: flex-start !important;*!*/
+/*!*    width: 100% !important;*!*/
+/*!*    !*background: white !important;*!*!*/
+/*!*    !*background: #ef0b0b !important;*!*!*/
+/*!*    background-color: var(--cv-wrapper-background-color);*!*/
+/*!*    margin: 0 !important;*!*/
+/*!*    !*padding: 0 !important;*!*!*/
+/*!*    !*padding: 40px 0;*!*!*/
+/*!*    !*min-height: 100vh;*!*!*/
+/*!*}*!*/
+/*!*{*!*/
+/*    background-color: var(--cv-wrapper-background-color);*/
+/*    !*padding: 40px 0;*!*/
+/*    min-height: 100vh;*/
+
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*}*/
+
+
+/*!* style.css Section 32 *!*/
+/*body.mode-one-page #one-page-section {*/
+/*    display: flex !important; !* Keep the Sidebar/Body split *!*/
+/*    flex-direction: row;*/
+/*    width: 100% !important;*/
+/*    max-width: 850px !important;   !* MATCHES Standard CV Paper *!*/
+/*    height: auto !important;       !* REPAIR: Removes the fixed height overflow *!*/
+/*    margin: 0 auto !important;     !* REPAIR: Removes the -8mm shift *!*/
+/*    !*background: #ffffff;*!*/
+/*    !*box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);*!*/
+/*    background: blue;*/
+/*    box-shadow: 0 0 15px rgba(50, 200, 20, 1);*/
+/*}*/
+
+/* style.css Section 32 */
+body.mode-one-page #one-page-section {
+    display: flex !important; /* Keep the Sidebar/Body split */
+    /*flex-direction: row;*/
+    width: 100% !important;
+    /*max-width: 850px !important;   !* MATCHES Standard CV Paper *!*/
+    height: auto !important;       /* REPAIR: Removes the fixed height overflow */
+    margin: 0 auto !important;     /* REPAIR: Removes the -8mm shift */
+    /*background: #ffffff;*/
+    /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);*/
+    /*background: blue;*/
+    /*box-shadow: 0 0 15px rgba(50, 200, 20, 1);*/
+}
+
+/* Remove the fixed height that causes footer overlap */
+body.mode-one-page #one-page-section {
+    height: auto !important;
+}
+
+/*body.mode-one-page .cv-paper-sheet {*/
+/*    display: flex !important;*/
+/*    width: 100% !important;*/
+/*    padding: 0 !important;*/
+/*    margin: 0 !important;*/
+/*    box-shadow: none !important;*/
+/*}*/
+
+
+body.mode-one-page .cv-paper-sheet {
+    width: 100% !important; /* Allow it to shrink */
+    max-width: 850px;       /* Keep desktop size bound */
+    min-height: auto !important; /* Remove fixed A4 height on web view */
+    /*width: 210mm; !* A4 Width *!*/
+    /*min-height: 297mm; !* A4 Height *!*/
+    margin: 0 auto;
+    padding: 40px;          /* Default desktop padding */
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ==========================================================================
+   ONE-PAGE CV: ALIGNMENT & OVERFLOW REFACTOR
+   ========================================================================== */
+
+/*!* 1. Reset the wrapper to handle flow naturally *!*/
+/*.all_cv_wrapper {*/
+/*    display: block !important;*/
+/*    width: 100%;*/
+/*    overflow: visible !important; !* Prevents "hidden" content cutting off *!*/
+/*    background-color: var(--cv-wrapper-background-color);*/
+/*}*/
+
+/* 2. Center the paper sheet and manage the split layout */
+/*body.mode-one-page #one-page-section {*/
+/*    !*display: flex !important;*!*/
+/*    !*flex-direction: row;*!*/
+/*    justify-content: center; !* Horizontally centers the sheet *!*/
+/*    !*align-items: flex-start;*!*/
+/*    width: 100%;*/
+/*    !*max-width: 850px;       !* Standard web-view width *!*!*/
+/*    !*margin: 20px auto !important; !* Creates a gap from top and footer *!*!*/
+/*    background: #ffffff;*/
+/*    !*box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);*!*/
+/*    position: relative;*/
+/*    !*z-index: 10;            !* Keeps it above the wrapper but below the footer if necessary *!*!*/
+/*}*/
+
+/* 3. Handle the sidebar/body split proportionally */
+/*body.mode-one-page .cv-sidebar {*/
+/*    !*flex: 0 0 30% !important; !* Fixed 30% width *!*!*/
+/*    background-color: var(--default-color) !important;*/
+/*    color: #ffffff !important;*/
+/*    !*padding: 25px 15px;*!*/
+/*}*/
+
+/*body.mode-one-page .cv-main-body {*/
+/*    !*flex: 0 0 70% !important; !* Fixed 70% width *!*!*/
+/*    !*padding: 25px 30px;*!*/
+/*    background-color: #ffffff !important;*/
+/*}*/
+
+/*!* 4. Fix for the footer collision *!*/
+/*#footer {*/
+/*    position: relative;*/
+/*    z-index: 100;           !* Ensures footer always sits on top of any overflows *!*/
+/*    margin-top: 50px !important; !* Forces clear space after the CV ends *!*/
+/*}*/
+
+
+/*!* Offset for Sticky Bar on CV Page *!*/
+/*.printable-cv-page section {*/
+/*    scroll-margin-top: 85px; !* Adjust this value to match the height of your .cv-sticky-bar *!*/
+/*}*/
+
+/*!* If you have specific IDs outside of <section> tags that are targets *!*/
+/*.printable-cv-page [id] {*/
+/*    scroll-margin-top: 85px;*/
+/*}*/
+
+
+/*!* Container to keep the logo relative to the image *!*/
+/*.profile-pic-wrapper {*/
+/*    position: relative;*/
+/*    display: inline-block;*/
+/*}*/
+
+
+/* Sidebar Profile Logo Overlay */
+.profile-logo-overlay {
+    /*position: absolute;*/
+    position: relative;
+    /* Position relative to the 70% wide container */
+    bottom: 5%;
+    right: 5%;
+    width: 20px;
+    height: 20px;
+    z-index: 10;
+    pointer-events: none; /* Allows clicking the profile link 'through' the logo */
+
+    /* Enhance visibility against the photo */
+    background: white;
+    padding: 2px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Print scaling and positioning fix */
+@media print {
+    .profile-logo-overlay {
+        /* Use fixed physical units for print accuracy */
+        width: 6mm !important;
+        height: 6mm !important;
+        min-width: 6mm !important;
+        /*bottom: 5% !important;*/
+        /*right: 5% !important;*/
+        display: block !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+
+/* Sidebar Footer Container */
+.cv-sidebar-footer-container {
+    width: 100%;
+    /* Remove red background for professional print, use only for debugging */
+    background-color: transparent !important;
+}
+
+/* Sidebar Footer Logo - Web View */
+.sidebar-footer-logo {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0; /* Prevents the image from widening in flex containers */
+    background: white;
+    padding: 2px;
+    border-radius: 50%;
+    /*opacity: 0.2; !* Faint background look *!*/
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    display: block;
+}
+
+@media print {
+    /* 1. Ensure the container spans the full sidebar width */
+    .cv-sidebar-footer-container {
+        display: block !important; /* Switch to block for more stable print alignment */
+        width: 100% !important;
+        text-align: right !important; /* Fallback alignment */
+        background-color: transparent !important;
+    }
+
+    /* 2. Force the logo to the right */
+    .sidebar-footer-logo {
+        width: 20px !important;
+        height: 20px !important;
+        min-width: 20px !important;
+        max-width: 20px !important;
+        /* Use margin-left: auto to push the image to the right edge */
+        margin-left: auto !important;
+        margin-right: 0 !important;
+        display: block !important;
+
+        /* Preserve transparency */
+        /*opacity: 0.9 !important;*/
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+}
+
+
+/* Standard CV Footer Logo */
+.cv-footer-container {
+    width: 100% !important;
+    display: block !important;
+    text-align: right !important; /* Mathematically pins the logo to the right */
+    margin-top: 10px;
+}
+
+.standard-footer-logo {
+    width: 25px !important; /* Slightly larger for the full-width footer */
+    height: 25px !important;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1 !important; /* Prevents horizontal stretching */
+    object-fit: contain !important;
+    display: inline-block !important; /* Required for text-align: right to work */
+    /*opacity: 0.9;*/
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+@media print {
+    .standard-footer-logo {
+        /* Fixed dimensions to ignore the 140% sheet scale distortion */
+        width: 25px !important;
+        height: 25px !important;
+        max-width: 25px !important;
+        min-width: 25px !important;
+        opacity: 0.9 !important;
+        display: inline-block !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .sidebar-footer-logo {
+        /* Prevents mobile resets from overriding your fixed dimensions */
+        width: 20px !important;
+        height: 20px !important;
+        max-width: 20px !important;
+        max-height: 20px !important;
+        opacity: 0.9 !important;
+        display: inline-block !important;
+    }
+}
+
+
+
+
+/****************************/
+/* --- CV Sticky Bar Flex Refactor --- */
+
+.cv-sticky-bar {
+    background-color: var(--heading-color) !important;
+    min-height: 70px;
+    z-index: 1020;
+    transition: all 0.3s ease;
+}
+
+/* Force elements to match height and align */
+.cv-sticky-bar .btn,
+.cv-sticky-bar .form-select {
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mobile Specific Adjustments (< 1200px) */
+@media (max-width: 1199px) {
+    .cv-sticky-bar {
+        /* PROTECT TOGGLE BUTTON: Adds space on the right so Print doesn't go under the hamburger */
+        padding-right: 65px !important;
+    }
+
+    .cv-type-wrapper {
+        /* SCALING: Dropdown grows to fit all remaining space */
+        flex-grow: 1;
+        min-width: 120px;
+    }
+
+    #cvTypeSelector {
+        font-size: 11px !important; /* Smaller text to prevent overflow on tiny screens */
+        padding-left: 8px;
+    }
+
+    .cv-sticky-bar .btn-sm {
+        font-size: 12px;
+        padding: 0 12px !important;
+    }
+}
+
+/* Prevent the bar from being too tall on very small devices */
+@media (max-width: 480px) {
+    .cv-sticky-bar {
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        min-height: 60px;
+    }
+}
+
+.section-detail-header {
+    /*font-size: 0.9rem; !* Adjust to match your CV page h6 size *!*/
+    color: var(--background-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Prevents long titles from breaking the layout on mobile */
+    display: block !important; /* Forces visibility regardless of parent classes */
+}
+
+/* Ensures the Home button text doesn't hide on mobile if you want the full button */
+@media (max-width: 576px) {
+    .section-detail-header {
+        font-size: 0.85rem; /* Slightly smaller for very narrow screens */
+    }
+}
+
+
+/* Add to Section 3: SHARED UTILITY CLASSES */
+.italic { font-style: italic !important; }
+
+
+/* High-Density Key Info Grid */
+.cv-info-grid {
+    font-size: var(--cv-one-page-summary-fs, 8px); /* Defaults to 8px from your :root */
+    line-height: 1.1;
+}
+
+/* Individual Info Card */
+.cv-info-card {
+    padding: 0.25rem; /* Matches Bootstrap p-1 */
+    border: 1px solid var(--cv-title-border-color);
+    border-radius: 4px;
+    background-color: var(--light-background-color);
+    /*height: 100%;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+/* Optional: Subtle hover effect for interactive feel */
+.cv-info-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+
+/* High-Density CV Item */
+.cv-item-compact {
+    font-size: var(--cv-one-page-body-fs, 9px); /* Uses 9px from root */
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+}
+
+/* Secondary Sub-text (for Specialisations/Theses) */
+.cv-item-detail {
+    font-size: var(--cv-one-page-summary-fs, 8px); /* Uses 8px from root */
+    color: var(--resume-text-muted-color); /* Uses your muted grey */
+}
+
+
+
+
+
+
+/* --- ************************************* --- */
+/* --- Generalized Section Detail Components --- */
+/* --- Generalized Detail: Academic Sub-Components --- */
+
+/* 1. Collaboration / Scholarship / Info Box */
+.detail-info-box {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 14px; /* small */
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #6c757d;
+}
+
+/* 2. Research & Projects List Group */
+.detail-list-group {
+    margin-top: 1.5rem;
+}
+
+.detail-list-group-item {
+    padding: 0.75rem 0;
+    background: transparent;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.detail-list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* 3. Research/Thesis Title Styling */
+.detail-sub-text {
+    color: #6c757d; /* text-secondary */
+    font-size: 13.5px;
+    display: block;
+    margin-top: 2px;
+}
+
+
+
+
+
+/* --- ************************************* --- */
+/* --- Section Detail Components --- */
+/* Section Details Component Styles */
+.details-category-header {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.details-card {
+    border-left: 5px solid var(--accent-color) !important;
+    border-radius: 12px !important;
+    transition: transform 0.3s ease;
+}
+
+.details-card:target {
+    animation: highlight-fade 2s ease-out;
+}
+
+.details-card-title {
+    font-size: 16px;
+    color: var(--heading-color);
+}
+
+.details-accent-link {
+    color: var(--accent-color);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.details-text-content {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.details-collab-box {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #6c757d;
+}
+
+@keyframes highlight-fade {
+    0% { background-color: rgba(var(--accent-color-rgb), 0.1); }
+    100% { background-color: transparent; }
+}
+
+
+/* Section Details Page: Dynamic Components */
+.details-category-header {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.details-card {
+    border-left: 5px solid var(--accent-color) !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+}
+
+.details-card-title {
+    font-size: 16px;
+    color: var(--heading-color);
+}
+
+.details-accent-link {
+    color: var(--accent-color);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.details-text-justify {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+.details-collab-box {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #6c757d;
+}
+
+/* Highlight effect for target IDs */
+.target-highlight {
+    animation: highlight-pulse 2s ease-out;
+}
+
+@keyframes highlight-pulse {
+    0% { background-color: rgba(var(--accent-color-rgb), 0.2); border-left-width: 15px !important; }
+    100% { background-color: transparent; border-left-width: 5px !important; }
+}
+
+
+
+/* --- Logo Page Components --- */
+.logo-gallery-wrapper {
+    padding: 20px 0;
+}
+
+.logo-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.logo-image-box {
+    background: #fafafa;
+    padding: 30px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.logo-display-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.logo-details-box {
+    padding: 15px;
+    border-top: 1px solid #f5f5f5;
+    text-align: center;
+}
+
+.logo-tag {
+    font-size: 11px;
+    color: var(--accent-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.logo-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--heading-color);
+    margin: 0;
+}
+
+/* Highlight for target hash navigation */
+.logo-target-highlight {
+    animation: logo-pulse 2s ease-out;
+}
+
+@keyframes logo-pulse {
+    0% { background-color: rgba(var(--accent-color-rgb), 0.1); }
+    100% { background-color: transparent; }
+}
+
+
+/* --- Copyright Page Components --- */
+.legal-card {
+    border-left: 5px solid var(--accent-color) !important;
+    background-color: #fff;
+    border-radius: 12px;
+}
+
+.legal-accent-text {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.legal-description {
+    text-align: justify;
+    line-height: 1.8;
+    color: #444;
+}
+
+.legal-meta-box {
+    background-color: #f8f9fa;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+
+
+/* --- Gallery Page Components --- */
+.gallery-filter-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border: 1px solid var(--accent-color);
+    background: transparent;
+    color: var(--accent-color);
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+.gallery-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.gallery-card:hover {
+    transform: scale(1.02);
+}
+
+.gallery-img-box {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.gallery-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-info-box {
+    padding: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.gallery-item-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--heading-color);
+}
+
+.gallery-item-desc {
+    font-size: 12px;
+    color: #666;
+    text-align: justify;
+}
+
+
+
+
+/* --- Diary Page Components --- */
+.diary-filter-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.diary-card {
+    border-left: 5px solid var(--accent-color) !important;
+    background-color: #fff;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.diary-card:hover {
+    transform: translateX(5px);
+}
+
+.diary-accent-text {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+.diary-description {
+    text-align: justify;
+    line-height: 1.6;
+    color: #444;
+}
+
+
+
+
+/* --- 404 Error Page Styling --- */
+/* --- Global 404 Error Styling --- */
+.error-404-wrapper {
+    padding: 80px 20px;
+    text-align: center;
+    background: #fff;
+    border-radius: 15px;
+}
+
+.error-404-icon {
+    font-size: 100px;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.error-404-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--heading-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.error-404-msg {
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    line-height: 1.6;
+}
+
+.error-404-btn {
+    padding: 12px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+
+
+

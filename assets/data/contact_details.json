@@ -1,0 +1,64 @@
+{
+  "section_info": {
+    "title": "Contact Details_XX",
+    "details": "Formal channels for academic collaboration, technical consultation, and industrial partnerships within the Victorian tertiary sector and the global ICT industry. Communication is welcomed regarding research initiatives in machine learning research, doctoral study at Deakin University, or professional software development projects._XX",
+    "icon_class": "bi bi-person-lines-fill",
+    "hashtag": "#contact_details"
+  },
+  "contacts": {
+    "location": {
+      "title": "Location",
+      "icon_class": "bi bi-geo-alt",
+      "text": "Melbourne, Australia_XX",
+      "link": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d402590.51606698317!2d144.72350126495118!3d-37.97156521227629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC!5e0!3m2!1sen!2sau!4v1767821326394!5m2!1sen!2sau"
+    },
+    "email": {
+      "title": "Email",
+      "icon_class": "bx bx-envelope",
+      "text": "emran.ali@research.deakin.edu.au",
+      "link": "mailto:emran.ali@research.deakin.edu.au"
+    },
+    "teams": {
+      "title": "MS Teams",
+      "icon_class": "bi bi-microsoft-teams",
+      "text": "wwm.emran@outlook.com",
+      "link": "https://teams.microsoft.com/l/chat/0/0?users=wwm.emran@outlook.com"
+    },
+    "linkedin": {
+      "title": "LinkedIn",
+      "icon_class": "bx bxl-linkedin",
+      "text": "@wwmemran",
+      "link": "https://www.linkedin.com/in/wwmemran"
+    },
+    "google_scholar": {
+      "title": "Google Scholar",
+      "icon_class": "g-scholar-icon-black",
+      "text": "@ej8d6LkAAAAJ",
+      "link": "https://scholar.google.com.au/citations?hl=en&user=ej8d6LkAAAAJ"
+    },
+    "researchgate": {
+      "title": "ResearchGate",
+      "icon_class": "researchgate-icon-black",
+      "text": "@Emran-Ali-2",
+      "link": "https://www.researchgate.net/profile/Emran-Ali-2"
+    },
+    "google_scholar_cv": {
+      "title": "Google Scholar",
+      "icon_class": "g-scholar-icon",
+      "text": "@ej8d6LkAAAAJ",
+      "link": "https://scholar.google.com.au/citations?hl=en&user=ej8d6LkAAAAJ"
+    },
+    "researchgate_cv": {
+      "title": "ResearchGate",
+      "icon_class": "researchgate-icon",
+      "text": "@Emran-Ali-2",
+      "link": "https://www.researchgate.net/profile/Emran-Ali-2"
+    },
+    "website": {
+      "title": "Website",
+      "icon_class": "bi bi-globe",
+      "text": "https://emran.humachlab.com",
+      "link": "https://emran.humachlab.com"
+    }
+  }
+}
