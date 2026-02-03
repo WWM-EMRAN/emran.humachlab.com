@@ -1586,7 +1586,13 @@ const SiteSection = {
     _build_details_publication_card(pub, category) {
         const pubLink = pub.journal_link || pub.conference_link;
 
-        // Build Action Button for Verification
+        // 1. Prepare the citation text for the copy button (removes HTML tags and escapes quotes)
+        const cleanCitation = pub.citation_text
+            .replace(/<[^>]*>/g, "")
+            .replace(/'/g, "&apos;")
+            .replace(/"/g, "&quot;");
+
+        // 2. Build Action Button for Verification
         const actionButtonHtml = pubLink ? `
             <div class="mt-auto">
                 <a href="${pubLink}" target="_blank" class="btn btn-sm btn-primary w-100" style="font-size: 13px; background-color: var(--accent-color); border-color: var(--accent-color);">
@@ -1602,16 +1608,24 @@ const SiteSection = {
                             <i class="${pub.icon_class || 'bi bi-file-earmark-ruled'} me-2" style="color: var(--accent-color);"></i>${pub.title}
                         </h4>
                     </div>
-
+    
                     <div class="d-flex flex-wrap gap-2 mb-4">
                         <span class="badge badge-institute"><i class="bi bi-bookmark-fill me-1"></i> ${category.sub_type}</span>
                         <span class="badge badge-status"><i class="bi bi-journal-check me-1"></i> Peer Reviewed</span>
                     </div>
-
+    
                     <div class="row">
                         <div class="col-lg-7 border-end">
                             <div class="mb-3 p-3 bg-light rounded border-start border-3" style="border-color: var(--accent-color) !important;">
-                                <strong class="small d-block mb-1"><i class="bi bi-quote me-1"></i> Citation:</strong>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <strong class="small"><i class="bi bi-quote me-1"></i> Citation:</strong>
+                                    <button class="badge border-0 badge-dates" 
+                                            onclick="handleCopyAction(this, 'Citation')" 
+                                            data-citation='${cleanCitation}'
+                                            style="cursor: pointer;">
+                                        <i class="bi bi-clipboard-plus me-1"></i> Copy Citation
+                                    </button>
+                                </div>
                                 <div class="small text-dark" style="line-height: 1.5;">${pub.citation_text}</div>
                             </div>
                             
@@ -1620,7 +1634,7 @@ const SiteSection = {
                                 ${pub.abstract}
                             </div>
                         </div>
-
+    
                         <div class="col-lg-5 mt-4 mt-lg-0 ps-lg-4 d-flex flex-column">
                             <div class="p-3 mb-3 small bg-light rounded border">
                                 <strong><i class="bi bi-info-circle me-2"></i>Indexing Details:</strong>
@@ -1634,6 +1648,7 @@ const SiteSection = {
                 </div>
             </div>`;
     },
+
 
 
     /**
