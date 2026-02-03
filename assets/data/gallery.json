@@ -1,7 +1,7 @@
 {
   "section_info": {
-    "title": "Gallery_XX",
-    "details": "Snippets of life_XX",
+    "title": "Gallery",
+    "details": "Snippets of life",
     "icon_class": "bi bi-images",
     "hashtag": "gallery"
   },
@@ -11,7 +11,7 @@
       "category": "nature",
       "tags": "moon, night, sky, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg1.jpg",
-      "title": "Moonlight_XX",
+      "title": "Moonlight",
       "description": "The glittering new moon in the evening",
       "location": "Burwood, Victoria, Australia"
     },
@@ -20,7 +20,7 @@
       "category": "nature",
       "tags": "ocean, island, rocks, earth, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg2.jpg",
-      "title": "Elements of the earth_XX",
+      "title": "Elements of the earth",
       "description": "Ocean, wind, land and rock meet with each other",
       "location": "Cows, Phillip Island, Victoria, Australia"
     },
@@ -29,7 +29,7 @@
       "category": "nature",
       "tags": "ocean, sunlight, reflection, water, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg3.jpg",
-      "title": "The reflection_XX",
+      "title": "The reflection",
       "description": "Sunlight reflection on the ocean water",
       "location": "Cows, Phillip Island, Victoria, Australia"
     },
@@ -38,7 +38,7 @@
       "category": "nature",
       "tags": "road, field, green, infinite, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg4.jpg",
-      "title": "The road to infinite_XX",
+      "title": "The road to infinite",
       "description": "A long road in a green field",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -47,7 +47,7 @@
       "category": "nature",
       "tags": "stairs, path, wood, ocean, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg5.jpg",
-      "title": "The unseen path_XX",
+      "title": "The unseen path",
       "description": "A wooden stairs to the ocean",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -56,7 +56,7 @@
       "category": "nature",
       "tags": "ocean, water, blue, depth, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg6.jpg",
-      "title": "Depth of the ocean_XX",
+      "title": "Depth of the ocean",
       "description": "The deep blue ocean water",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -65,7 +65,7 @@
       "category": "nature",
       "tags": "ocean, waves, island, shores, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg7.jpg",
-      "title": "Shores of the island_XX",
+      "title": "Shores of the island",
       "description": "The ocean waves touching the island shores",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -74,7 +74,7 @@
       "category": "nature",
       "tags": "sky, ocean, land, landscape, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg8.jpg",
-      "title": "The meeting point_XX",
+      "title": "The meeting point",
       "description": "The ocean, the sky and the land meet",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -83,7 +83,7 @@
       "category": "nature",
       "tags": "breeze, waves, ocean, air, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg9.jpg",
-      "title": "The ocean breeze_XX",
+      "title": "The ocean breeze",
       "description": "The ocean breeze and the waves",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -92,7 +92,7 @@
       "category": "nature",
       "tags": "rocks, ocean, shores, geology, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg10.jpg",
-      "title": "The rocky shores_XX",
+      "title": "The rocky shores",
       "description": "The rocky shores of the ocean",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -101,7 +101,7 @@
       "category": "nature",
       "tags": "ocean, water, silent, calm, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg11.jpg",
-      "title": "The silent ocean_XX",
+      "title": "The silent ocean",
       "description": "The silent ocean water",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -110,7 +110,7 @@
       "category": "nature",
       "tags": "sky, ocean, land, layers, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg12.jpg",
-      "title": "Layers of the nature_XX",
+      "title": "Layers of the nature",
       "description": "The sky, the ocean and the land layers",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -119,7 +119,7 @@
       "category": "nature",
       "tags": "blue, sky, ocean, horizon, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg13.jpg",
-      "title": "The blues_XX",
+      "title": "The blues",
       "description": "The blue ocean meets the blue sky",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -128,7 +128,7 @@
       "category": "nature",
       "tags": "rocks, land, barrier, protection, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg14.jpg",
-      "title": "The protectors_XX",
+      "title": "The protectors",
       "description": "The rocks to protect the land",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -137,7 +137,7 @@
       "category": "nature",
       "tags": "rock, ocean, tides, strength, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg15.jpg",
-      "title": "The warrior_XX",
+      "title": "The warrior",
       "description": "A rock overcoming the tides",
       "location": "Phillip Island, Victoria, Australia"
     },
@@ -146,7 +146,7 @@
       "category": "city",
       "tags": "sun, cloud, golden, sky, burwood, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg16.jpg",
-      "title": "The golden sun_XX",
+      "title": "The golden sun",
       "description": "The golden sun in a hot cloudy day",
       "location": "Burwood, Victoria, Australia"
     },
@@ -155,7 +155,7 @@
       "category": "city",
       "tags": "city, melbourne, aerial, cityscape, roots, australia, victoria",
       "image_path": "assets/img/gallery/emran-bg17.jpg",
-      "title": "Finding roots_XX",
+      "title": "Finding roots",
       "description": "The Melbourne city from the top",
       "location": "Melbourne, Victoria, Australia"
     }

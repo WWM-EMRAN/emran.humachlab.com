@@ -2,8 +2,8 @@
   "site_info": {
     "meta_description": "Emran Ali - Educator, Trainer, Researcher, Developer: Personal Portfolio.",
     "meta_keywords": "Emran Ali, Educator, Teacher, Trainer, Researcher, AI, Machine Learning, Data Science, PhD, Projects, Developer, Portfolio, Resume, CV, Personal Website",
-    "author": "Emran Ali_XX",
-    "title": "Emran Ali_XX - Personal Website"
+    "author": "Emran Ali",
+    "title": "Emran Ali - Personal Website"
   },
   "cache_settings": {
     "data_file_dir": "./assets/data/",
@@ -121,49 +121,49 @@
   ],
   "navigation": {
     "main_menu": [
-      {"label": "Home_XX", "url": "#hero", "icon_class": "bx bx-home", "is_dropdown": false},
-      {"label": "About_XX", "url": "#about", "icon_class": "bi bi-person", "is_dropdown": false},
-      {"label": "Academic Information_XX", "url": "#academic_information", "icon_class": "bi bi-mortarboard", "is_dropdown": false},
-      {"label": "Professional Experiences_XX", "url": "#professional_experiences", "icon_class": "bi bi-briefcase", "is_dropdown": false},
+      {"label": "Home", "url": "#hero", "icon_class": "bx bx-home", "is_dropdown": false},
+      {"label": "About", "url": "#about", "icon_class": "bi bi-person", "is_dropdown": false},
+      {"label": "Academic Information", "url": "#academic_information", "icon_class": "bi bi-mortarboard", "is_dropdown": false},
+      {"label": "Professional Experiences", "url": "#professional_experiences", "icon_class": "bi bi-briefcase", "is_dropdown": false},
       {
-        "label": "Expertise Skills and Achievements_XX",
+        "label": "Expertise Skills and Achievements",
         "url": "#",
         "icon_class": "bi bi-trophy",
         "is_dropdown": true,
         "submenu": [
-          {"label": "Skills and Tools_XX", "url": "#skills_tools", "icon_class": "bi bi-tools"},
-          {"label": "Honors and Awards_XX", "url": "#honors_awards", "icon_class": "bi bi-award"},
-          {"label": "Courses Training and Certificates_XX", "url": "#courses_trainings_certificates", "icon_class": "bx bi-journal-bookmark-fill"},
-          {"label": "Projects_XX", "url": "#projects", "icon_class": "bi bi-lightbulb"},
-          {"label": "Organisational Memberships_XX", "url": "#organisational_memberships", "icon_class": "bi bi-people"},
-          {"label": "Sessions and Events_XX", "url": "#sessions_events", "icon_class": "bi bi-calendar-event"},
-          {"label": "Languages_XX", "url": "#languages", "icon_class": "bi bi-translate"},
-          {"label": "Portfolios_XX", "url": "#portfolios", "icon_class": "bi bi-window-sidebar"},
-          {"label": "Volunteering Services_XX", "url": "#volunteering_services", "icon_class": "bx bxs-donate-heart"}
+          {"label": "Skills and Tools", "url": "#skills_tools", "icon_class": "bi bi-tools"},
+          {"label": "Honors and Awards", "url": "#honors_awards", "icon_class": "bi bi-award"},
+          {"label": "Courses Training and Certificates", "url": "#courses_trainings_certificates", "icon_class": "bx bi-journal-bookmark-fill"},
+          {"label": "Projects", "url": "#projects", "icon_class": "bi bi-lightbulb"},
+          {"label": "Organisational Memberships", "url": "#organisational_memberships", "icon_class": "bi bi-people"},
+          {"label": "Sessions and Events", "url": "#sessions_events", "icon_class": "bi bi-calendar-event"},
+          {"label": "Languages", "url": "#languages", "icon_class": "bi bi-translate"},
+          {"label": "Portfolios", "url": "#portfolios", "icon_class": "bi bi-window-sidebar"},
+          {"label": "Volunteering Services", "url": "#volunteering_services", "icon_class": "bx bxs-donate-heart"}
         ]
       },
-      {"label": "Publications_XX", "url": "#publications", "icon_class": "bx bi-journal-richtext", "is_dropdown": false},
-      {"label": "Contact Details_XX", "url": "#contact_details", "icon_class": "bi bi-person-lines-fill", "is_dropdown": false}
+      {"label": "Publications", "url": "#publications", "icon_class": "bx bi-journal-richtext", "is_dropdown": false},
+      {"label": "Contact Details", "url": "#contact_details", "icon_class": "bi bi-person-lines-fill", "is_dropdown": false}
     ],
     "short_menu": [
-      {"label": "Home_XX", "url": "./", "icon_class": "bx bx-home"},
-      {"label": "Back_XX", "url": "javascript:history.back()", "icon_class": "bx bx-share"}
+      {"label": "Home", "url": "./", "icon_class": "bx bx-home"},
+      {"label": "Back", "url": "javascript:history.back()", "icon_class": "bx bx-share"}
     ]
   },
   "footer_meta": {
     "menu_footer": {
       "copyright_year": "auto",
-      "copyright_owner": "WWM Emran_XX",
+      "copyright_owner": "WWM Emran",
       "copyright_logo_url": "ea_logo",
       "copyright_text_url": "copyright",
       "links": [
-        {"label": "Diary_XX", "url": "diary"},
-        {"label": "Gallery_XX", "url": "gallery"}
+        {"label": "Diary", "url": "diary"},
+        {"label": "Gallery", "url": "gallery"}
       ]
     },
     "main_page_footer": {
-      "sitename": "iPortfolio_XX",
-      "design_credit": "BootstrapMade_XX",
+      "sitename": "iPortfolio",
+      "design_credit": "BootstrapMade",
       "design_link": "https://bootstrapmade.com/"
     }
   }

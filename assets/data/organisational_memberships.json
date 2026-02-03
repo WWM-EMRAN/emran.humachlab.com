@@ -1,19 +1,19 @@
 {
   "section_info": {
-    "title": "Oranisational Memberships_XX",
-    "details": "_XXSustained engagement with professional bodies and student-led organisations, encompassing both advisory roles and active memberships within the tertiary sector. These affiliations underscore a dedicated contribution to the advancement of information technology, biomedical engineering, and competitive programming standards.",
+    "title": "Oranisational Memberships",
+    "details": "Sustained engagement with professional bodies and student-led organisations, encompassing both advisory roles and active memberships within the tertiary sector. These affiliations underscore a dedicated contribution to the advancement of information technology, biomedical engineering, and competitive programming standards.",
     "icon_class": "bx bx-group",
     "hashtag": "organisational_memberships"
   },
   "memberships": [
     {
       "id_ref": "mem_acsassmem",
-      "title": "ACS Associate Member_XX",
+      "title": "ACS Associate Member",
       "icon_class": "bi bi-person-check",
-      "role": "Associate Member_XX",
+      "role": "Associate Member",
       "membership_organization": [
         {
-          "name": "_XXAustralian Computer Society (ACS)",
+          "name": "Australian Computer Society (ACS)",
           "location": "Sydney, Australia",
           "link": "https://www.acs.edu.au/"
         }
@@ -23,7 +23,7 @@
         "start_date": "Aug. 1, 2023",
         "end_date": "Nov. 30, 2024"
       },
-      "description_full": "_XXThe ACS is the professional association for Australia's information and communication technology (ICT) sector, driving technological excellence and professional standards.",
+      "description_full": "The ACS is the professional association for Australia's information and communication technology (ICT) sector, driving technological excellence and professional standards.",
       "image_path": "",
       "url_link": ""
     },
@@ -92,13 +92,13 @@
     },
     {
       "id_ref": "mem_dusamem",
-      "title": "DUSA Member_XX",
+      "title": "DUSA Member",
       "icon_class": "bi bi-people",
       "role": "Student Member",
       "membership_organization": [
         {
-          "name": "Deakin University Student Association (DUSA)_XX",
-          "location": "Burwood, Melbourne, VIC-3125, Australia_XX",
+          "name": "Deakin University Student Association (DUSA)",
+          "location": "Burwood, Melbourne, VIC-3125, Australia",
           "link": "https://www.dusa.org.au/"
         }
       ],
@@ -107,7 +107,7 @@
         "start_date": "Jan. 1, 2023",
         "end_date": "Dec. 31, 2023"
       },
-      "description_full": "_XXDUSA provides student support, advocacy, and a range of services and clubs across all Deakin University campuses.",
+      "description_full": "DUSA provides student support, advocacy, and a range of services and clubs across all Deakin University campuses.",
       "image_path": "",
       "url_link": ""
     },
@@ -176,13 +176,13 @@
     },
     {
       "id_ref": "mem_cseclubadv",
-      "title": "Advisor_XX",
+      "title": "Advisor",
       "icon_class": "bi bi-laptop",
-      "role": "Advisor_XX",
+      "role": "Advisor",
       "membership_organization": [
         {
-          "name": "CSE Club - HSTU_XX (CSE Club)",
-          "location": "HSTU, Dinajpur, Bangladesh_XX",
+          "name": "CSE Club - HSTU (CSE Club)",
+          "location": "HSTU, Dinajpur, Bangladesh",
           "link": ""
         }
       ],
@@ -191,7 +191,7 @@
         "start_date": "Sep. 1, 2014",
         "end_date": "Present"
       },
-      "description_full": "_XXAdvisor for the Computer Science and Engineering (CSE) Club at HSTU, guiding students in academic and co-curricular activities, including technical workshops and events.",
+      "description_full": "Advisor for the Computer Science and Engineering (CSE) Club at HSTU, guiding students in academic and co-curricular activities, including technical workshops and events.",
       "image_path": "",
       "url_link": ""
     }

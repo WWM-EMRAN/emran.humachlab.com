@@ -1,51 +1,51 @@
 {
   "section_info": {
-    "title": "Professional Experiences_XX",
-    "details": "_XXA multidisciplinary professional background spanning over a decade across academic research, tertiary teaching, and industrial software development. This career trajectory is defined by a commitment to bridging the gap between theoretical Machine Learning and real-world applications within Healthcare and the Bio-sciences. Technical rigour and pedagogical expertise, established through the leadership of large-scale mobile application projects and doctoral research at Deakin University, drive innovation across diverse sectors.",
+    "title": "Professional Experiences",
+    "details": "A multidisciplinary professional background spanning over a decade across academic research, tertiary teaching, and industrial software development. This career trajectory is defined by a commitment to bridging the gap between theoretical Machine Learning and real-world applications within Healthcare and the Bio-sciences. Technical rigour and pedagogical expertise, established through the leadership of large-scale mobile application projects and doctoral research at Deakin University, drive innovation across diverse sectors.",
     "icon_class": "bx bx-briefcase",
     "hashtag": "professional_experiences"
   },
   "summary": {
-    "title": "Summary_XX",
+    "title": "Summary",
     "expertise_list": [
       {
-        "title": "Areas of Expertise_XX",
+        "title": "Areas of Expertise",
         "areas_of_expertise": [
-          "_XXTeaching and Training",
+          "Teaching and Training",
           "Application of AI, ML and DL",
           "Applied Research in Health Informatics, Business Analytics, System Automation & Sustainable Environment",
           "Industries-Academia Collaboration",
-          "_XXSoftware Development, Team Management & Project Management"
+          "Software Development, Team Management & Project Management"
         ]
       },
       {
-        "title": "Research Interests_XX",
+        "title": "Research Interests",
         "research_interests_columns": [
-          ["_XXData Science", "Machine (Deep) Learning", "Generative AI and Agentic AI", "Interpretability", "Optimisation_XX"],
-          ["_XXBiomedical Science", "Health Informatics", "Disease Detection and Prediction", "Time series Data Analysis", "Biosignal Analysis_XX"],
-          ["_XXHypnogram EEG and Brain Signal Analysis", "Epilepsy", "Sleep*", "Aging*", "Air Quality_XX"]
+          ["Data Science", "Machine (Deep) Learning", "Generative AI and Agentic AI", "Interpretability", "Optimisation"],
+          ["Biomedical Science", "Health Informatics", "Disease Detection and Prediction", "Time series Data Analysis", "Biosignal Analysis"],
+          ["Hypnogram EEG and Brain Signal Analysis", "Epilepsy", "Sleep*", "Aging*", "Air Quality"]
         ]
       },
       {
-        "title": "Expertise_XX",
+        "title": "Expertise",
         "cv_expertise": [
-          "Data (Business) Analytics_XX",
+          "Data (Business) Analytics",
           "Machine (Deep) Learning",
           "GenAI, Agentic AI & ΧΑΙ",
           "(Bio-) Signal Processing",
           "AWS & Azure",
-          "_XXApple App Development"
+          "Apple App Development"
         ]
       },
       {
-        "title": "Research Areas_XX",
+        "title": "Research Areas",
         "cv_research_areas": [
-          "Data Science & Business Analytics_XX",
+          "Data Science & Business Analytics",
           "Machine (Deep) Learning",
           "Health Informatics & MedTech",
           "Disease Detection & Prediction",
           "Agentic Business Automation",
-          "_XXTime-series Data Analysis",
+          "Time-series Data Analysis",
           "(Bio)Signal Processing"
         ]
       }
@@ -53,18 +53,18 @@
   },
   "experiences": [
     {
-      "category": "Research Experiences_XX",
+      "category": "Research Experiences",
       "column": "left",
       "organisation": [
         {
           "icon_class": "bx bxs-flask",
-          "organization": "Deakin University_XX",
-          "location": "Melbourne, Australia_XX",
+          "organization": "Deakin University",
+          "location": "Melbourne, Australia",
           "link": "https://www.deakin.edu.au/",
           "roles": [
             {
               "role_id": "res_du_grp",
-              "title": "Graduate Researcher (PhD Student)_XX",
+              "title": "Graduate Researcher (PhD Student)",
               "role_type": "Full-time",
               "timeframe_details": {
                 "start_date": "Jan. 15, 2023",
@@ -73,21 +73,21 @@
               },
               "about_job": "Applied ML for sleep disorder detection using Hypnogram and find causalities using explainable AI.",
               "description_list": [
-                "_XXSleep disorder detection using Hypnogram",
+                "Sleep disorder detection using Hypnogram",
                 "Efficacy of sleep dynamics for sleep disorder detection",
                 "Analysis of age in sleep analysis",
-                "_XXImpact of noise in Hypnogram in sleep analysis"
+                "Impact of noise in Hypnogram in sleep analysis"
               ],
               "responsibilities_list": [
-                "_XXStudying research methodology and strategy",
+                "Studying research methodology and strategy",
                 "Conducting experiments and evaluations",
-                "_XXPreparing documentation and publishing articles"
+                "Preparing documentation and publishing articles"
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electroencephalography (EEG) · Electrocardiography (ECG) · Hypnogram · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electroencephalography (EEG) · Electrocardiography (ECG) · Hypnogram · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
             },
             {
               "role_id": "res_du_ra3",
-              "title": "Research Assistant_XX",
+              "title": "Research Assistant",
               "role_type": "Casual/Contract",
               "timeframe_details": {
                 "start_date": "Oct. 01, 2023",
@@ -96,16 +96,16 @@
               },
               "about_job": "Applied GenAI for cardiovascular disorder detection using ECG.",
               "description_list": [
-                "_XXOffered this job for 3 times as part of the team to complete 3 phases of this continuous project.",
-                "_XXFeasibility analysis of Generative AI solutions for ECG-based heart disease detection",
+                "Offered this job for 3 times as part of the team to complete 3 phases of this continuous project.",
+                "Feasibility analysis of Generative AI solutions for ECG-based heart disease detection",
                 "Security analysis and risk assessment for agentic AI-based healthcare platforms"
               ],
               "responsibilities_list": [
                 "Studying research methodology and strategy",
-                "_XXConducting experiments and evaluations",
+                "Conducting experiments and evaluations",
                 "Preparing documentation and publishing articles"
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electrocardiography (ECG) · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electrocardiography (ECG) · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
             },
             {
               "role_id": "res_du_grm",
@@ -128,7 +128,7 @@
                 "Conducting experiments and evaluations",
                 "Preparing documentation and publishing articles"
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electroencephalography (EEG) · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electroencephalography (EEG) · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
             },
             {
               "role_id": "res_du_ra2",
@@ -150,7 +150,7 @@
                 "ML and DL model evaluation, testing, and visualisation.",
                 "Worked as an official (funded) employee from Aug 2021 to Dec 2021 and the rest of the period as a volunteer. "
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electroencephalography (EEG) · Industry Collaboration · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electroencephalography (EEG) · Industry Collaboration · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
             },
             {
               "role_id": "res_du_ra1",
@@ -173,13 +173,13 @@
                 "Effect of indoor and outdoor temperature on people's health.",
                 "Application of Deep Learning (DL)."
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electroencephalography (EEG) · Industry Collaboration · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Electroencephalography (EEG) · Industry Collaboration · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Biomedical Sciences · Biomedical Engineering and Instrumentation · LaTeX · Programming · Algorithms · GitHub"
             }
           ]
         },
         {
           "icon_class": "bx bxs-flask",
-          "organization": "Hajee Mohammad Danesh Science and Technology University (HSTU)_XX",
+          "organization": "Hajee Mohammad Danesh Science and Technology University (HSTU)",
           "location": "Dinajpur, Bangladesh",
           "link": "https://www.hstu.ac.bd/",
           "roles": [
@@ -198,25 +198,25 @@
                 "Research conduction.",
                 "Research supervision of undergraduate students."
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Applied Machine Learning · LaTeX · Teaching · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · Applied Machine Learning · LaTeX · Teaching · Programming · Algorithms · GitHub"
             }
           ]
         }
       ]
     },
     {
-      "category": "Training Experiences_XX",
+      "category": "Training Experiences",
       "column": "left",
       "organisation": [
         {
           "icon_class": "bi bi-person-video",
-          "organization": "Intersect Australia_XX",
-          "location": "Sydney, Australia_XX",
+          "organization": "Intersect Australia",
+          "location": "Sydney, Australia",
           "link": "https://www.intersect.org.au/",
           "roles": [
             {
               "role_id": "trn_ia_drt",
-              "title": "Digital Research Trainer_XX",
+              "title": "Digital Research Trainer",
               "role_type": "Casual/Contract",
               "timeframe_details": {
                 "start_date": "Mar. 01, 2023",
@@ -227,35 +227,35 @@
               "description_list": [],
               "responsibilities_list": [
                 "Training the researchers.",
-                "_XXTraining assistance. ",
+                "Training assistance. ",
                 "Training content creation and modification."
               ],
               "course_involvement": [
                 "PYTHON101: Introduction to Programming: Python",
                 "PYTHON203: Data Manipulation and Visualisation",
-                "_XXPYTHON205: Introduction to Machine Learning: Regression",
+                "PYTHON205: Introduction to Machine Learning: Regression",
                 "PYTHON206: Introduction to Machine Learning: Classification",
                 "PYTHON207: Introduction to Machine Learning: Unsupervised Learning"
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
             }
           ]
         }
       ]
     },
     {
-      "category": "Teaching Experiences_XX",
+      "category": "Teaching Experiences",
       "column": "right",
       "organisation": [
         {
           "icon_class": "bx bx-pen",
-          "organization": "Deakin University_XX",
-          "location": "Melbourne, Australia_XX",
+          "organization": "Deakin University",
+          "location": "Melbourne, Australia",
           "link": "https://www.deakin.edu.au/",
           "roles": [
             {
               "role_id": "tch_du_grtf",
-              "title": "Graduate Reserach Teaching Fellow (GRTF)_XX",
+              "title": "Graduate Reserach Teaching Fellow (GRTF)",
               "role_type": "Part-time/Contract",
               "timeframe_details": {
                 "start_date": "Feb. 20, 2025",
@@ -266,19 +266,19 @@
               "description_list": [],
               "responsibilities_list": [
                 "Course (sessional) assistance.",
-                "_XXAssistance in examination process and evaluation."
+                "Assistance in examination process and evaluation."
               ],
               "course_involvement": [
-                "_XXMIS140-Introduction to Machine Learning || Python, ML, AI || T2-2025",
+                "MIS140-Introduction to Machine Learning || Python, ML, AI || T2-2025",
                 "SIT107+SIT720-Machine Learning || Python, ML, AI || T1-2025",
                 "SIT719-Analytics for Security and Privacy || Linux, Computer Security, Security Analytics || T1-2025",
-                "_XXSIT103+SIT772-Database Fundamentals || Database Management, SQL || T1-2025"
+                "SIT103+SIT772-Database Fundamentals || Database Management, SQL || T1-2025"
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Programming · Algorithms · GitHub"
             },
             {
               "role_id": "tch_du_sas",
-              "title": "Sessional Academic Staff_XX",
+              "title": "Sessional Academic Staff",
               "role_type": "Casual/Contract",
               "timeframe_details": {
                 "start_date": "Feb. 20, 2020",
@@ -289,29 +289,29 @@
               "description_list": [],
               "responsibilities_list": [
                 "Course assistance.",
-                "_XXAssistance in examination process and evaluation.",
+                "Assistance in examination process and evaluation.",
                 "Assistance in student HelpHub."
               ],
               "course_involvement": [
                 "SIT107+SIT720-Machine Learning || Python, ML, AI || T2-2020, T2-2021, T1-2022, T2-2022, T2-2023, T2-2024",
-                "_XXMIS781-Business Intelligence and Database || Database, SQL, Power BI || T1-2023",
+                "MIS781-Business Intelligence and Database || Database, SQL, Power BI || T1-2023",
                 "MIS710-Machine Learning in Business || Python, ML, Business use case analysis: || T2-2023, T1-2024, T2-2024, T1-2025",
                 "MIS384-Marketing Analytics || Database, SQL, BigQuery, GCP || T1-2024",
-                "_XXOther miscellaneous courses: Database, Computer programming (C, C++, C#)"
+                "Other miscellaneous courses: Database, Computer programming (C, C++, C#)"
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
             }
           ]
         },
         {
           "icon_class": "bx bx-pen",
-          "organization": "Hajee Mohammad Danesh Science and Technology University (HSTU)_XX",
-          "location": "Dinajpur, Bangladesh_XX",
+          "organization": "Hajee Mohammad Danesh Science and Technology University (HSTU)",
+          "location": "Dinajpur, Bangladesh",
           "link": "https://www.hstu.ac.bd/",
           "roles": [
             {
               "role_id": "tch_hstu_astp",
-              "title": "Assistant Professor_XX",
+              "title": "Assistant Professor",
               "role_type": "Full-time",
               "timeframe_details": {
                 "start_date": "Sep. 01, 2017",
@@ -322,7 +322,7 @@
               "description_list": [],
               "responsibilities_list": [
                 "Course (theory and sessional) conduction, examination process and evaluation.",
-                "_XXResearch conduction and supervision.",
+                "Research conduction and supervision.",
                 "Currently on leave for higher studies since February 2020."
               ],
               "course_involvement": [
@@ -332,11 +332,11 @@
                 "Machine Learning",
                 "Pattern Recognition"
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
             },
             {
               "role_id": "tch_hstu_lect",
-              "title": "Lecturer_XX",
+              "title": "Lecturer",
               "role_type": "Full-time",
               "timeframe_details": {
                 "start_date": "Sep. 01, 2014",
@@ -355,25 +355,25 @@
                 "Database Management",
                 "Machine Learning"
               ],
-              "related_skills": "_XXResearch · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
             }
           ]
         }
       ]
     },
     {
-      "category": "Industrial (Software Development) Experiences_XX",
+      "category": "Industrial (Software Development) Experiences",
       "column": "right",
       "organisation": [
         {
           "icon_class": "bi bi-terminal",
-          "organization": "Advanced Apps Bangladesh (AAPBD) Ltd._XX",
-          "location": "Dhaka, Bangladesh_XX",
+          "organization": "Advanced Apps Bangladesh (AAPBD) Ltd.",
+          "location": "Dhaka, Bangladesh",
           "link": "https://www.aapbd.com/",
           "roles": [
             {
               "role_id": "dev_aapbd_ssepm",
-              "title": "Project Development Manager & Senior Software Engineer_XX",
+              "title": "Project Development Manager & Senior Software Engineer",
               "role_type": "Full-time",
               "timeframe_details": {
                 "start_date": "Jan. 01, 2014",
@@ -383,11 +383,11 @@
               "about_job": "Software development and management of the company's apps, projects and clients.",
               "description_list": [],
               "responsibilities_list": [
-                "_XXAAPBD previously was DROIDBD, and currently working as AppBajar and The Borak.",
+                "AAPBD previously was DROIDBD, and currently working as AppBajar and The Borak.",
                 "Project Management: Project management, app design, app testing, and client management. ",
                 "Involved in the development of more than 50 apps.",
                 "iOS application design, development, implementation, testing and instructing new members. ",
-                "_XXOther platforms: Android apps, web apps using PHP, MySQL, JS etc"
+                "Other platforms: Android apps, web apps using PHP, MySQL, JS etc"
               ],
               "related_skills": "Programming · Algorithms · iOS Development · Swift (Programming Language) · Xcode · GitHub · Software Engineering · Mobile Applications · Android Development · Software Project Management · Project Management · Software Design · Web Services · OOP · iOS · Objective-C · iOS Application Development"
             }
@@ -395,13 +395,13 @@
         },
         {
           "icon_class": "bi bi-terminal",
-          "organization": "Droid Bangladesh (DROIDBD) Ltd._XX",
-          "location": "Dhaka, Bangladesh_XX",
+          "organization": "Droid Bangladesh (DROIDBD) Ltd.",
+          "location": "Dhaka, Bangladesh",
           "link": "https://www.linkedin.com/company/droid-bangladesh-limited/",
           "roles": [
             {
               "role_id": "dev_drbd_sse",
-              "title": "Senior Software Engineer_XX",
+              "title": "Senior Software Engineer",
               "role_type": "Full-time",
               "timeframe_details": {
                 "start_date": "May. 01, 2012",
@@ -412,7 +412,7 @@
               "description_list": [],
               "responsibilities_list": [
                 "iOS application design ",
-                "_XXiOS application development & implementation ",
+                "iOS application development & implementation ",
                 "iOS application testing ",
                 "iOS application training new members "
               ],
@@ -422,7 +422,7 @@
         },
         {
           "icon_class": "bi bi-terminal",
-          "organization": "Kento Studios Ltd._XX",
+          "organization": "Kento Studios Ltd.",
           "location": "Dhaka, Bangladesh",
           "link": "https://www.linkedin.com/company/kento-studios-ltd./",
           "roles": [
@@ -439,7 +439,7 @@
               "description_list": [],
               "responsibilities_list": [
                 "iOS application design ",
-                "_XXiOS application development ",
+                "iOS application development ",
                 "iOS application testing ",
                 "iOS Game design "
               ],

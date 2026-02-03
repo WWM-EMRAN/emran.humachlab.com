@@ -1,7 +1,7 @@
 {
   "section_info": {
-    "title": "Key Information_XX",
-    "details": "_XXStrategic insights into educational background, applied research initiatives, and professional experiences, showcasing a record of excellence and innovation.",
+    "title": "Key Information",
+    "details": "Strategic insights into educational background, applied research initiatives, and professional experiences, showcasing a record of excellence and innovation.",
     "icon_class": "bx bx-key",
     "hashtag": "key_information"
   },
@@ -9,8 +9,8 @@
     {
       "icon_class": "bi bi-vector-pen",
       "value": 12,
-      "strong_text": "Years_XX",
-      "description": "of teaching and research experience_XX"
+      "strong_text": "Years",
+      "description": "of teaching and research experience"
     },
     {
       "icon_class": "bx bi-file-earmark-code",
@@ -22,7 +22,7 @@
       "icon_class": "bx bi-lightbulb",
       "value": 5,
       "strong_text": "Projects",
-      "description": "with research contribution_XX"
+      "description": "with research contribution"
     },
     {
       "icon_class": "bx bi-journal-richtext",
@@ -51,7 +51,7 @@
     {
       "icon_class": "bx bi-journal-bookmark-fill",
       "value": 20,
-      "strong_text": "Specialisation Certificates_XX",
+      "strong_text": "Specialisation Certificates",
       "description": "for courses and training"
     }
   ]

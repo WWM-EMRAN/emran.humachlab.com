@@ -1,32 +1,32 @@
 {
   "section_info": {
-    "title": "Sessions and Events_XX",
-    "details": "_XXA formal record of delivered technical workshops and professional training sessions focused on programming and machine learning. These engagements involve the facilitation of digital research training and academic seminars designed for diverse audiences within the tertiary and research sectors.",
+    "title": "Sessions and Events",
+    "details": "A formal record of delivered technical workshops and professional training sessions focused on programming and machine learning. These engagements involve the facilitation of digital research training and academic seminars designed for diverse audiences within the tertiary and research sectors.",
     "icon_class": "bi bi-calendar-event",
     "hashtag": "sessions_events"
   },
   "sessionsevents": [
     {
       "id_ref": "sessevnt_spkr",
-      "title": "Seminar Speaker_XX",
-      "type": "Seminar Session_XX",
+      "title": "Seminar Speaker",
+      "type": "Seminar Session",
       "icon_class": "bi bi-mic",
-      "organization": "CSE Club, Hajee Mohammad Danesh Science and Technology University (HSTU)_XX",
+      "organization": "CSE Club, Hajee Mohammad Danesh Science and Technology University (HSTU)",
       "location": "Dinajpur, Bangladesh",
       "date": "Sep. 12, 2022",
-      "description": "_XXPresented a talk at 'A seminar on Higher Studies in Abroad - Journey to Australia and Research Experiences'.",
+      "description": "Presented a talk at 'A seminar on Higher Studies in Abroad - Journey to Australia and Research Experiences'.",
       "image_path": "",
       "url_link": ""
     },
     {
       "id_ref": "sessevnt_knspkr",
-      "title": "Keynote Speaker_XX",
-      "type": "Seminar Session_XX",
+      "title": "Keynote Speaker",
+      "type": "Seminar Session",
       "icon_class": "bi bi-megaphone",
-      "organization": "AFCSE, Hajee Mohammad Danesh Science and Technology University (HSTU)_XX",
+      "organization": "AFCSE, Hajee Mohammad Danesh Science and Technology University (HSTU)",
       "location": "Dinajpur, Bangladesh",
       "date": "Apr. 06, 2015",
-      "description": "_XXDelivered keynotes at 'A seminar on career development and the future of mobile app development in Bangladesh'.",
+      "description": "Delivered keynotes at 'A seminar on career development and the future of mobile app development in Bangladesh'.",
       "image_path": "",
       "url_link": ""
     }

@@ -1,19 +1,19 @@
 {
   "section_info": {
-    "title": "Honors and Awards_XX",
-    "details": "_XXFormal recognition of scholarly merit and technical innovation, highlighting significant achievements in health informatics and software development. These distinctions underscore a high standard of excellence maintained throughout a multidisciplinary career spanning both academia and industry.",
+    "title": "Honors and Awards",
+    "details": "Formal recognition of scholarly merit and technical innovation, highlighting significant achievements in health informatics and software development. These distinctions underscore a high standard of excellence maintained throughout a multidisciplinary career spanning both academia and industry.",
     "icon_class": "bi bi-award",
     "hashtag": "honors_awards"
   },
   "honorsawards": [
     {
       "id_ref": "aw_ber_ngtb",
-      "title": "_XXBertelsmann Next Generation Tech Booster Scholarship",
+      "title": "Bertelsmann Next Generation Tech Booster Scholarship",
       "icon_class": "bi bi-award",
       "date": "Jun. 09, 2024",
-      "short_description": "_XXNext Generation Tech Booster Scholarship (Phase 1+2) from Bertelsmann for a Udacity Nanodegree program, valued over $1,500",
+      "short_description": "Next Generation Tech Booster Scholarship (Phase 1+2) from Bertelsmann for a Udacity Nanodegree program, valued over $1,500",
       "issuer_organization": {
-        "name": "_XXBertelsmann",
+        "name": "Bertelsmann",
         "location": "",
         "link": "https://www.bertelsmann.com/"
       },
@@ -22,7 +22,7 @@
         "location": "",
         "link": "https://www.udacity.com/"
       },
-      "description_full": "_XXThis scholarship, offered by Bertelsmann in collaboration with Udacity, aims to support emerging tech professionals. In 2023, I was selected for Phase 1 to pursue the Enterprise Security Nanodegree but was not shortlisted for Phase 2. In 2024, I was again selected, this time for the Foundations of Generative AI Nanodegree. The scholarship covered a program worth over $1,500. Completion of the course included a Certification Assessment (CA) which determined eligibility for Phase 2 and awarded a certificate of completion.",
+      "description_full": "This scholarship, offered by Bertelsmann in collaboration with Udacity, aims to support emerging tech professionals. In 2023, I was selected for Phase 1 to pursue the Enterprise Security Nanodegree but was not shortlisted for Phase 2. In 2024, I was again selected, this time for the Foundations of Generative AI Nanodegree. The scholarship covered a program worth over $1,500. Completion of the course included a Certification Assessment (CA) which determined eligibility for Phase 2 and awarded a certificate of completion.",
       "image_path": "",
       "award_link": "https://www.udacity.com/blog/2023/09/announcing-the-next-generation-tech-booster-a-new-bertelsmann-scholarship.html"
     },
@@ -88,10 +88,10 @@
     },
     {
       "id_ref": "aw_duprs",
-      "title": "DUPR Scholarship_XX",
+      "title": "DUPR Scholarship",
       "icon_class": "bi bi-mortarboard",
       "date": "Jan. 15, 2023 (Ongoing)",
-      "short_description": "_XXFullly funded DUPR Scholarship for Joint PhD research at Deakin and Coventry University",
+      "short_description": "Fullly funded DUPR Scholarship for Joint PhD research at Deakin and Coventry University",
       "issuer_organization": {
         "name": "Deakin University",
         "location": "Melbourne, Australia",
@@ -102,7 +102,7 @@
         "location": "Coventry, United Kingdom",
         "link": "https://www.coventry.ac.uk/"
       },
-      "description_full": "_XXThe Deakin University Postgraduate Research Scholarship (DUPRS) supports my joint doctoral study with Coventry University. The scholarship includes full tuition coverage, health insurance, and a living stipend during the study period at Deakin University",
+      "description_full": "The Deakin University Postgraduate Research Scholarship (DUPRS) supports my joint doctoral study with Coventry University. The scholarship includes full tuition coverage, health insurance, and a living stipend during the study period at Deakin University",
       "image_path": "",
       "award_link": "https://www.deakin.edu.au/study/fees-and-scholarships/scholarships/find-a-scholarship/rtp-and-duprs"
     },

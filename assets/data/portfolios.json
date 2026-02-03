@@ -1,34 +1,34 @@
 {
   "section_info": {
-    "title": "Portfolios_XX",
-    "details": "_XXPublicly available repositories demonstrating projects with my core contributions. An extensive technical portfolio featuring the architectural design and deployment of over fifty mobile applications and numerous industrial software solutions. This record highlights a proven capability for managing full-lifecycle digital projects, from initial conceptualisation to large-scale implementation within the global technology market.",
+    "title": "Portfolios",
+    "details": "Publicly available repositories demonstrating projects with my core contributions. An extensive technical portfolio featuring the architectural design and deployment of over fifty mobile applications and numerous industrial software solutions. This record highlights a proven capability for managing full-lifecycle digital projects, from initial conceptualisation to large-scale implementation within the global technology market.",
     "icon_class": "bi bi-window-sidebar",
     "hashtag": "portfolios"
   },
   "portfolios": [
     {
       "id_ref": "port_git_dihcdown",
-      "title": "DIHC_Downloader_XX",
-      "type": "GitHub_XX",
+      "title": "DIHC_Downloader",
+      "type": "GitHub",
       "icon_class": "bx bxl-github",
       "portfolio_url": "https://github.com/WWM-EMRAN/DIHC_Downloader",
-      "description": "_XXA fully Python-based utility library to recursively download the contents from a web directory including subdirectories and files."
+      "description": "A fully Python-based utility library to recursively download the contents from a web directory including subdirectories and files."
     },
     {
       "id_ref": "port_git_dihcfeatman",
-      "title": "DIHC_FeatureManager_XX",
-      "type": "GitHub_XX",
+      "title": "DIHC_FeatureManager",
+      "type": "GitHub",
       "icon_class": "bx bxl-github",
       "portfolio_url": "https://github.com/WWM-EMRAN/DIHC_FeatureManager",
-      "description": "_XXA python (and Matlab) based library for advanced feature extraction and feature engineering related task for Machine Learning."
+      "description": "A python (and Matlab) based library for advanced feature extraction and feature engineering related task for Machine Learning."
     },
     {
       "id_ref": "port_git_awsaiml_nanodeg",
-      "title": "AWS_Udacity_AIML_Scholarship_Program_XX",
-      "type": "GitHub_XX",
+      "title": "AWS_Udacity_AIML_Scholarship_Program",
+      "type": "GitHub",
       "icon_class": "bx bxl-github",
       "portfolio_url": "https://github.com/WWM-EMRAN/AWS_Udacity_AIML_Scholarship_Program",
-      "description": "_XXA python Machine Learning and Deep Learning repository containing all the projects completed in AWS AI/ML Scholarship (Phase 1 and 2) programs. It contains a collection of 6 end-to-end projects from 2 Udacity nanodegree."
+      "description": "A python Machine Learning and Deep Learning repository containing all the projects completed in AWS AI/ML Scholarship (Phase 1 and 2) programs. It contains a collection of 6 end-to-end projects from 2 Udacity nanodegree."
     }
   ]
 }

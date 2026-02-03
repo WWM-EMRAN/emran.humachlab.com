@@ -1,18 +1,18 @@
 {
   "section_info": {
-    "title": "Languages_XX",
-    "details": "_XXA synthesis of multilingual skills enabling seamless integration into international research teams and the effective delivery of educational programmes. These capabilities enhance the capacity for cross-cultural collaboration and technical knowledge transfer within the ICT and higher education sectors. Language proficiency levels in Listening (L), Reading (R), Writing (W), and Speaking (S).",
+    "title": "Languages",
+    "details": "A synthesis of multilingual skills enabling seamless integration into international research teams and the effective delivery of educational programmes. These capabilities enhance the capacity for cross-cultural collaboration and technical knowledge transfer within the ICT and higher education sectors. Language proficiency levels in Listening (L), Reading (R), Writing (W), and Speaking (S).",
     "icon_class": "bi bi-translate",
     "hashtag": "languages"
   },
   "languages": [
     {
       "id_ref": "lan_ben",
-      "language": "Bengali_XX",
+      "language": "Bengali",
       "icon_class": "fi fi-bd",
-      "status": "Native_XX",
-      "proficiency_level": "Excellent Level_XX",
-      "details": "_XXNative language · Excellent proficiency in Listening, Reading, Writing, and Speaking (LRWS).",
+      "status": "Native",
+      "proficiency_level": "Excellent Level",
+      "details": "Native language · Excellent proficiency in Listening, Reading, Writing, and Speaking (LRWS).",
       "test_scores": [
         {
           "test_name": "",
@@ -65,11 +65,11 @@
     },
     {
       "id_ref": "lan_spn",
-      "language": "Spanish_XX",
+      "language": "Spanish",
       "icon_class": "fi fi-es",
-      "status": "Beginner_XX",
-      "proficiency_level": "Beginner Level_XX",
-      "details": "_XXBeginner-level · Self-learner with foundational vocabulary and expressions.",
+      "status": "Beginner",
+      "proficiency_level": "Beginner Level",
+      "details": "Beginner-level · Self-learner with foundational vocabulary and expressions.",
       "test_scores": [
         {
           "test_name": "",

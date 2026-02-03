@@ -1,18 +1,18 @@
 {
   "section_info": {
-    "title": "Copyright Information_XX",
-    "details": "Reserved right to copy the contents_XX",
+    "title": "Copyright Information",
+    "details": "Reserved right to copy the contents",
     "icon_class": "bx bx-copyright",
     "hashtag": "copyright"
   },
   "copyrights": [
     {
       "id_ref": "copyright_v1_2_0",
-      "version": "1.2.0_XX",
-      "right_to_copy": "@wwm.emran_XX",
-      "description": "_XXThe theme and content of this website have been modified for personal use. Any reproduction, distribution, or usage of this modified version or any of its contents for any purpose is strictly prohibited without the prior explicit consent of the website owner.",
+      "version": "1.2.0",
+      "right_to_copy": "@wwm.emran",
+      "description": "The theme and content of this website have been modified for personal use. Any reproduction, distribution, or usage of this modified version or any of its contents for any purpose is strictly prohibited without the prior explicit consent of the website owner.",
       "modifications": [
-        "_XXTheme has been changed with cusom CSS and JS files",
+        "Theme has been changed with cusom CSS and JS files",
         "Modernised printable CV pages added",
         "Description page has been modified",
         "Dynamic data loading from JSON files has been added"
@@ -20,11 +20,11 @@
     },
     {
       "id_ref": "copyright_v1_1_0",
-      "version": "1.1.0_XX",
-      "right_to_copy": "@wwm.emran_XX",
-      "description": "_XXThe theme and content of this website have been modified for personal use. Any reproduction, distribution, or usage of this modified version or any of its contents for any purpose is strictly prohibited without the prior explicit consent of the website owner.",
+      "version": "1.1.0",
+      "right_to_copy": "@wwm.emran",
+      "description": "The theme and content of this website have been modified for personal use. Any reproduction, distribution, or usage of this modified version or any of its contents for any purpose is strictly prohibited without the prior explicit consent of the website owner.",
       "modifications": [
-        "_XXTheme has been changed slightly",
+        "Theme has been changed slightly",
         "Color scheme has been changed slightly",
         "Description page has been modified",
         "Fonts are modified"
@@ -32,9 +32,9 @@
     },
     {
       "id_ref": "copyright_v1_0_0",
-      "version": "1.0.0_XX",
-      "right_to_copy": "@wwm.emran_XX",
-      "description": "_XXThe theme of this website was originally designed by 'iPortfolio' and is available on https://bootstrapmade.com/. In accordance with the license terms, this theme is used strictly for personal purposes only. The theme and content have been modified for personal use. Redistribution, reproduction, or usage of this modified version—or any part of it—for any purpose without prior explicit consent from the owner of this website is strictly prohibited.",
+      "version": "1.0.0",
+      "right_to_copy": "@wwm.emran",
+      "description": "The theme of this website was originally designed by 'iPortfolio' and is available on https://bootstrapmade.com/. In accordance with the license terms, this theme is used strictly for personal purposes only. The theme and content have been modified for personal use. Redistribution, reproduction, or usage of this modified version—or any part of it—for any purpose without prior explicit consent from the owner of this website is strictly prohibited.",
       "modifications": []
     }
   ]

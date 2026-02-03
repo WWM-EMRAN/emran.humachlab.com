@@ -1,18 +1,18 @@
 {
   "section_info": {
-    "title": "Skills and Tools_XX",
-    "details": "_XXBased on self-assessment and practical experience, skill levels and technical capabilities in high-level programming and data science, integrated with expert knowledge of machine learning frameworks and automated system environments. A comprehensive suite of proficiencies across both academic research tools and industrial software development technologies.",
+    "title": "Skills and Tools",
+    "details": "Based on self-assessment and practical experience, skill levels and technical capabilities in high-level programming and data science, integrated with expert knowledge of machine learning frameworks and automated system environments. A comprehensive suite of proficiencies across both academic research tools and industrial software development technologies.",
     "icon_class": "bi bi-tools",
     "hashtag": "skills_tools"
   },
   "skills": [
     {
       "id_ref": "comp_prog",
-      "category": "_XXComputer Programming",
+      "category": "Computer Programming",
       "icon_class": "bi bi-file-earmark-code",
-      "short_description": "_XXPython, Java, Swift, Objective-C, C, C++, C#, SQL, PHP, R",
+      "short_description": "Python, Java, Swift, Objective-C, C, C++, C#, SQL, PHP, R",
       "level": 100,
-      "details_description": "_XXPython: Used extensively in research and development during Masters and PhD at Deakin and Coventry University. Java: Utilized in BSc thesis work and mobile application development at HSTU. Swift, Objective-C: Industrial-level development experience. C, C++, C#: Academic and professional (teaching) experience. SQL: Applied in both academic settings and teaching roles. PHP: Gained experience through academic and collaborative personal/team-based projects."
+      "details_description": "Python: Used extensively in research and development during Masters and PhD at Deakin and Coventry University. Java: Utilized in BSc thesis work and mobile application development at HSTU. Swift, Objective-C: Industrial-level development experience. C, C++, C#: Academic and professional (teaching) experience. SQL: Applied in both academic settings and teaching roles. PHP: Gained experience through academic and collaborative personal/team-based projects."
     },
     {
       "id_ref": "dat_sci",
@@ -32,17 +32,17 @@
     },
     {
       "id_ref": "deep_lear",
-      "category": "Deep Learning_XX",
+      "category": "Deep Learning",
       "icon_class": "bi bi-diagram-3",
-      "short_description": "_XXConcept and Application, Pytorch, Tensorflow, Keras",
+      "short_description": "Concept and Application, Pytorch, Tensorflow, Keras",
       "level": 85,
-      "details_description": "_XXConcept and Application: In-depth understanding of neural network architecture and optimization including ANN, CNN (1D/2D), RNN, LSTM, transfer learning, transformer models, and architectures like VGG, ResNet, and AlexNet. Pytorch: Used for image classification projects. Tensorflow and Keras: Used for both image classification and time series analysis."
+      "details_description": "Concept and Application: In-depth understanding of neural network architecture and optimization including ANN, CNN (1D/2D), RNN, LSTM, transfer learning, transformer models, and architectures like VGG, ResNet, and AlexNet. Pytorch: Used for image classification projects. Tensorflow and Keras: Used for both image classification and time series analysis."
     },
     {
       "id_ref": "gen_ag_ai",
-      "category": "Generative & Agentic AI_XX",
+      "category": "Generative & Agentic AI",
       "icon_class": "bi bi-robot",
-      "short_description": "_XX(Gemini & Huggingface): Multi-Agent, Tools & MCP, Session & Memory, Observability, A2A",
+      "short_description": "(Gemini & Huggingface): Multi-Agent, Tools & MCP, Session & Memory, Observability, A2A",
       "level": 60,
       "details_description": "Concept and Application: Experience building single and multi-agent systems with parallel, loop, and human-in-the-loop (HITL) capabilities. Context Management: Session-based, database, and persistent vector store context handling. Tools and MCP: Hands-on with built-in tools, function tools, sub-agents, and MCP structure. Observability: Debugging and tracing agent behavior. A2A Communication: Agent-to-agent communication and agent deployment workflows."
     },
@@ -64,19 +64,19 @@
     },
     {
       "id_ref": "teach_train",
-      "category": "Teaching and Training_XX",
+      "category": "Teaching and Training",
       "icon_class": "bi bi-vector-pen",
-      "short_description": "_XXDemonstration, Communication, Supervision",
+      "short_description": "Demonstration, Communication, Supervision",
       "level": 100,
-      "details_description": "_XXDemonstration: Delivering concepts with real-life examples and intuitive explanations. Communication: Effective knowledge transfer with continuous feedback for student growth. Supervision: Overseeing projects and theses, providing career guidance. Evaluation: Assessing performance, giving constructive feedback, and suggesting personalized improvement strategies."
+      "details_description": "Demonstration: Delivering concepts with real-life examples and intuitive explanations. Communication: Effective knowledge transfer with continuous feedback for student growth. Supervision: Overseeing projects and theses, providing career guidance. Evaluation: Assessing performance, giving constructive feedback, and suggesting personalized improvement strategies."
     },
     {
       "id_ref": "soft_skil",
-      "category": "Soft Skills_XX",
+      "category": "Soft Skills",
       "icon_class": "bi bi-person-workspace",
-      "short_description": "_XXCritical Thinking, Problem Solving, Communication, Collaboration",
+      "short_description": "Critical Thinking, Problem Solving, Communication, Collaboration",
       "level": 90,
-      "details_description": "_XXCritical Thinking: Identifying, interpreting, evaluating, and analyzing problems. Problem Solving: Planning and designing structured solutions, prioritizing steps, and integrating components. Communication: Clearly presenting ideas and insights. Collaboration: Working effectively in team environments."
+      "details_description": "Critical Thinking: Identifying, interpreting, evaluating, and analyzing problems. Problem Solving: Planning and designing structured solutions, prioritizing steps, and integrating components. Communication: Clearly presenting ideas and insights. Collaboration: Working effectively in team environments."
     },
     {
       "id_ref": "man_leads",

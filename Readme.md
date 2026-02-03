@@ -144,5 +144,14 @@ Instead of a monolithic script, functionality is split:
 2.  **Bypass Cache:** During development, set `"expiration_seconds": 0` in `site.json` to see changes instantly without clearing browser storage.
 3.  **Extensibility:** New pages can be added by creating a new controller script in `assets/js` and registering it in the `site-loader.js` orchestration logic.
 
+
+### 🛠️ Todo
+* **Need to fix:** 
+* Most of the things are done. Only two issues left:
+1. Page 404 is not working everywhere...
+2. After a section failed, the back button does not load the previous page with the previous data properly...
+
+
+
 ---
 *Copyright © 2026 Emran Ali. All Rights Reserved.*
