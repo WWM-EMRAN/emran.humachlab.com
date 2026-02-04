@@ -13,6 +13,14 @@
       "column": "left",
       "items": [
         {
+          "id_ref": "jour_mulmodinsdet",
+          "title": "_XXA Multi-Modal Biosignal-Based Sleep Analysis Framework for Insomnia Detection",
+          "icon_class": "bi bi-file-earmark",
+          "citation_text": "<strong>Ali E</strong>, He F, Habib A, Angelova M, Karmakar C. A Multi-Modal Biosignal-Based Sleep Analysis Framework for Insomnia Detection. Journal of Pharmaceutical Research and Innovation (JPRI). 2026 Jan 1;6(1):7-14.",
+          "abstract": "Insomnia is the second most prevalent sleep disorder and the most difficult to diagnose. There are different sleep analysis approaches that can be used in insomnia detection that use various physiological signals. Hypnograms, on the other hand, have great potential in sleep disorder detection and have not often been used with other physiological signals for sleep analysis. In this study, we developed a novel framework that uses multimodal physiological signals, including EEG and hypnogram, to diagnose insomnia. Nonlinear time-domain features extracted from EEG and sleep stage transition features from hypnogram are used standalone and in combination to observe the efficacy of those settings. We use various machine learning models and feature selection methods for this investigation. The results found in this study indicate that the hypnogram features are a great addition to the time-domain features in insomnia detection. The performance improvement in various models ranges from 2%-12% after adding hypnogram features. This finding ultimately shows that a hypnogram can be a great addition in sleep analysis when the pattern of disorder is very complex.",
+          "journal_link": "https://dx.doi.org/10.36647/JPRI/06.01.A002"
+        },
+        {
           "id_ref": "jour_epszdetovrpers",
           "title": "_XXEpileptic seizure detection using CHB-MIT dataset: The overlooked perspectives",
           "icon_class": "bi bi-file-earmark",
