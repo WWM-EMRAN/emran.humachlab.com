@@ -8,6 +8,7 @@ window.SiteCore = (function() {
      * Loads all data, prioritizing Persistent Cache -> RAM Cache -> Server Fetch
      */
     async function preloadAllData(base, files) {
+        console.log("=================>", mem);
         if (mem.promise) return mem.promise;
 
         const now = Date.now();
@@ -45,6 +46,7 @@ window.SiteCore = (function() {
             mem.loaded = true;
         });
 
+        console.log("--------------->", mem);
         return mem.promise;
     }
 

@@ -7,7 +7,7 @@
   },
   "cache_settings": {
     "data_file_dir": "./assets/data/",
-    "expiration_seconds": 3600,
+    "expiration_seconds": 1,
     "cache_key": "site_data_cache",
     "timestamp_key": "site_data_timestamp"
   },

@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // 1. Configuration: Path and full list of data requirements
     const BASE = './assets/data/';
+    // const BASE = './assets/data_test/';
     const FILES = [
         'site.json', 'personal_information.json', 'key_information.json',
         'academic_information.json', 'professional_experiences.json',
@@ -109,7 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     finally {
         // FINALLY: This executes no matter what happened in 'try' or 'catch'
         // This is your ultimate insurance against an infinite preloader
-        console.error("Something went wrong...");
+        // console.error("Something went wrong...");
         window.hide_preloader();
     }
 
