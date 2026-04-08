@@ -50,14 +50,27 @@
         const headerOffset = stickyBar ? 85 : 0; // 85px for CV, 20px for Index
 
         // Mobile Toggle
+        // if (headerToggleBtn) {
+        //     headerToggleBtn.replaceWith(headerToggleBtn.cloneNode(true));
+        //     const newToggleBtn = document.querySelector('.header-toggle');
+        //     newToggleBtn.addEventListener('click', function() {
+        //         body.classList.toggle('mobile-nav-active');
+        //         this.classList.toggle('bi-list');
+        //         this.classList.toggle('bi-x');
+        //     });
+        // }
+
         if (headerToggleBtn) {
-            headerToggleBtn.replaceWith(headerToggleBtn.cloneNode(true));
+            const clone = headerToggleBtn.cloneNode(true)
+            headerToggleBtn.replaceWith(clone);
             const newToggleBtn = document.querySelector('.header-toggle');
-            newToggleBtn.addEventListener('click', function() {
-                body.classList.toggle('mobile-nav-active');
-                this.classList.toggle('bi-list');
-                this.classList.toggle('bi-x');
-            });
+            if (newToggleBtn){
+                newToggleBtn.addEventListener('click', function() {
+                    body.classList.toggle('mobile-nav-active');
+                    this.classList.toggle('bi-list');
+                    this.classList.toggle('bi-x');
+                });
+            }
         }
 
         // Click Handler: Dropdowns vs Navigation
@@ -221,11 +234,14 @@
             navLinks.forEach(link => {
                 // const hash = link.hash;
                 const fullHash = link.hash;
-                const sectionId = fullHash;
+                let sectionId = fullHash;
+                let itemId = null;
                 if (fullHash.includes('-')) {
                     const parts = fullHash.substring(1).split('-');
-                    const sectionId = parts[0];
-                    const itemId = parts[1];
+                    // const sectionId = parts[0];
+                    // const itemId = parts[1];
+                    sectionId = parts[0];
+                    itemId = parts[1];
                 }
                 // EXCLUSION: We skip containers so they don't "steal" the highlight
                 const isWrapper = ['#hero', '#all_cv_section', '#all_details_section', '#expertise_skills_achievements', '#all_cv_wrapper', '#', ''].includes(sectionId);

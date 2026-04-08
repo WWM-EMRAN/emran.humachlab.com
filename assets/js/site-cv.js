@@ -88,14 +88,14 @@ const SiteCV_Standard = {
         // --- 0. DATA SYNCHRONIZATION ---
 
         // --- 1. RENDER ALL SECTIONS ---
-        this.render_all_standatdCV_sections();
+        this.render_all_standardCV_sections();
 
 
         console.log("Standard CV Page synchronization complete.");
     },
 
     // Render all or catch rendering problem, also deal with preloader and page 404
-    async render_all_standatdCV_sections() {
+    async render_all_standardCV_sections() {
         try {
             // Call each section individually
             // --- 1. HEADER & IDENTITY ---

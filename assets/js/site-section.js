@@ -481,7 +481,7 @@ const SiteSection = {
         const duration = role.timeframe_details.duration || SiteUtil.calculateDuration(role.timeframe_details.start_date, role.timeframe_details.end_date);
 
         return `
-            <div class="card shadow-sm border-0" style="border-left: 5px solid var(--accent-color) !important; border-radius: 12px;">
+            <div id="${role.role_id}" class="card shadow-sm border-0" style="border-left: 5px solid var(--accent-color) !important; border-radius: 12px;">
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-start flex-wrap mb-3">
                         <h4 class="fw-bold text-dark mb-1" style="font-size: 16px;">${role.title}</h4>
@@ -1601,7 +1601,7 @@ const SiteSection = {
             </div>` : '';
 
         return `
-            <div class="card shadow-sm border-0" style="border-left: 5px solid var(--accent-color) !important; border-radius: 12px;">
+            <div id="${pub.id_ref}" class="card shadow-sm border-0" style="border-left: 5px solid var(--accent-color) !important; border-radius: 12px;">
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-start flex-wrap mb-3">
                         <h4 class="fw-bold text-dark mb-1" style="font-size: 17px;">

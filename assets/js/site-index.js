@@ -716,7 +716,7 @@ const SiteIndex = {
                                     <a href="${item.image_path}" title="${item.title}" data-gallery="portfolio-gallery-cert" class="glightbox preview-link">
                                         <i class="bi bi-zoom-in"></i>
                                     </a>
-                                    <a href="section_details.html${info.hashtag}-${item.id_ref}" title="More Details" class="details-link">
+                                    <a href="section_details.html#${info.hashtag}-${item.id_ref}" title="More Details" class="details-link">
                                         <i class="bi bi-link-45deg"></i>
                                     </a>
                                 </div>

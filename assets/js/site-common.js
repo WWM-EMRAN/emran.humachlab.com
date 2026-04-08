@@ -68,7 +68,7 @@ const SiteCommon = {
         const navContainer = document.getElementById('navmenu');
         if (!navContainer || !nav?.main_menu || !nav?.short_menu) return;
 
-        selected_menu = (menuType==="main") ? nav.main_menu : nav.short_menu;
+        const selected_menu = (menuType==="main") ? nav.main_menu : nav.short_menu;
         console.log("Rendering Navigation Menu: " + selected_menu)
 
         let html = '<ul>';

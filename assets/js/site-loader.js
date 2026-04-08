@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // CV types: standard, onePage, twoPage, detailed
             // const type = allParams.get('type') || 'standard';
             // type = allParams.type?.toLowerCase() || 'standard';
-            type = allParams.type || 'standard';
+            const type = allParams.type || 'standard';
             console.log(`### Routing to: CV View [Type: ${type}]`);
             // homeLink.setAttribute('href', '#all_cv_section');
             homeLink.setAttribute('href', '#all_cv_section');
