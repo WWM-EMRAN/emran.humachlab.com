@@ -805,6 +805,27 @@ p {
     font-size: 1.1em;
 }
 
+
+
+
+
+/*
+ * Prevent dynamically generated subsection cards from being
+ * covered by the sticky bar on the section-details page.
+ */
+#all_details_section [data-navigation-item-id] {
+    scroll-margin-top: 90px;
+}
+
+@media (max-width: 480px) {
+    #all_details_section [data-navigation-item-id] {
+        scroll-margin-top: 80px;
+    }
+}
+
+
+
+
 .resume .resume-title {
   color: var(--heading-color);
   font-size: 17px;

@@ -1952,137 +1952,53 @@ const SiteSection = {
     },
 
 
-    // navigate_to_hash(targetId = null) {
-    //     const fullTargetId = this.normalize_route_value(
-    //         targetId || this._activeRoute?.targetId || window.location.hash
-    //     );
-    //
-    //     if (!fullTargetId) return false;
-    //
-    //     const sectionId = this.get_section_from_target(fullTargetId);
-    //     if (!sectionId) {
-    //         console.warn(`Unknown section target: ${fullTargetId}`);
-    //         return false;
-    //     }
-    //
-    //     // Preferred target: the exact composite ID used by index-page links.
-    //     let targetElement = document.getElementById(fullTargetId);
-    //
-    //     // Backward compatibility: older details cards used only the raw item ID.
-    //     if (!targetElement && fullTargetId.startsWith(`${sectionId}-`)) {
-    //         const rawItemId = fullTargetId.slice(sectionId.length + 1);
-    //         targetElement = document.getElementById(rawItemId);
-    //     }
-    //
-    //     // Safe fallback: scroll to the parent section rather than silently doing nothing.
-    //     if (!targetElement) {
-    //         targetElement = document.getElementById(sectionId);
-    //     }
-    //
-    //     if (!targetElement) {
-    //         console.warn(`Navigation target not found: ${fullTargetId}`);
-    //         return false;
-    //     }
-    //
-    //     const stickyBar = document.getElementById('details-sticky-bar');
-    //     const stickyOffset = (stickyBar?.getBoundingClientRect().height || 0) + 12;
-    //     const targetTop = targetElement.getBoundingClientRect().top + window.scrollY - stickyOffset;
-    //
-    //     window.scrollTo({
-    //         top: Math.max(0, targetTop),
-    //         behavior: 'smooth'
-    //     });
-    //
-    //     targetElement.classList.add('hash-target-highlight');
-    //     window.setTimeout(() => {
-    //         targetElement.classList.remove('hash-target-highlight');
-    //     }, 2000);
-    //
-    //     return true;
-    // },
-
-
     navigate_to_hash(targetId = null) {
         const fullTargetId = this.normalize_route_value(
-            targetId ||
-            this._activeRoute?.targetId ||
-            window.location.hash
+            targetId || this._activeRoute?.targetId || window.location.hash
         );
 
         if (!fullTargetId) return false;
 
         const sectionId = this.get_section_from_target(fullTargetId);
-
         if (!sectionId) {
             console.warn(`Unknown section target: ${fullTargetId}`);
             return false;
         }
 
-        // First try the complete section-subsection ID.
+        // Preferred target: the exact composite ID used by index-page links.
         let targetElement = document.getElementById(fullTargetId);
 
-        // Compatibility with older item-only IDs.
-        if (
-            !targetElement &&
-            fullTargetId.startsWith(`${sectionId}-`)
-        ) {
-            const rawItemId =
-                fullTargetId.slice(sectionId.length + 1);
-
+        // Backward compatibility: older details cards used only the raw item ID.
+        if (!targetElement && fullTargetId.startsWith(`${sectionId}-`)) {
+            const rawItemId = fullTargetId.slice(sectionId.length + 1);
             targetElement = document.getElementById(rawItemId);
         }
 
-        // Fall back to the parent section.
+        // Safe fallback: scroll to the parent section rather than silently doing nothing.
         if (!targetElement) {
             targetElement = document.getElementById(sectionId);
         }
 
         if (!targetElement) {
-            console.warn(
-                `Navigation target not found: ${fullTargetId}`
-            );
+            console.warn(`Navigation target not found: ${fullTargetId}`);
             return false;
         }
 
-        const stickyBar =
-            document.getElementById('details-sticky-bar');
+        const stickyBar = document.getElementById('details-sticky-bar');
+        const stickyOffset = (stickyBar?.getBoundingClientRect().height || 0) + 12;
+        const targetTop = targetElement.getBoundingClientRect().top + window.scrollY - stickyOffset;
 
-        // const stickyOffset = Math.ceil(
-        //     stickyBar?.getBoundingClientRect().height || 0
-        // ) + 100;
-
-        const isMainSection = fullTargetId === sectionId;
-        const extraOffset = isMainSection ? 0 : 100;
-        const stickyOffset = Math.ceil(
-            stickyBar?.getBoundingClientRect().height || 0
-        ) + extraOffset;
-
-        /*
-         * Main sections have their own padding, but subsection cards do not.
-         * Applying scroll-margin-top ensures the card begins below the
-         * sticky details bar.
-         */
-        targetElement.style.scrollMarginTop =
-            `${stickyOffset}px`;
-
-        targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+        window.scrollTo({
+            top: Math.max(0, targetTop),
+            behavior: 'smooth'
         });
 
-        targetElement.classList.add(
-            'hash-target-highlight'
-        );
-
+        targetElement.classList.add('hash-target-highlight');
         window.setTimeout(() => {
-            targetElement.classList.remove(
-                'hash-target-highlight'
-            );
+            targetElement.classList.remove('hash-target-highlight');
         }, 2000);
 
         return true;
     },
-
-
 
 };
