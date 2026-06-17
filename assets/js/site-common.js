@@ -21,13 +21,88 @@ const SiteCommon = {
 
     /** Updates <title> and Favicon */
     updateMetadata(info, assets) {
-        if (info?.title) document.title = info.title;
+        // if (info?.title) document.title = info.title;
+        if (info?.title){
+            const pageTitle = this.getPageTitle(info.title);
+            document.title = pageTitle;
+        }
 
         // Update favicon if exists
         let favicon = document.querySelector('link[rel="icon"]');
         if (favicon && assets?.icons?.logo_png) {
             favicon.href = assets.icons.logo_png;
         }
+    },
+
+    getPageTitle(defaultTitle) {
+        const path =
+            window.location.pathname
+                .split('/')
+                .pop()
+                .toLowerCase();
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        if (
+            path === '' ||
+            path === 'index.html'
+        ) {
+            return defaultTitle;
+        }
+
+        if (path === 'curriculum_vitae.html') {
+            const cvType =
+                params.get('type') || 'standard';
+
+            const cvTitles = {
+                standard: 'Standard CV',
+                onePage: 'One-Page CV',
+                twoPage: 'Two-Page CV',
+                detailed: 'Detailed CV'
+            };
+
+            return `Emran Ali - ${cvTitles[cvType] || 'CV'}`;
+        }
+
+        if (path === 'section_details.html') {
+            const target =
+                window.location.hash
+                    .replace(/^#/, '')
+                    .replace(/_/g, ' ');
+
+            if (target) {
+                return `Emran Ali - ${this.formatPageTitle(target)}`;
+            }
+
+            return 'Emran Ali - Section Details';
+        }
+
+        if (path === 'page_details.html') {
+            const page =
+                params.get('page') ||
+                params.get('type') ||
+                'Details';
+
+            return `Emran Ali - ${this.formatPageTitle(page)}`;
+        }
+
+        if (path === '404.html') {
+            return 'Emran Ali - Page Not Found';
+        }
+
+        return defaultTitle;
+    },
+
+    formatPageTitle(value) {
+        return String(value || '')
+            .replace(/[-_]+/g, ' ')
+            .replace(/\b\w/g, character =>
+                character.toUpperCase()
+            )
+            .trim();
     },
 
     /** Renders Sidebar Name, Photo, and Social Links */
