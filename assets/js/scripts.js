@@ -319,6 +319,9 @@
                         const searchParams = window.location.search;
                         const isHome = bestMatchLink.hash === '#hero' || bestMatchLink.hash === '#all_cv_section';
                         const newHash = isHome ? '' : bestMatchLink.hash;
+                        if (window.sectionDetailsNavigationInProgress) {
+                            return;
+                        }
                         history.replaceState(null, null, window.location.pathname + searchParams + newHash);
                     }
                 }

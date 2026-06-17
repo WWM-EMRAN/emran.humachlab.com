@@ -2002,26 +2002,112 @@ const SiteSection = {
     // },
 
 
+    // navigate_to_hash(targetId = null) {
+    //     const fullTargetId = this.normalize_route_value(
+    //         targetId ||
+    //         this._activeRoute?.targetId ||
+    //         window.location.hash
+    //     );
+    //
+    //     if (!fullTargetId) return false;
+    //
+    //     const sectionId = this.get_section_from_target(fullTargetId);
+    //
+    //     if (!sectionId) {
+    //         console.warn(`Unknown section target: ${fullTargetId}`);
+    //         return false;
+    //     }
+    //
+    //     // First try the complete section-subsection ID.
+    //     let targetElement = document.getElementById(fullTargetId);
+    //
+    //     // Compatibility with older item-only IDs.
+    //     if (
+    //         !targetElement &&
+    //         fullTargetId.startsWith(`${sectionId}-`)
+    //     ) {
+    //         const rawItemId =
+    //             fullTargetId.slice(sectionId.length + 1);
+    //
+    //         targetElement = document.getElementById(rawItemId);
+    //     }
+    //
+    //     // Fall back to the parent section.
+    //     if (!targetElement) {
+    //         targetElement = document.getElementById(sectionId);
+    //     }
+    //
+    //     if (!targetElement) {
+    //         console.warn(
+    //             `Navigation target not found: ${fullTargetId}`
+    //         );
+    //         return false;
+    //     }
+    //
+    //     const stickyBar =
+    //         document.getElementById('details-sticky-bar');
+    //
+    //     // const stickyOffset = Math.ceil(
+    //     //     stickyBar?.getBoundingClientRect().height || 0
+    //     // ) + 100;
+    //
+    //     const isMainSection = fullTargetId === sectionId;
+    //     const extraOffset = isMainSection ? 0 : 100;
+    //     const stickyOffset = Math.ceil(
+    //         stickyBar?.getBoundingClientRect().height || 0
+    //     ) + extraOffset;
+    //
+    //     /*
+    //      * Main sections have their own padding, but subsection cards do not.
+    //      * Applying scroll-margin-top ensures the card begins below the
+    //      * sticky details bar.
+    //      */
+    //     targetElement.style.scrollMarginTop =
+    //         `${stickyOffset}px`;
+    //
+    //     targetElement.scrollIntoView({
+    //         behavior: 'smooth',
+    //         block: 'start'
+    //     });
+    //
+    //     targetElement.classList.add(
+    //         'hash-target-highlight'
+    //     );
+    //
+    //     window.setTimeout(() => {
+    //         targetElement.classList.remove(
+    //             'hash-target-highlight'
+    //         );
+    //     }, 2000);
+    //
+    //     return true;
+    // },
+
     navigate_to_hash(targetId = null) {
+        window.sectionDetailsNavigationInProgress = true;
+
         const fullTargetId = this.normalize_route_value(
             targetId ||
             this._activeRoute?.targetId ||
             window.location.hash
         );
 
-        if (!fullTargetId) return false;
-
-        const sectionId = this.get_section_from_target(fullTargetId);
-
-        if (!sectionId) {
-            console.warn(`Unknown section target: ${fullTargetId}`);
+        if (!fullTargetId) {
+            window.sectionDetailsNavigationInProgress = false;
             return false;
         }
 
-        // First try the complete section-subsection ID.
-        let targetElement = document.getElementById(fullTargetId);
+        const sectionId =
+            this.get_section_from_target(fullTargetId);
 
-        // Compatibility with older item-only IDs.
+        if (!sectionId) {
+            window.sectionDetailsNavigationInProgress = false;
+            return false;
+        }
+
+        let targetElement =
+            document.getElementById(fullTargetId);
+
         if (
             !targetElement &&
             fullTargetId.startsWith(`${sectionId}-`)
@@ -2029,39 +2115,33 @@ const SiteSection = {
             const rawItemId =
                 fullTargetId.slice(sectionId.length + 1);
 
-            targetElement = document.getElementById(rawItemId);
-        }
-
-        // Fall back to the parent section.
-        if (!targetElement) {
-            targetElement = document.getElementById(sectionId);
+            targetElement =
+                document.getElementById(rawItemId);
         }
 
         if (!targetElement) {
-            console.warn(
-                `Navigation target not found: ${fullTargetId}`
-            );
+            targetElement =
+                document.getElementById(sectionId);
+        }
+
+        if (!targetElement) {
+            window.sectionDetailsNavigationInProgress = false;
             return false;
         }
 
         const stickyBar =
             document.getElementById('details-sticky-bar');
 
-        // const stickyOffset = Math.ceil(
-        //     stickyBar?.getBoundingClientRect().height || 0
-        // ) + 100;
+        const isMainSection =
+            fullTargetId === sectionId;
 
-        const isMainSection = fullTargetId === sectionId;
-        const extraOffset = isMainSection ? 0 : 100;
+        const extraOffset =
+            isMainSection ? 50 : 100;
+
         const stickyOffset = Math.ceil(
             stickyBar?.getBoundingClientRect().height || 0
         ) + extraOffset;
 
-        /*
-         * Main sections have their own padding, but subsection cards do not.
-         * Applying scroll-margin-top ensures the card begins below the
-         * sticky details bar.
-         */
         targetElement.style.scrollMarginTop =
             `${stickyOffset}px`;
 
@@ -2070,15 +2150,23 @@ const SiteSection = {
             block: 'start'
         });
 
-        targetElement.classList.add(
-            'hash-target-highlight'
-        );
+        const unlockNavigation = () => {
+            window.sectionDetailsNavigationInProgress =
+                false;
+        };
 
-        window.setTimeout(() => {
-            targetElement.classList.remove(
-                'hash-target-highlight'
+        if ('onscrollend' in window) {
+            window.addEventListener(
+                'scrollend',
+                unlockNavigation,
+                { once: true }
             );
-        }, 2000);
+        } else {
+            window.setTimeout(
+                unlockNavigation,
+                1000
+            );
+        }
 
         return true;
     },
