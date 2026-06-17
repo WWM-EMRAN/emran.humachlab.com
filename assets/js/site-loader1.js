@@ -95,15 +95,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.render_404_page("Content");
         }
         
-        // 4. Re-initialize optional UI libraries.
-        // A UI-plugin failure must not be treated as missing page content.
-        try {
-            if (typeof window.initExternalLibraries === 'function') {
-                window.initExternalLibraries();
-            }
-        } catch (uiError) {
-            console.error('Non-critical UI initialisation error:', uiError);
-        }
+        // 4. Re-initialize UI Libraries
+        window.initExternalLibraries();
 
         // // --- 5. Hide preloader once finished ---
         // window.hide_preloader();

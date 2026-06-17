@@ -1,32 +1,214 @@
 const SiteSection = {
-    init(section) {
-        console.log(`Section Details Page initializing with section: '${section}'...`);
+    /**
+     * Maps visible section IDs to the JSON cache keys used by SiteCore.
+     * Most IDs and data keys are identical; About is the deliberate exception.
+     */
+    SECTION_DATA_MAP: Object.freeze({
+        about: 'personal_information',
+        key_information: 'key_information',
+        academic_information: 'academic_information',
+        professional_experiences: 'professional_experiences',
+        expertise_skills_achievements: 'expertise_skills_achievements',
+        skills_tools: 'skills_tools',
+        honors_awards: 'honors_awards',
+        courses_trainings_certificates: 'courses_trainings_certificates',
+        projects: 'projects',
+        organisational_memberships: 'organisational_memberships',
+        sessions_events: 'sessions_events',
+        languages: 'languages',
+        portfolios: 'portfolios',
+        volunteering_services: 'volunteering_services',
+        publications: 'publications',
+        contact_details: 'contact_details'
+    }),
 
-        // --- 0. DATA SYNCHRONIZATION ---
+    _activeRoute: null,
+    _navigationListenersBound: false,
 
-        // --- 1. RENDER ALL SECTIONS ---
-        this.render_all_section_details(section);
+    /** Safely decodes and cleans a hash/query value without changing item-ID case. */
+    normalize_route_value(value) {
+        if (value === undefined || value === null) return '';
 
+        let cleaned = String(value).trim().replace(/^#+/, '');
+        try {
+            cleaned = decodeURIComponent(cleaned);
+        } catch (error) {
+            console.warn('Unable to decode navigation value:', cleaned, error);
+        }
+        return cleaned.trim();
+    },
+
+    /** Returns the main section represented by either a section or section-item target. */
+    get_section_from_target(targetId) {
+        const target = this.normalize_route_value(targetId);
+        if (!target) return '';
+
+        const lowerTarget = target.toLowerCase();
+        const sectionIds = Object.keys(this.SECTION_DATA_MAP)
+            .sort((a, b) => b.length - a.length);
+
+        return sectionIds.find(sectionId =>
+            lowerTarget === sectionId.toLowerCase() ||
+            lowerTarget.startsWith(`${sectionId.toLowerCase()}-`)
+        ) || '';
+    },
+
+    /**
+     * Resolves all supported section-detail routes:
+     *   section_details.html?section=honors_awards-aw_ber_ngtb
+     *   section_details.html?section=honors_awards&id=aw_ber_ngtb
+     *   section_details.html#honors_awards-aw_ber_ngtb
+     *
+     * The parent section is used as the JSON/cache key. The complete value is
+     * retained as the DOM scrolling target. Subsection IDs remain case-sensitive.
+     */
+    resolve_route(allParams = null, hashes = null, preferHash = false) {
+        const params = allParams ?? Object.fromEntries(
+            new URLSearchParams(window.location.search)
+        );
+
+        const hashValue = Array.isArray(hashes)
+            ? (hashes[0] || '')
+            : window.location.hash.slice(1);
+
+        const rawHashTarget = this.normalize_route_value(hashValue);
+        const rawQueryRoute = this.normalize_route_value(params.section);
+        const rawQueryItem = this.normalize_route_value(params.id);
+
+        const buildRoute = (rawTarget, source, separateItem = '') => {
+            if (!rawTarget) return null;
+
+            const section = this.get_section_from_target(rawTarget);
+            if (!section) return null;
+
+            let targetId;
+            const isParentOnly = rawTarget.toLowerCase() === section.toLowerCase();
+
+            if (isParentOnly && separateItem) {
+                targetId = `${section}-${separateItem}`;
+            } else {
+                // Canonicalise only the section prefix. Preserve item-ID case.
+                targetId = section + rawTarget.slice(section.length);
+            }
+
+            return {
+                section,
+                subsectionId: targetId.startsWith(`${section}-`)
+                    ? targetId.slice(section.length + 1)
+                    : '',
+                targetId,
+                dataKey: this.SECTION_DATA_MAP[section],
+                source
+            };
+        };
+
+        const queryRoute = buildRoute(rawQueryRoute, 'query', rawQueryItem);
+        const hashRoute = buildRoute(rawHashTarget, 'hash');
+        const route = preferHash
+            ? (hashRoute || queryRoute)
+            : (queryRoute || hashRoute);
+
+        if (route) return route;
+
+        return {
+            section: '',
+            subsectionId: '',
+            targetId: rawQueryRoute || rawHashTarget,
+            dataKey: '',
+            source: rawQueryRoute ? 'query' : (rawHashTarget ? 'hash' : 'none')
+        };
+    },
+
+    /** Gives every dynamic card the same ID format used by homepage links. */
+    set_navigation_target_id(element, sectionHash, itemId) {
+        if (!element || !itemId) return '';
+        const section = this.normalize_route_value(sectionHash);
+        const targetId = `${section}-${itemId}`;
+        element.id = targetId;
+        element.dataset.navigationItemId = String(itemId);
+        return targetId;
+    },
+
+    // init(section) {
+    //     console.log(`Section Details Page initializing with section: '${section}'...`);
+    //
+    //     // --- 0. DATA SYNCHRONIZATION ---
+    //
+    //     // --- 1. RENDER ALL SECTIONS ---
+    //     this.render_all_section_details(section);
+    //
+    //
+    //     console.log("Section Details Page synchronization complete.");
+    // },
+    async init(routeOrSection) {
+        const route = (typeof routeOrSection === 'string')
+            ? {
+                section: this.get_section_from_target(routeOrSection),
+                targetId: this.normalize_route_value(routeOrSection),
+                dataKey: this.SECTION_DATA_MAP[this.get_section_from_target(routeOrSection)]
+            }
+            : routeOrSection;
+
+        this._activeRoute = route;
+        console.log(`Section Details Page initializing with section: '${route.section}', target: '${route.targetId}'...`);
+
+        await this.render_all_section_details(route);
+
+        if (!this._navigationListenersBound) {
+            const handleRouteChange = () => {
+                const updatedRoute = this.resolve_route(null, null, true);
+                if (!updatedRoute.section) return;
+
+                this._activeRoute = updatedRoute;
+                this.render_sticky_header(updatedRoute.section);
+                this.navigate_to_hash(updatedRoute.targetId);
+            };
+
+            window.addEventListener('hashchange', handleRouteChange);
+            window.addEventListener('popstate', handleRouteChange);
+            this._navigationListenersBound = true;
+        }
 
         console.log("Section Details Page synchronization complete.");
     },
 
-   async render_all_section_details(section){
-      try {
+   // async render_all_section_details(section){
+   //    try {
+   //
+   //      // --- 0. DATA SYNCHRONIZATION ---
+   //
+   //      // --- 1. RENDER ALL SECTIONS ---
+   //      this.render_all_details_sections(section);
+   //
+   //      // --- THE FIX: Hide preloader once finished ---
+   //      window.hide_preloader();
+   //   }
+   //   catch (error) {
+   //       console.error("Render Error in Section Details page:", error);
+   //       window.hide_preloader(); // Hide anyway to stop the hang
+   //   }
+   // },
+    async render_all_section_details(route) {
+        try {
+            // Wait until all dynamic cards have been inserted
+            await this.render_all_details_sections(route.section);
 
-        // --- 0. DATA SYNCHRONIZATION ---
+            // Wait for the browser to calculate the newly inserted layout
+            await new Promise(resolve => {
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(resolve);
+                });
+            });
 
-        // --- 1. RENDER ALL SECTIONS ---
-        this.render_all_details_sections(section);
+            // Navigate only after every dynamic target exists and layout is calculated
+            this.navigate_to_hash(route.targetId);
 
-        // --- THE FIX: Hide preloader once finished ---
-        window.hide_preloader();
-     }
-     catch (error) {
-         console.error("Render Error in Section Details page:", error);
-         window.hide_preloader(); // Hide anyway to stop the hang
-     }
-   },
+            window.hide_preloader();
+        } catch (error) {
+            console.error("Render Error in Section Details page:", error);
+            window.hide_preloader();
+        }
+    },
 
     // Render all or catch rendering problem, also deal with preloader and page 404
     async render_all_details_sections(section) {
@@ -301,7 +483,12 @@ const SiteSection = {
                 cardCol.setAttribute('data-aos', 'fade-up');
 
                 // ADDED: Assigned degree_id for Auto-Scrolling
-                cardCol.id = deg.degree_id;
+                // cardCol.id = deg.degree_id;
+                // console.log(`XXX=======> ${deg.degree_id} ${data.section_info.hashtag}`);
+                // cardCol.id = `${data.section_info.hashtag}-${deg.degree_id}`;
+                // console.log(`XXX=======> ${data.section_info.hashtag}-${deg.degree_id}`);
+
+                this.set_navigation_target_id(cardCol, data.section_info.hashtag, deg.degree_id);
 
                 cardCol.innerHTML = this._build_details_academic_card(deg);
                 contentContainer.appendChild(cardCol);
@@ -334,7 +521,7 @@ const SiteSection = {
                 <div class="card-body p-4">
                     <div class="d-flex justify-content-between align-items-start flex-wrap mb-3">
                         <div>
-                            <h4 class="fw-bold details-card-title mb-1">${degree.degree_major} — (${degree.degree_short_name || ''})</h4>
+                            <h4 class="fw-bold details-card-title mb-1" >${degree.degree_major} — (${degree.degree_short_name || ''}) </h4>
                             <p class="text-secondary mb-0">${degree.department_name}</p>
                         </div>
                     </div>
@@ -434,6 +621,7 @@ const SiteSection = {
                         const cardCol = document.createElement('div');
                         cardCol.className = 'col-12 mb-4';
                         cardCol.setAttribute('data-aos', 'fade-up');
+                        this.set_navigation_target_id(cardCol, data.section_info.hashtag, role.role_id);
                         cardCol.innerHTML = this._build_details_experience_card(role);
                         contentContainer.appendChild(cardCol);
                     });
@@ -567,6 +755,7 @@ const SiteSection = {
                 cardCol.className = 'col-12 mb-4';
                 cardCol.setAttribute('data-aos', 'fade-up');
                 cardCol.setAttribute('data-aos-delay', (index % 4) * 100);
+                this.set_navigation_target_id(cardCol, info.hashtag, skill.id_ref);
 
                 // Split descriptions for the detailed lists and badges
                 const detailPoints = skill.details_description.split('. ').filter(p => p.trim() !== '');
@@ -658,6 +847,7 @@ const SiteSection = {
                 cardCol.className = 'col-12 mb-4';
                 cardCol.setAttribute('data-aos', 'fade-up');
                 cardCol.setAttribute('data-aos-delay', (index % 3) * 100);
+                this.set_navigation_target_id(cardCol, data.section_info.hashtag, award.id_ref);
 
                 // Check for associated organization data
                 const hasAssocOrg = award.associated_organization && award.associated_organization.name;
@@ -764,6 +954,7 @@ const SiteSection = {
                 cardCol.className = 'col-12 mb-4';
                 cardCol.setAttribute('data-aos', 'fade-up');
                 cardCol.setAttribute('data-aos-delay', (index % 3) * 100);
+                this.set_navigation_target_id(cardCol, info.hashtag, item.id_ref);
 
                 cardCol.innerHTML = this._build_details_certificate_card(item);
                 gridRow.appendChild(cardCol);
@@ -889,6 +1080,7 @@ const SiteSection = {
                 cardCol.className = 'col-12 mb-5';
                 cardCol.setAttribute('data-aos', 'fade-up');
                 cardCol.setAttribute('data-aos-delay', (index % 3) * 100);
+                this.set_navigation_target_id(cardCol, info.hashtag, project.id_ref);
 
                 cardCol.innerHTML = this._build_details_project_card(project);
                 contentContainer.appendChild(cardCol);
@@ -1022,6 +1214,7 @@ const SiteSection = {
                 cardCol.className = 'col-12 mb-4';
                 cardCol.setAttribute('data-aos', 'fade-up');
                 cardCol.setAttribute('data-aos-delay', (index % 3) * 100);
+                this.set_navigation_target_id(cardCol, info.hashtag, mem.id_ref);
 
                 cardCol.innerHTML = this._build_details_membership_card(mem);
                 gridRow.appendChild(cardCol);
@@ -1140,6 +1333,7 @@ const SiteSection = {
                 cardCol.className = 'col-12 mb-4';
                 cardCol.setAttribute('data-aos', 'fade-up');
                 cardCol.setAttribute('data-aos-delay', (index % 3) * 100);
+                this.set_navigation_target_id(cardCol, info.hashtag, event.id_ref);
 
                 cardCol.innerHTML = this._build_details_session_event_card(event);
                 gridRow.appendChild(cardCol);
@@ -1232,6 +1426,7 @@ const SiteSection = {
                 cardCol.className = 'col-12 mb-4';
                 cardCol.setAttribute('data-aos', 'fade-up');
                 cardCol.setAttribute('data-aos-delay', (index % 3) * 100);
+                this.set_navigation_target_id(cardCol, info.hashtag, lang.id_ref);
 
                 cardCol.innerHTML = this._build_details_language_card(lang);
                 gridRow.appendChild(cardCol);
@@ -1357,6 +1552,7 @@ const SiteSection = {
                 cardCol.className = 'col-12 mb-4';
                 cardCol.setAttribute('data-aos', 'fade-up');
                 cardCol.setAttribute('data-aos-delay', (index % 3) * 100);
+                this.set_navigation_target_id(cardCol, info.hashtag, item.id_ref);
 
                 cardCol.innerHTML = this._build_details_portfolio_card(item);
                 gridRow.appendChild(cardCol);
@@ -1452,6 +1648,7 @@ const SiteSection = {
                 cardCol.className = 'col-12 mb-4';
                 cardCol.setAttribute('data-aos', 'fade-up');
                 cardCol.setAttribute('data-aos-delay', (index % 3) * 100);
+                this.set_navigation_target_id(cardCol, info.hashtag, vol.id_ref);
 
                 cardCol.innerHTML = this._build_details_volunteering_card(vol);
                 gridRow.appendChild(cardCol);
@@ -1572,6 +1769,7 @@ const SiteSection = {
                     cardCol.className = 'col-12 mb-4';
                     cardCol.setAttribute('data-aos', 'fade-up');
                     cardCol.setAttribute('data-aos-delay', (index % 3) * 100);
+                    this.set_navigation_target_id(cardCol, info.hashtag, pub.id_ref);
 
                     cardCol.innerHTML = this._build_details_publication_card(pub, category);
                     contentContainer.appendChild(cardCol);
@@ -1754,6 +1952,53 @@ const SiteSection = {
     },
 
 
+    navigate_to_hash(targetId = null) {
+        const fullTargetId = this.normalize_route_value(
+            targetId || this._activeRoute?.targetId || window.location.hash
+        );
 
+        if (!fullTargetId) return false;
+
+        const sectionId = this.get_section_from_target(fullTargetId);
+        if (!sectionId) {
+            console.warn(`Unknown section target: ${fullTargetId}`);
+            return false;
+        }
+
+        // Preferred target: the exact composite ID used by index-page links.
+        let targetElement = document.getElementById(fullTargetId);
+
+        // Backward compatibility: older details cards used only the raw item ID.
+        if (!targetElement && fullTargetId.startsWith(`${sectionId}-`)) {
+            const rawItemId = fullTargetId.slice(sectionId.length + 1);
+            targetElement = document.getElementById(rawItemId);
+        }
+
+        // Safe fallback: scroll to the parent section rather than silently doing nothing.
+        if (!targetElement) {
+            targetElement = document.getElementById(sectionId);
+        }
+
+        if (!targetElement) {
+            console.warn(`Navigation target not found: ${fullTargetId}`);
+            return false;
+        }
+
+        const stickyBar = document.getElementById('details-sticky-bar');
+        const stickyOffset = (stickyBar?.getBoundingClientRect().height || 0) + 12;
+        const targetTop = targetElement.getBoundingClientRect().top + window.scrollY - stickyOffset;
+
+        window.scrollTo({
+            top: Math.max(0, targetTop),
+            behavior: 'smooth'
+        });
+
+        targetElement.classList.add('hash-target-highlight');
+        window.setTimeout(() => {
+            targetElement.classList.remove('hash-target-highlight');
+        }, 2000);
+
+        return true;
+    },
 
 };

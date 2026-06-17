@@ -391,95 +391,6 @@
 
 
     /**
-     * Initialise the category filters used by the
-     * Courses, Trainings and Certificates section.
-     *
-     * The cards and filter buttons are generated dynamically by
-     * site-index.js, so this must run after SiteIndex.init().
-     */
-    function initCourseIsotope() {
-        const section = document.getElementById('courses_trainings_certificates');
-
-        // The course section is not present on every page.
-        if (!section) return;
-
-        const layout = section.querySelector('.isotope-layout');
-        const container = section.querySelector('.isotope-container');
-        const filterList = section.querySelector('.isotope-filters');
-
-        if (!layout || !container || !filterList) {
-            console.warn('Course filtering was not initialised because required elements are missing.');
-            return;
-        }
-
-        if (typeof window.Isotope !== 'function') {
-            console.warn('Course filtering was not initialised because Isotope is unavailable.');
-            return;
-        }
-
-        // Remove a previous instance/listener when this function is called again.
-        if (layout._courseIsotope && typeof layout._courseIsotope.destroy === 'function') {
-            layout._courseIsotope.destroy();
-        }
-
-        if (layout._courseFilterHandler) {
-            filterList.removeEventListener('click', layout._courseFilterHandler);
-        }
-
-        const isotope = new window.Isotope(container, {
-            itemSelector: '.isotope-item',
-            layoutMode: layout.dataset.layout || 'masonry',
-            filter: layout.dataset.defaultFilter || '*',
-            sortBy: layout.dataset.sort || 'original-order',
-            percentPosition: true
-        });
-
-        layout._courseIsotope = isotope;
-
-        // Delegation remains reliable even when filter <li> elements are rebuilt.
-        const filterHandler = (event) => {
-            const selectedFilter = event.target.closest('li[data-filter]');
-
-            if (!selectedFilter || !filterList.contains(selectedFilter)) return;
-
-            event.preventDefault();
-
-            filterList.querySelectorAll('li[data-filter]').forEach((filter) => {
-                filter.classList.remove('filter-active');
-            });
-
-            selectedFilter.classList.add('filter-active');
-
-            isotope.arrange({
-                filter: selectedFilter.dataset.filter || '*'
-            });
-
-            if (window.AOS && typeof window.AOS.refresh === 'function') {
-                window.AOS.refresh();
-            }
-        };
-
-        layout._courseFilterHandler = filterHandler;
-        filterList.addEventListener('click', filterHandler);
-
-        // Image dimensions can change the masonry calculation after initial render.
-        container.querySelectorAll('img').forEach((image) => {
-            if (image.complete) return;
-
-            const refreshLayout = () => {
-                if (layout._courseIsotope && typeof layout._courseIsotope.layout === 'function') {
-                    layout._courseIsotope.layout();
-                }
-            };
-
-            image.addEventListener('load', refreshLayout, { once: true });
-            image.addEventListener('error', refreshLayout, { once: true });
-        });
-
-        window.requestAnimationFrame(() => isotope.layout());
-    }
-
-    /**
      * --- 4. EXTERNAL INITIALIZERS ---
      */
     window.initExternalLibraries = () => {
@@ -495,14 +406,6 @@
         // GLightbox
         if (typeof GLightbox !== 'undefined') GLightbox({selector: '.glightbox'});
 
-        // Course category filtering is optional UI behaviour.
-        // Keep any plugin error local so it cannot trigger the site's 404 fallback.
-        try {
-            initCourseIsotope();
-        } catch (error) {
-            console.error('Course filter initialisation failed:', error);
-        }
-
         // Typed.js (Hero)
         const selectTyped = document.querySelector('.typed');
         if (selectTyped) {
@@ -516,6 +419,8 @@
             });
         }
     };
+
+
 
     /**
      * Skill Bars Logic
@@ -550,6 +455,8 @@
             setTimeout(() => { preloader.style.display = "none"; }, 600);
         }
     };
+
+
 
     // Expose Navigation behavior to global window for dynamic loaders
     window.initNavigationBehavior = initNavigationBehavior;

@@ -65,8 +65,8 @@ The ecosystem follows a high-performance **Separation of Concerns (SoC)** model.
 │
 └── assets/
     ├── css/
-    │   ├── main.css          # Core Layout & Structural Styling
-    │   └── additional.css    # Custom Refinements & Overrides
+    │   ├── style.css         # Core Layout & Structural Styling
+    │   └── style_custom.css  # Custom Refinements & Overrides
     │
     ├── js/                   # ⚙️ THE MODULAR ENGINE
     │   ├── site-loader.js    # Data Fetching & Caching Manager
