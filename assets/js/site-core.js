@@ -35,7 +35,7 @@ window.SiteCore = (function() {
 
         // 2. Fetch fresh data if cache is missing or expired
         console.log("Cache expired or missing. Fetching fresh data...");
-        mem.promise = Promise.all(files.map(async f => {
+        mem.promise = await Promise.all(files.map(async f => {
             const r = await fetch(base + f);
             if (!r.ok) throw new Error(`Fetch failed for: ${f}`);
             mem.data[f.replace(/\.json$/, '')] = await r.json();

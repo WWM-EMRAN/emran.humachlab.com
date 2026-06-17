@@ -20,7 +20,8 @@ const SiteCV = {
         if (type === 'onePage') {
             body.classList.add('mode-one-page');
         } else if (type === 'twoPage') {
-            body.classList.add('mode-two-page');
+            // Reuse the existing one-page CV format for both sheets.
+            body.classList.add('mode-one-page', 'mode-two-page');
         } else {
             // Defaults to standard if type is 'standard', 'detailed', etc.
             body.classList.add('mode-standard');
@@ -2054,656 +2055,348 @@ const SiteCV_OnePage = {
 /**
  * SiteCV_TwoPage
  *
- * Two-page CV mode based entirely on the existing Standard CV visual format.
- * It uses the same paper sheet, header, Bootstrap grid, section title, item,
- * contact and footer classes. Content is read directly from the existing JSON
- * files. Page length is controlled by selecting the first records in their
- * existing JSON order and by shortening long existing text fields only where
- * required for a two-page document.
+ * The two-page mode intentionally reuses the existing one-page CV template.
+ * Page 1 is rendered by SiteCV_OnePage without changing its layout. Page 2
+ * is a clone of the same .cv-paper-sheet, .cv-sidebar and .cv-main-body
+ * structure, populated with additional records from the existing JSON data.
  */
 const SiteCV_TwoPage = {
     init() {
-        console.log("Initializing Two-Page CV using the Standard CV format...");
+        console.log("Initializing Two-Page CV using the existing One-Page format...");
         this.render_all_twoPageCV_sections();
     },
 
     async render_all_twoPageCV_sections() {
         try {
-            const container = document.getElementById('two-page-cv-container');
-            if (!container) {
-                throw new Error('Two-page CV container was not found.');
-            }
+            // Remove a previously generated continuation page, if init is
+            // called more than once in the same document.
+            document.getElementById('two-page-cv-paper-2')?.remove();
 
-            container.innerHTML = '';
+            // Render page 1 through the original one-page implementation.
+            await SiteCV_OnePage.render_all_onePageCV_sections();
 
-            const pageOne = document.createElement('div');
-            pageOne.id = 'two-page-cv-paper-1';
-            pageOne.className = 'cv-paper-sheet shadow-sm two-page-cv-paper';
-            pageOne.innerHTML = this.build_page_one();
+            // Clone that exact layout and place additional JSON content on it.
+            this.render_continuation_page();
 
-            const pageTwo = document.createElement('div');
-            pageTwo.id = 'two-page-cv-paper-2';
-            pageTwo.className = 'cv-paper-sheet shadow-sm two-page-cv-paper';
-            pageTwo.innerHTML = this.build_page_two();
-
-            container.append(pageOne, pageTwo);
-
-            if (typeof window.hide_preloader === 'function') {
-                window.hide_preloader();
-            }
-
-            console.log('Two-Page Standard CV synchronization complete.');
+            console.log("Two-Page CV synchronization complete.");
         }
         catch (error) {
-            console.error('Render Error in Two-Page Standard CV:', error);
+            console.error("Render Error in Two-Page CV page:", error);
             if (typeof window.hide_preloader === 'function') {
                 window.hide_preloader();
             }
         }
     },
 
-    build_page_one() {
-        return `
-            ${this.build_standard_header()}
-            <hr class="my-2"><hr class="my-2">
-            ${this.build_profile_and_metrics()}
-            ${this.build_academic_information()}
-            ${this.build_professional_experiences(6)}
-            ${this.build_page_number(1)}
-        `;
-    },
+    render_continuation_page() {
+        const container = document.getElementById('one-page-cv-container');
+        const firstPage = document.getElementById('one-page-cv-paper');
 
-    build_page_two() {
-        return `
-            ${this.build_continuation_header()}
-            <hr class="my-2"><hr class="my-2">
-            ${this.build_skills_tools()}
-            ${this.build_projects(4)}
-            ${this.build_publications({ journals: 3, conferences: 1, posters: 1 })}
+        if (!container || !firstPage) {
+            console.warn('The existing one-page CV template was not found.');
+            return;
+        }
 
-            <div class="row g-4 two-page-supporting-grid">
-                <div class="col-6">
-                    ${this.build_honors_awards(6)}
-                    ${this.build_memberships(4)}
-                    ${this.build_languages()}
-                </div>
-                <div class="col-6">
-                    ${this.build_certificates(6)}
-                    ${this.build_sessions(2)}
-                    ${this.build_portfolios(3)}
-                    ${this.build_volunteering(2)}
-                </div>
-            </div>
+        // Deep-cloning preserves the exact sidebar/body structure, classes,
+        // fonts, spacing, colours and proportions of the one-page CV.
+        const secondPage = firstPage.cloneNode(true);
+        secondPage.id = 'two-page-cv-paper-2';
+        secondPage.classList.add('two-page-continuation-paper');
 
-            ${this.build_contact_details()}
-            ${this.build_standard_footer()}
-            ${this.build_page_number(2)}
-        `;
-    },
-
-    build_standard_header() {
-        const personal = SiteCore.get('personal_information');
-        const site = SiteCore.get('site');
-        if (!personal || !site) return '';
-
-        const sloganText = (personal.hero?.main_keywards?.hero_slogan || [])
-            .map(item => item.text)
-            .filter(Boolean)
-            .join(' | ');
-
-        const links = site.social_links?.main || [];
-        const teams = links.find(link => link.platform === 'teams');
-        const email = links.find(link => link.platform === 'email');
-        const website = links.find(link => link.platform === 'website');
-
-        const label = link => {
-            if (!link?.url) return '';
-            return link.url
-                .replace('mailto:', '')
-                .replace(/^https?:\/\//, '')
-                .split('?')[0]
-                .replace(/\/$/, '');
-        };
-
-        return `
-            <header class="text-center text-muted small pb-2"><br></header>
-            <section class="mb-4 two-page-cv-header">
-                <div class="row text-center mb-2 flex-center-middle">
-                    <div class="col-2">
-                        <a href="${this.escape_attribute(personal.assets?.images?.profile_image_formal || '')}"
-                           class="img-fluid glightbox rounded-0" data-gallery="profile-gallery">
-                            <img src="${this.escape_attribute(personal.assets?.images?.profile_image_formal || '')}"
-                                 alt="${this.escape_attribute(personal.name || 'Profile')}"
-                                 class="img-fluid cv-profile-img-border" style="width: 100%;">
-                        </a>
-                    </div>
-                    <div class="col-10">
-                        <h1 class="cv-name-header m-0">${this.escape_html(personal.name || '')}</h1>
-                        <p class="cv-accent-subtitle lead m-0 text-center">${this.escape_html(sloganText)}</p>
-                        <p class="m-0 small text-center text-muted">
-                            <strong><i class="${this.escape_attribute(teams?.icon_class || 'bi bi-microsoft-teams')}"></i></strong>
-                            <a href="${this.escape_attribute(teams?.url || '#')}" target="_blank" rel="noopener noreferrer"> ${this.escape_html(label(teams))} </a> |
-                            <strong><i class="${this.escape_attribute(email?.icon_class || 'bi bi-envelope')}"></i></strong>
-                            <a href="${this.escape_attribute(email?.url || '#')}" target="_blank" rel="noopener noreferrer"> ${this.escape_html(label(email))} </a> |
-                            <strong><i class="${this.escape_attribute(website?.icon_class || 'bi bi-globe')}"></i></strong>
-                            <a href="${this.escape_attribute(website?.url || '#')}" target="_blank" rel="noopener noreferrer"> ${this.escape_html(label(website))} </a>
-                        </p>
-                    </div>
-                </div>
-            </section>
-        `;
-    },
-
-    build_continuation_header() {
-        const personal = SiteCore.get('personal_information');
-        if (!personal) return '';
-
-        const sloganText = (personal.hero?.main_keywards?.hero_slogan || [])
-            .map(item => item.text)
-            .filter(Boolean)
-            .join(' | ');
-
-        return `
-            <header class="text-center text-muted small pb-2"><br></header>
-            <section class="mb-3 two-page-continuation-header">
-                <div class="d-flex justify-content-between align-items-end">
-                    <div>
-                        <h2 class="cv-name-header m-0">${this.escape_html(personal.name || '')}</h2>
-                        <p class="cv-accent-subtitle m-0">${this.escape_html(sloganText)}</p>
-                    </div>
-                    <span class="small text-muted text-uppercase">Curriculum Vitae — Continued</span>
-                </div>
-            </section>
-        `;
-    },
-
-    build_profile_and_metrics() {
-        const personal = SiteCore.get('personal_information');
-        const metricsData = SiteCore.get('key_information');
-        if (!personal) return '';
-
-        const summary = personal.profile_summary || {};
-        const metrics = metricsData?.metrics || [];
-        const midpoint = Math.ceil(metrics.length / 2);
-
-        const renderMetricColumn = items => items.map(metric => `
-            <div>
-                <i class="${this.escape_attribute(metric.icon_class || 'bi bi-dot')} me-2"></i>
-                <strong>${this.escape_html(metric.value)} ${this.escape_html(metric.label || metric.strong_text || '')}</strong>
-                ${this.escape_html(metric.description || '')}
-            </div>
-        `).join('');
-
-        return `
-            <section class="mb-4">
-                <h5 class="cv-section-title">${this.escape_html(summary.title || 'Profile Summary')}</h5>
-                <p class="small text-justify mb-2">${this.escape_html(summary.intro_paragraph_short || '')}</p>
-
-                <section class="mb-0">
-                    <h5 class="cv-section-title">${this.escape_html(metricsData?.section_info?.title || 'Key Information')}</h5>
-                    <div class="row small mb-2">
-                        <div class="col-6">${renderMetricColumn(metrics.slice(0, midpoint))}</div>
-                        <div class="col-6">${renderMetricColumn(metrics.slice(midpoint))}</div>
-                    </div>
-                </section>
-            </section>
-        `;
-    },
-
-    build_academic_information() {
-        const data = SiteCore.get('academic_information');
-        const degrees = data?.degrees || [];
-        if (!data || degrees.length === 0) return '';
-
-        const items = degrees.map((degree, index) => {
-            const collaboration = (degree.collaboration || []).map(item => `
-                <div class="mt-1">
-                    <strong class="text-muted">${this.escape_html(item.collaboration_type || 'Collaboration')}:</strong>
-                    ${this.escape_html(item.institution_name || '')}${item.institution_location ? `, ${this.escape_html(item.institution_location)}` : ''}
-                </div>
-            `).join('');
-
-            const thesis = degree.thesis_details?.thesis_title
-                ? `<div class="mt-1"><strong class="text-muted">Thesis:</strong> ${this.escape_html(degree.thesis_details.thesis_title)}</div>`
-                : '';
-
-            return `
-                <div class="${index === degrees.length - 1 ? 'mb-0' : 'mb-3'} small">
-                    <div class="d-flex justify-content-between gap-3">
-                        <h6 class="text-uppercase fw-bold small m-0">
-                            <i class="${this.escape_attribute(degree.icon_class || 'bi bi-mortarboard')} me-2"></i>
-                            ${this.escape_html(degree.degree_level || '')} in ${this.escape_html(degree.degree_major || '')}
-                        </h6>
-                        <span class="text-muted text-end flex-shrink-0">
-                            ${this.escape_html(degree.timeframe_details?.start_date || '')} – ${this.escape_html(degree.timeframe_details?.end_date || '')}
-                        </span>
-                    </div>
-                    <div class="d-flex justify-content-between gap-3 italic">
-                        <span>${this.escape_html(degree.institution_name || '')} – <span class="text-muted">${this.escape_html(degree.institution_location || '')}</span></span>
-                        <span class="text-muted text-end">${this.escape_html(degree.timeframe_details?.award_date || '')}</span>
-                    </div>
-                    ${collaboration}
-                    <div class="mt-1"><strong class="text-muted">Specialisation:</strong> ${this.escape_html(degree.specialisation || '')}</div>
-                    ${thesis}
-                </div>
-            `;
-        }).join('');
-
-        return `
-            <section class="mb-4">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Academic Information')}</h5>
-                ${items}
-            </section>
-        `;
-    },
-
-    build_professional_experiences(limit = 6) {
-        const data = SiteCore.get('professional_experiences');
-        if (!data?.experiences) return '';
-
-        const flattened = [];
-        data.experiences.forEach(category => {
-            (category.organisation || []).forEach(organisation => {
-                (organisation.roles || []).forEach(role => {
-                    flattened.push({ category: category.category, organisation, role });
-                });
-            });
+        // Avoid duplicate IDs if any are added inside the one-page template.
+        secondPage.querySelectorAll('[id]').forEach(element => {
+            element.removeAttribute('id');
         });
 
-        const selected = flattened.slice(0, limit);
-        const items = selected.map((entry, index) => {
-            const timeframe = entry.role.timeframe_details || {};
-            const duration = typeof SiteUtil?.calculateDuration === 'function'
-                ? SiteUtil.calculateDuration(timeframe.start_date, timeframe.end_date)
-                : '';
+        this.render_continuation_header(secondPage);
+        this.render_continuation_metrics(secondPage);
+        this.render_continuation_sections(secondPage);
 
-            return `
-                <div class="${index === selected.length - 1 ? 'mb-0' : 'mb-2'} small">
-                    <div class="d-flex justify-content-between gap-3">
-                        <span class="fw-bold text-dark text-uppercase">
-                            <i class="bi bi-briefcase me-2"></i>${this.escape_html(entry.role.title || '')}
-                        </span>
-                        <span class="text-muted text-end flex-shrink-0">
-                            ${this.escape_html(timeframe.start_date || '')} – ${this.escape_html(timeframe.end_date || '')}${duration ? ` (${this.escape_html(duration)})` : ''}
-                        </span>
-                    </div>
-                    <div class="italic text-muted">
-                        ${this.escape_html(entry.organisation.organization || '')} — ${this.escape_html(entry.organisation.location || '')}
-                    </div>
-                    <div class="mt-1 text-justify">
-                        <strong class="text-muted">About Job:</strong> ${this.escape_html(this.shorten(entry.role.about_job || '', 210))}
-                    </div>
-                </div>
-            `;
-        }).join('');
+        container.appendChild(secondPage);
+    },
 
-        return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Professional Experiences')}</h5>
-                ${items}
-            </section>
+    render_continuation_header(page) {
+        const personal = SiteCore.get('personal_information');
+        const header = page.querySelector('.header-section');
+
+        if (!personal || !header) return;
+
+        const name = personal.name || '';
+        const slogans = personal.hero?.main_keywards?.hero_slogan || [];
+        const subtitle = slogans.map(item => item.text).filter(Boolean).join(' | ');
+
+        // Use the existing recent_works text exactly as a JSON source, with
+        // character limiting only to keep the existing CV layout within A4.
+        const continuationText =
+            personal.profile_summary?.recent_works?.text ||
+            personal.profile_summary?.research_area?.text ||
+            personal.profile_summary?.intro_paragraph_short ||
+            '';
+
+        header.innerHTML = `
+            <h1 class="one-page-name">${this.escape_html(name)}</h1>
+            <p class="one-page-subtitle text-center">${this.escape_html(subtitle)}</p>
+            <p class="cv-one-page-body text-justify mt-2">
+                ${this.truncate(continuationText, 520)}
+            </p>
         `;
     },
 
-    build_skills_tools() {
-        const data = SiteCore.get('skills_tools');
-        const skills = data?.skills || [];
-        if (!data || skills.length === 0) return '';
+    render_continuation_metrics(page) {
+        const grid = page.querySelector('.cv-info-grid');
+        if (!grid) return;
 
-        const midpoint = Math.ceil(skills.length / 2);
-        const renderColumn = items => items.map(skill => `
-            <div class="mb-2 small">
-                <i class="${this.escape_attribute(skill.icon_class || 'bi bi-tools')} me-2"></i>
-                <strong>${this.escape_html(skill.category || '')}:</strong>
-                <span class="text-dark">${this.escape_html(this.shorten(skill.short_description || '', 180))}</span>
+        const projects = SiteCore.get('projects')?.projects || [];
+        const publications = SiteCore.get('publications')?.publications || {};
+        const awards = SiteCore.get('honors_awards')?.honorsawards || [];
+        const certificates = SiteCore.get('courses_trainings_certificates')?.coursestrainingscertificates || [];
+        const memberships = SiteCore.get('organisational_memberships')?.memberships || [];
+        const sessions = SiteCore.get('sessions_events')?.sessionsevents || [];
+        const portfolios = SiteCore.get('portfolios')?.portfolios || [];
+        const volunteering = SiteCore.get('volunteering_services')?.volunteerings || [];
+
+        const publicationCount = Object.values(publications).reduce((total, category) => {
+            return total + (category?.items?.length || 0);
+        }, 0);
+
+        const metrics = [
+            [projects.length, 'Projects'],
+            [publicationCount, 'Publications'],
+            [awards.length, 'Awards'],
+            [certificates.length, 'Certificates'],
+            [memberships.length, 'Memberships'],
+            [sessions.length, 'Sessions'],
+            [portfolios.length, 'Portfolios'],
+            [volunteering.length, 'Services']
+        ];
+
+        grid.innerHTML = metrics.map(([value, label]) => `
+            <div class="col-3">
+                <div class="cv-info-card">
+                    <strong>${this.escape_html(value)}</strong><br>${this.escape_html(label)}
+                </div>
             </div>
         `).join('');
-
-        return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Skills and Tools')}</h5>
-                <div class="row small">
-                    <div class="col-6">${renderColumn(skills.slice(0, midpoint))}</div>
-                    <div class="col-6">${renderColumn(skills.slice(midpoint))}</div>
-                </div>
-            </section>
-        `;
     },
 
-    build_projects(limit = 4) {
+    render_continuation_sections(page) {
+        const mainBody = page.querySelector('.cv-main-body');
+        if (!mainBody) return;
+
+        const header = mainBody.querySelector('.header-section');
+        const metrics = mainBody.querySelector('.cv-info-grid');
+
+        // Keep only the existing header and information-grid components from
+        // the cloned one-page template. All following sections are populated
+        // below from JSON using the same one-page classes.
+        Array.from(mainBody.children).forEach(child => {
+            if (child !== header && child !== metrics) {
+                child.remove();
+            }
+        });
+
+        const sections = [
+            this.build_projects_section(),
+            this.build_publications_section(),
+            this.build_remaining_awards_section(),
+            this.build_additional_certificates_section(),
+            this.build_sessions_section()
+        ].filter(Boolean).join('');
+
+        mainBody.insertAdjacentHTML('beforeend', sections);
+    },
+
+    build_projects_section(limit = 5) {
         const data = SiteCore.get('projects');
         const projects = data?.projects || [];
         if (!data || projects.length === 0) return '';
 
-        const selected = projects.slice(0, limit);
-        const items = selected.map((project, index) => `
-            <div class="${index === selected.length - 1 ? 'mb-0' : 'mb-2'} small">
-                <div class="d-flex justify-content-between gap-3">
-                    <span class="fw-bold text-dark text-uppercase">
-                        <i class="${this.escape_attribute(project.icon_class || 'bi bi-lightbulb')} me-2"></i>${this.escape_html(project.title || '')}
-                    </span>
-                    <span class="text-muted text-end flex-shrink-0">
-                        ${this.escape_html(project.timeframe_details?.start_date || '')} – ${this.escape_html(project.timeframe_details?.end_date || '')}
-                    </span>
+        const items = projects.slice(0, limit).map(project => {
+            const timeframe = this.format_timeframe(project.timeframe_details);
+            const context = [project.role, project.basic_details, project.status]
+                .filter(Boolean)
+                .join(' | ');
+
+            return `
+                <div class="mb-2 cv-item-compact">
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span><i class="${this.escape_html(project.icon_class || 'bi bi-lightbulb')} me-1"></i>${this.escape_html(project.title)}</span>
+                        <span class="small-date">${this.escape_html(timeframe)}</span>
+                    </div>
+                    <div class="italic">${this.escape_html(context)}</div>
+                    <div class="cv-item-detail">${this.truncate(project.short_description, 190)}</div>
                 </div>
-                <div class="italic text-muted">${this.escape_html(project.role || '')}${project.status ? ` | ${this.escape_html(project.status)}` : ''}</div>
-                <div class="mt-1 text-justify">${this.escape_html(this.shorten(project.short_description || '', 235))}</div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Projects')}</h5>
-                ${items}
-            </section>
+            <h6 class="main-section-title mt-0">
+                <i class="${this.escape_html(data.section_info?.icon_class || 'bi bi-lightbulb')} me-2"></i>${this.escape_html(data.section_info?.title || 'Projects')}
+            </h6>
+            ${items}
         `;
     },
 
-    build_publications(limits = {}) {
+    build_publications_section() {
         const data = SiteCore.get('publications');
-        const categories = data?.publications || {};
-        if (!data) return '';
+        const publications = data?.publications;
+        if (!data || !publications) return '';
 
-        const selected = [];
-        Object.entries(categories).forEach(([key, category]) => {
-            const limit = limits[key] ?? 0;
-            (category.items || []).slice(0, limit).forEach(item => {
-                selected.push({ item, category });
-            });
+        const limits = {
+            journals: 3,
+            conferences: 2,
+            posters: 1
+        };
+
+        const selected = Object.entries(publications).flatMap(([key, category]) => {
+            const limit = limits[key] ?? 1;
+            return (category?.items || []).slice(0, limit).map(item => ({
+                item,
+                category: category.sub_type || category.type || key
+            }));
         });
 
         if (selected.length === 0) return '';
 
-        const items = selected.map(({ item, category }, index) => {
-            const year = this.extract_year(item.citation_text || '');
-            const citation = this.shorten(this.strip_html(item.citation_text || ''), 250);
-
-            return `
-                <div class="${index === selected.length - 1 ? 'mb-0' : 'mb-2'} small">
-                    <div class="d-flex justify-content-between gap-3 align-items-baseline">
-                        <span class="fw-bold text-muted">
-                            <i class="${this.escape_attribute(item.icon_class || 'bi bi-file-earmark-text')} me-2"></i>${this.escape_html(item.title || '')}
-                        </span>
-                        <span class="text-muted text-end flex-shrink-0">
-                            ${this.escape_html(year)}${year ? ' | ' : ''}<span class="italic">${this.escape_html(category.type || category.sub_type || '')}</span>
-                        </span>
-                    </div>
-                    <div class="mt-1 text-justify">${this.escape_html(citation)}</div>
+        const items = selected.map(({ item, category }) => `
+            <div class="mb-2 cv-item-compact">
+                <div class="fw-bold">
+                    <i class="${this.escape_html(item.icon_class || 'bi bi-file-earmark')} me-1"></i>${this.escape_html(item.title)}
                 </div>
-            `;
-        }).join('');
+                <div class="italic">${this.escape_html(category)}</div>
+                <div class="cv-item-detail">${this.truncate(item.citation_text, 165)}</div>
+            </div>
+        `).join('');
 
         return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Publications')}</h5>
-                ${items}
-            </section>
+            <h6 class="main-section-title mt-0">
+                <i class="${this.escape_html(data.section_info?.icon_class || 'bi bi-file-richtext')} me-2"></i>${this.escape_html(data.section_info?.title || 'Publications')}
+            </h6>
+            ${items}
         `;
     },
 
-    build_honors_awards(limit = 6) {
+    build_remaining_awards_section(startIndex = 7, limit = 5) {
         const data = SiteCore.get('honors_awards');
         const awards = data?.honorsawards || [];
-        if (!data || awards.length === 0) return '';
+        const selected = awards.slice(startIndex, startIndex + limit);
+        if (!data || selected.length === 0) return '';
 
-        const selected = awards.slice(0, limit);
-        const items = selected.map((award, index) => `
-            <div class="${index === selected.length - 1 ? 'mb-0' : 'mb-2'} small">
-                <div class="d-flex justify-content-between gap-2">
-                    <span class="fw-bold text-dark">
-                        <i class="${this.escape_attribute(award.icon_class || 'bi bi-award')} me-1"></i>${this.escape_html(award.title || '')}
+        const items = selected.map(award => {
+            const organisation =
+                award.associated_organization?.name ||
+                award.issuer_organization?.name ||
+                '';
+
+            return `
+                <div class="d-flex justify-content-between mb-1">
+                    <span>
+                        <i class="${this.escape_html(award.icon_class || 'bi bi-award')} me-1"></i>
+                        <strong>${this.escape_html(award.title)}</strong>${organisation ? ` – ${this.escape_html(organisation)}` : ''}
                     </span>
-                    <span class="text-muted text-end flex-shrink-0">${this.escape_html(award.date || '')}</span>
+                    <span class="small-date">${this.escape_html(this.extract_year(award.date))}</span>
                 </div>
-                <div class="italic text-muted">${this.escape_html(award.issuer_organization?.name || '')}</div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
 
         return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Honors and Awards')}</h5>
-                ${items}
-            </section>
+            <h6 class="main-section-title mt-0">
+                <i class="${this.escape_html(data.section_info?.icon_class || 'bi bi-award')} me-2"></i>${this.escape_html(data.section_info?.title || 'Honors and Awards')}
+            </h6>
+            <div class="ms-1" style="font-size: 8.5px; line-height: 1.2;">${items}</div>
         `;
     },
 
-    build_certificates(limit = 6) {
+    build_additional_certificates_section(startIndex = 5, limit = 7) {
         const data = SiteCore.get('courses_trainings_certificates');
         const certificates = data?.coursestrainingscertificates || [];
-        if (!data || certificates.length === 0) return '';
+        const selected = certificates.slice(startIndex, startIndex + limit);
+        if (!data || selected.length === 0) return '';
 
-        const selected = certificates.slice(0, limit);
-        const items = selected.map((certificate, index) => {
+        const items = selected.map(certificate => {
             const details = certificate.details || {};
-            const issuer = [details.offering_organization, details.funding_organization]
-                .filter(Boolean)
-                .join(' / ');
+            const issuer = [
+                details.offering_organization,
+                details.funding_organization
+            ].filter(Boolean).join('/');
 
             return `
-                <div class="${index === selected.length - 1 ? 'mb-0' : 'mb-2'} small">
-                    <div class="d-flex justify-content-between gap-2">
-                        <span class="fw-bold text-dark">
-                            <i class="${this.escape_attribute(certificate.icon_class || 'bi bi-journal-bookmark-fill')} me-1"></i>${this.escape_html(certificate.title || '')}
-                        </span>
-                        <span class="text-muted text-end flex-shrink-0">${this.escape_html(details.date || '')}</span>
-                    </div>
-                    <div class="italic text-muted">${this.escape_html(issuer)}</div>
+                <div class="mb-1">
+                    ${issuer ? `<strong>${this.escape_html(issuer)}:</strong> ` : ''}${this.escape_html(certificate.title)}
                 </div>
             `;
         }).join('');
 
         return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Courses, Trainings and Certificates')}</h5>
-                ${items}
-            </section>
+            <h6 class="main-section-title mt-0">
+                <i class="${this.escape_html(data.section_info?.icon_class || 'bi bi-patch-check')} me-2"></i>${this.escape_html(data.section_info?.title || 'Courses, Trainings and Certificates')}
+            </h6>
+            <div class="cv-one-page-body">${items}</div>
         `;
     },
 
-    build_memberships(limit = 4) {
-        const data = SiteCore.get('organisational_memberships');
-        const memberships = data?.memberships || [];
-        if (!data || memberships.length === 0) return '';
-
-        const selected = memberships.slice(0, limit);
-        const items = selected.map((membership, index) => `
-            <div class="${index === selected.length - 1 ? 'mb-0' : 'mb-2'} small">
-                <div class="d-flex justify-content-between gap-2">
-                    <span class="fw-bold text-dark">
-                        <i class="${this.escape_attribute(membership.icon_class || 'bi bi-people')} me-1"></i>${this.escape_html(membership.title || '')}
-                    </span>
-                    <span class="text-muted text-end flex-shrink-0">${this.escape_html(membership.timeframe_details?.start_date || '')}</span>
-                </div>
-                <div class="italic text-muted">${this.escape_html(membership.membership_organization?.[0]?.name || '')}</div>
-            </div>
-        `).join('');
-
-        return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Organisational Memberships')}</h5>
-                ${items}
-            </section>
-        `;
-    },
-
-    build_sessions(limit = 2) {
+    build_sessions_section(limit = 2) {
         const data = SiteCore.get('sessions_events');
         const sessions = data?.sessionsevents || [];
-        if (!data || sessions.length === 0) return '';
+        const selected = sessions.slice(0, limit);
+        if (!data || selected.length === 0) return '';
 
-        const items = sessions.slice(0, limit).map((item, index, arr) => `
-            <div class="${index === arr.length - 1 ? 'mb-0' : 'mb-2'} small">
-                <div class="d-flex justify-content-between gap-2">
-                    <span class="fw-bold text-dark">
-                        <i class="${this.escape_attribute(item.icon_class || 'bi bi-mic')} me-1"></i>${this.escape_html(item.title || '')}
-                    </span>
-                    <span class="text-muted text-end flex-shrink-0">${this.escape_html(item.date || '')}</span>
+        const items = selected.map(session => `
+            <div class="mb-2 cv-item-compact">
+                <div class="d-flex justify-content-between fw-bold">
+                    <span><i class="${this.escape_html(session.icon_class || 'bi bi-calendar-event')} me-1"></i>${this.escape_html(session.title)}</span>
+                    <span class="small-date">${this.escape_html(session.date || '')}</span>
                 </div>
-                <div class="italic text-muted">${this.escape_html(item.organization || '')}${item.type ? ` | ${this.escape_html(item.type)}` : ''}</div>
+                <div class="italic">${this.escape_html([session.organization, session.location].filter(Boolean).join(', '))}</div>
+                <div class="cv-item-detail">${this.truncate(session.description, 180)}</div>
             </div>
         `).join('');
 
         return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Sessions and Events')}</h5>
-                ${items}
-            </section>
+            <h6 class="main-section-title mt-0">
+                <i class="${this.escape_html(data.section_info?.icon_class || 'bi bi-calendar-event')} me-2"></i>${this.escape_html(data.section_info?.title || 'Sessions and Events')}
+            </h6>
+            ${items}
         `;
     },
 
-    build_languages() {
-        const data = SiteCore.get('languages');
-        const languages = data?.languages || [];
-        if (!data || languages.length === 0) return '';
-
-        const items = languages.map((item, index) => `
-            <div class="${index === languages.length - 1 ? 'mb-0' : 'mb-1'} small d-flex justify-content-between gap-2">
-                <span class="fw-bold text-dark"><i class="${this.escape_attribute(item.icon_class || 'bi bi-translate')} me-1"></i>${this.escape_html(item.language || '')}</span>
-                <span class="text-muted text-end">${this.escape_html(item.status || item.proficiency_level || '')}</span>
-            </div>
-        `).join('');
-
-        return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Languages')}</h5>
-                ${items}
-            </section>
-        `;
+    format_timeframe(timeframe = {}) {
+        return [timeframe.start_date, timeframe.end_date]
+            .filter(Boolean)
+            .join(' – ');
     },
 
-    build_portfolios(limit = 3) {
-        const data = SiteCore.get('portfolios');
-        const portfolios = data?.portfolios || [];
-        if (!data || portfolios.length === 0) return '';
-
-        const items = portfolios.slice(0, limit).map((item, index, arr) => {
-            const handle = (item.portfolio_url || '').replace('https://github.com/', '@');
-            return `
-                <div class="${index === arr.length - 1 ? 'mb-0' : 'mb-2'} small">
-                    <div class="fw-bold text-dark"><i class="${this.escape_attribute(item.icon_class || 'bi bi-github')} me-1"></i>${this.escape_html(item.title || '')}</div>
-                    <div class="italic text-muted">${this.escape_html(handle)}</div>
-                </div>
-            `;
-        }).join('');
-
-        return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Portfolios')}</h5>
-                ${items}
-            </section>
-        `;
+    extract_year(value = '') {
+        return String(value).match(/\b(?:19|20)\d{2}\b/)?.[0] || '';
     },
 
-    build_volunteering(limit = 2) {
-        const data = SiteCore.get('volunteering_services');
-        const volunteering = data?.volunteerings || [];
-        if (!data || volunteering.length === 0) return '';
-
-        const items = volunteering.slice(0, limit).map((item, index, arr) => `
-            <div class="${index === arr.length - 1 ? 'mb-0' : 'mb-2'} small">
-                <div class="d-flex justify-content-between gap-2">
-                    <span class="fw-bold text-dark"><i class="${this.escape_attribute(item.icon_class || 'bi bi-person-heart')} me-1"></i>${this.escape_html(item.title || '')}</span>
-                    <span class="text-muted text-end flex-shrink-0">${this.escape_html(item.timeframe_details?.start_date || '')}</span>
-                </div>
-                <div class="italic text-muted">${this.escape_html(item.organization || '')}</div>
-            </div>
-        `).join('');
-
-        return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Volunteering Services')}</h5>
-                ${items}
-            </section>
-        `;
+    strip_html(value = '') {
+        const holder = document.createElement('div');
+        holder.innerHTML = String(value);
+        return (holder.textContent || holder.innerText || '')
+            .replace(/\s+/g, ' ')
+            .trim();
     },
 
-    build_contact_details() {
-        const data = SiteCore.get('contact_details');
-        const contacts = data?.contacts;
-        if (!data || !contacts) return '';
+    truncate(value = '', limit = 180) {
+        const clean = this.strip_html(value);
+        if (clean.length <= limit) {
+            return this.escape_html(clean);
+        }
 
-        const safeLink = item => this.escape_attribute(item?.link || '#');
-        const safeText = item => this.escape_html(item?.text || '');
-
-        return `
-            <section class="mb-3">
-                <h5 class="cv-section-title">${this.escape_html(data.section_info?.title || 'Contact Details')}</h5>
-                <div class="row mb-2">
-                    <div class="col-6">
-                        <div class="small"><strong>Location:</strong> <a href="${safeLink(contacts.location)}" target="_blank" rel="noopener noreferrer">${safeText(contacts.location)}</a></div>
-                        <div class="small"><strong>Email:</strong> <a href="${safeLink(contacts.email)}" target="_blank" rel="noopener noreferrer">${safeText(contacts.email)}</a></div>
-                        <div class="small"><strong>LinkedIn:</strong> <a href="${safeLink(contacts.linkedin)}" target="_blank" rel="noopener noreferrer">${safeText(contacts.linkedin)}</a></div>
-                    </div>
-                    <div class="col-6">
-                        <div class="small"><strong>Scholar:</strong> <a href="${safeLink(contacts.google_scholar_cv)}" target="_blank" rel="noopener noreferrer">${safeText(contacts.google_scholar_cv)}</a></div>
-                        <div class="small"><strong>MS Teams:</strong> <a href="${safeLink(contacts.teams)}" target="_blank" rel="noopener noreferrer">${safeText(contacts.teams)}</a></div>
-                        <div class="small"><strong>Website:</strong> <a href="${safeLink(contacts.website)}" target="_blank" rel="noopener noreferrer">${safeText(contacts.website).replace('https://', '')}</a></div>
-                    </div>
-                </div>
-            </section>
-        `;
-    },
-
-    build_standard_footer() {
-        const personal = SiteCore.get('personal_information');
-        if (!personal) return '';
-
-        const currentDate = new Date().toLocaleDateString('en-GB', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
-
-        return `
-            <hr class="my-2">
-            <section class="text-center text-muted small pb-2">
-                <p class="mb-0 small italic">I hereby certify that the information provided is true and correct to the best of my knowledge.</p>
-                <div class="cv-footer-container">
-                    <img src="assets/img/Emran_Ali_Logo_Fav.png" class="standard-footer-logo" alt="Branding Logo">
-                </div>
-                <div class="d-flex justify-content-between mt-2 text-dark text-uppercase">
-                    <span class="small">Generated: <span>${this.escape_html(currentDate)}</span></span>
-                    <span class="fw-bold">${this.escape_html(personal.name || '')}</span>
-                </div>
-            </section>
-            <footer class="text-center text-muted small pb-2"><br></footer>
-        `;
-    },
-
-    build_page_number(pageNumber) {
-        return `<div class="two-page-page-number text-center text-muted small">Page ${pageNumber} of 2</div>`;
-    },
-
-    shorten(value, maxLength) {
-        const text = String(value || '').replace(/\s+/g, ' ').trim();
-        if (text.length <= maxLength) return text;
-        const shortened = text.slice(0, Math.max(0, maxLength - 1));
+        const shortened = clean.slice(0, limit + 1);
         const lastSpace = shortened.lastIndexOf(' ');
-        return `${shortened.slice(0, lastSpace > 0 ? lastSpace : shortened.length)}…`;
+        const result = shortened.slice(0, lastSpace > 0 ? lastSpace : limit);
+        return `${this.escape_html(result)}…`;
     },
 
-    strip_html(value) {
-        const template = document.createElement('template');
-        template.innerHTML = String(value || '');
-        return (template.content.textContent || '').replace(/\s+/g, ' ').trim();
-    },
-
-    extract_year(value) {
-        const match = String(value || '').match(/\b(?:19|20)\d{2}\b/);
-        return match ? match[0] : '';
-    },
-
-    escape_html(value) {
-        return String(value ?? '')
+    escape_html(value = '') {
+        return String(value)
             .replace(/&/g, '&amp;')
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
-    },
-
-    escape_attribute(value) {
-        return this.escape_html(value);
     }
 };
 

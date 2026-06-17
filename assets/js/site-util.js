@@ -205,6 +205,8 @@ const SiteUtil = {
  * File: site-util.js
  */
 window.render_404_page = (missingItemName = "Page") => {
+    window.dynamic404Active = true;
+
     const mainElement = document.querySelector('main');
     if (!mainElement) return;
 
@@ -239,5 +241,11 @@ window.render_404_page = (missingItemName = "Page") => {
     if (typeof AOS !== 'undefined') AOS.init();
     window.hide_preloader();
 };
+
+window.addEventListener('popstate', () => {
+    if (window.dynamic404Active) {
+        window.location.reload();
+    }
+});
 
 

@@ -2083,9 +2083,138 @@ const SiteSection = {
     //     return true;
     // },
 
+    // navigate_to_hash(targetId = null) {
+    //     window.sectionDetailsNavigationInProgress = true;
+    //
+    //     const fullTargetId = this.normalize_route_value(
+    //         targetId ||
+    //         this._activeRoute?.targetId ||
+    //         window.location.hash
+    //     );
+    //
+    //     if (!fullTargetId) {
+    //         window.sectionDetailsNavigationInProgress = false;
+    //         return false;
+    //     }
+    //
+    //     const sectionId =
+    //         this.get_section_from_target(fullTargetId);
+    //
+    //     if (!sectionId) {
+    //         window.sectionDetailsNavigationInProgress = false;
+    //         return false;
+    //     }
+    //
+    //     let targetElement =
+    //         document.getElementById(fullTargetId);
+    //
+    //     if (
+    //         !targetElement &&
+    //         fullTargetId.startsWith(`${sectionId}-`)
+    //     ) {
+    //         const rawItemId =
+    //             fullTargetId.slice(sectionId.length + 1);
+    //
+    //         targetElement =
+    //             document.getElementById(rawItemId);
+    //     }
+    //
+    //     if (!targetElement) {
+    //         targetElement =
+    //             document.getElementById(sectionId);
+    //     }
+    //
+    //     if (!targetElement) {
+    //         window.sectionDetailsNavigationInProgress = false;
+    //         return false;
+    //     }
+    //
+    //     const stickyBar =
+    //         document.getElementById('details-sticky-bar');
+    //
+    //     const isMainSection =
+    //         fullTargetId === sectionId;
+    //
+    //     const extraOffset =
+    //         isMainSection ? 50 : 100;
+    //
+    //     const stickyOffset = Math.ceil(
+    //         stickyBar?.getBoundingClientRect().height || 0
+    //     ) + extraOffset;
+    //
+    //     targetElement.style.scrollMarginTop =
+    //         `${stickyOffset}px`;
+    //
+    //     targetElement.scrollIntoView({
+    //         behavior: 'smooth',
+    //         block: 'start'
+    //     });
+    //
+    //     const unlockNavigation = () => {
+    //         window.sectionDetailsNavigationInProgress =
+    //             false;
+    //     };
+    //
+    //     if ('onscrollend' in window) {
+    //         window.addEventListener(
+    //             'scrollend',
+    //             unlockNavigation,
+    //             { once: true }
+    //         );
+    //     } else {
+    //         window.setTimeout(
+    //             unlockNavigation,
+    //             1000
+    //         );
+    //     }
+    //
+    //     return true;
+    // },
+
+
+
+
     navigate_to_hash(targetId = null) {
+        /*
+         * Prevent scripts.js scroll-spy from changing the URL while this
+         * programmed navigation is running.
+         */
         window.sectionDetailsNavigationInProgress = true;
 
+        let unlockTimer = null;
+
+        /**
+         * Releases the scroll-spy navigation lock.
+         */
+        const unlockNavigation = () => {
+            window.sectionDetailsNavigationInProgress = false;
+
+            if (unlockTimer !== null) {
+                window.clearTimeout(unlockTimer);
+                unlockTimer = null;
+            }
+        };
+
+        /**
+         * Handles an invalid section or subsection target.
+         */
+        const handleMissingTarget = (targetType, message) => {
+            console.warn(message);
+            unlockNavigation();
+
+            if (typeof window.render_404_page === 'function') {
+                window.render_404_page(targetType);
+            }
+
+            return false;
+        };
+
+        /*
+         * Resolve the requested target from:
+         * 1. The explicitly supplied target
+         * 2. The active route
+         * 3. The current URL hash
+         */
         const fullTargetId = this.normalize_route_value(
             targetId ||
             this._activeRoute?.targetId ||
@@ -2093,83 +2222,199 @@ const SiteSection = {
         );
 
         if (!fullTargetId) {
-            window.sectionDetailsNavigationInProgress = false;
+            console.warn('No section-details navigation target was provided.');
+            unlockNavigation();
             return false;
         }
 
-        const sectionId =
-            this.get_section_from_target(fullTargetId);
+        /*
+         * Determine the parent section from the complete target.
+         *
+         * Examples:
+         * academic_information
+         * academic_information-phd_cu_csm
+         */
+        const sectionId = this.get_section_from_target(fullTargetId);
 
         if (!sectionId) {
-            window.sectionDetailsNavigationInProgress = false;
-            return false;
+            return handleMissingTarget(
+                'Section',
+                `Unknown section target: ${fullTargetId}`
+            );
         }
 
-        let targetElement =
-            document.getElementById(fullTargetId);
+        /*
+         * A subsection target contains the parent section followed by
+         * a hyphen and the item identifier.
+         */
+        const isSubsection =
+            fullTargetId !== sectionId &&
+            fullTargetId.startsWith(`${sectionId}-`);
 
-        if (
-            !targetElement &&
-            fullTargetId.startsWith(`${sectionId}-`)
-        ) {
-            const rawItemId =
-                fullTargetId.slice(sectionId.length + 1);
+        const isMainSection = !isSubsection;
 
-            targetElement =
-                document.getElementById(rawItemId);
+        /*
+         * First try the canonical combined element ID.
+         *
+         * Example:
+         * academic_information-phd_cu_csm
+         */
+        let targetElement = document.getElementById(fullTargetId);
+
+        /*
+         * Support older subsection elements that may still use only the
+         * raw item ID.
+         *
+         * Example:
+         * phd_cu_csm
+         */
+        if (!targetElement && isSubsection) {
+            const rawItemId = fullTargetId.slice(
+                sectionId.length + 1
+            );
+
+            targetElement = document.getElementById(rawItemId);
+
+            /*
+             * Also support elements that store their item ID in a
+             * data-navigation-item-id attribute.
+             */
+            if (!targetElement && rawItemId) {
+                targetElement = Array.from(
+                    document.querySelectorAll(
+                        '[data-navigation-item-id]'
+                    )
+                ).find(element => {
+                    return element.dataset.navigationItemId === rawItemId;
+                }) || null;
+            }
         }
 
+        /*
+         * A main-section request may fall back to the section element.
+         * An explicitly requested subsection must not silently fall back
+         * to its parent section.
+         */
+        if (!targetElement && isMainSection) {
+            targetElement = document.getElementById(sectionId);
+        }
+
+        /*
+         * An explicit subsection was requested, but no matching record
+         * was rendered.
+         */
+        if (!targetElement && isSubsection) {
+            return handleMissingTarget(
+                'Subsection',
+                `Subsection target not found: ${fullTargetId}`
+            );
+        }
+
+        /*
+         * The requested main section was also not found.
+         */
         if (!targetElement) {
-            targetElement =
-                document.getElementById(sectionId);
+            return handleMissingTarget(
+                'Section',
+                `Section target not found: ${sectionId}`
+            );
         }
 
-        if (!targetElement) {
-            window.sectionDetailsNavigationInProgress = false;
-            return false;
-        }
-
+        /*
+         * Calculate the sticky-bar offset.
+         *
+         * Main section:
+         * sticky-bar height + 50px
+         *
+         * Subsection:
+         * sticky-bar height + 100px
+         */
         const stickyBar =
-            document.getElementById('details-sticky-bar');
+            document.getElementById('details-sticky-bar') ||
+            document.querySelector('.cv-sticky-bar');
 
-        const isMainSection =
-            fullTargetId === sectionId;
-
-        const extraOffset =
-            isMainSection ? 50 : 100;
-
-        const stickyOffset = Math.ceil(
+        const stickyBarHeight = Math.ceil(
             stickyBar?.getBoundingClientRect().height || 0
-        ) + extraOffset;
+        );
 
+        const extraOffset = isMainSection ? 0 : 100;
+        const stickyOffset = stickyBarHeight + extraOffset;
+
+        /*
+         * scrollIntoView respects scroll-margin-top, preventing the
+         * sticky bar from covering the target.
+         */
         targetElement.style.scrollMarginTop =
             `${stickyOffset}px`;
 
+        /*
+         * Keep the URL on the canonical section or subsection target
+         * without triggering another hashchange event.
+         */
+        const canonicalHash = `#${fullTargetId}`;
+
+        if (window.location.hash !== canonicalHash) {
+            window.history.replaceState(
+                window.history.state,
+                '',
+                `${window.location.pathname}` +
+                `${window.location.search}` +
+                canonicalHash
+            );
+        }
+
+        /*
+         * Respect the user's reduced-motion browser preference.
+         */
+        const prefersReducedMotion =
+            window.matchMedia?.(
+                '(prefers-reduced-motion: reduce)'
+            ).matches;
+
         targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
+            behavior: prefersReducedMotion ? 'auto' : 'smooth',
+            block: 'start',
+            inline: 'nearest'
         });
 
-        const unlockNavigation = () => {
-            window.sectionDetailsNavigationInProgress =
-                false;
-        };
+        /*
+         * Visually highlight subsection cards after navigation.
+         */
+        if (isSubsection) {
+            targetElement.classList.add(
+                'hash-target-highlight'
+            );
 
+            window.setTimeout(() => {
+                targetElement.classList.remove(
+                    'hash-target-highlight'
+                );
+            }, 2000);
+        }
+
+        /*
+         * Release the navigation lock when scrolling finishes.
+         *
+         * The timeout remains as a fallback because scrollend support
+         * differs between browsers and may not fire when little or no
+         * scrolling is required.
+         */
         if ('onscrollend' in window) {
             window.addEventListener(
                 'scrollend',
                 unlockNavigation,
                 { once: true }
             );
-        } else {
-            window.setTimeout(
-                unlockNavigation,
-                1000
-            );
         }
+
+        unlockTimer = window.setTimeout(
+            unlockNavigation,
+            prefersReducedMotion ? 250 : 1200
+        );
 
         return true;
     },
+
 
 
 

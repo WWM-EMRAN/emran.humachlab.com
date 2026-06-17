@@ -2735,6 +2735,95 @@ body.mode-one-page .cv-paper-sheet {
 }
 
 
+/* ==========================================================================\n   TWO-PAGE CV — REUSES THE EXISTING ONE-PAGE CV FORMAT\n   Append this block to the end of assets/css/style.css.\n   ========================================================================== */
+/* ==========================================================================
+   TWO-PAGE CV — EXISTING STANDARD CV FORMAT
+   Uses the existing .cv-paper-sheet, .cv-section-title, Bootstrap grid,
+   standard item and footer styles. These rules only control mode visibility,
+   page separation and two-page printing.
+   ========================================================================== */
+body.mode-two-page #standard-page-section,
+body.mode-two-page #one-page-section {
+    display: none !important;
+}
+
+body.mode-two-page #two-page-section {
+    display: block !important;
+}
+
+body.mode-standard #two-page-section,
+body.mode-one-page #two-page-section {
+    display: none !important;
+}
+
+body.mode-two-page #two-page-cv-container {
+    width: 100%;
+}
+
+body.mode-two-page .two-page-cv-paper + .two-page-cv-paper {
+    margin-top: 32px;
+}
+
+body.mode-two-page .two-page-cv-paper {
+    position: relative;
+}
+
+body.mode-two-page .two-page-page-number {
+    margin-top: 12px;
+}
+
+body.mode-two-page .two-page-supporting-grid .cv-section-title {
+    font-size: 15px;
+}
+
+@media print {
+    body.mode-two-page .main,
+    body.mode-two-page .all_cv_wrapper,
+    body.mode-two-page #two-page-section,
+    body.mode-two-page #two-page-section .cv-bg-wrapper {
+        display: block !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body.mode-two-page #two-page-cv-container {
+        display: block !important;
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body.mode-two-page #two-page-section .two-page-cv-paper {
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: transparent !important;
+        width: 140% !important;
+        max-width: none !important;
+        margin: 0mm -20mm -8mm -26mm !important;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    body.mode-two-page #two-page-section .two-page-cv-paper:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    body.mode-two-page .two-page-cv-paper + .two-page-cv-paper {
+        margin-top: 0 !important;
+    }
+
+    body.mode-two-page .two-page-page-number {
+        display: none !important;
+    }
+}
+
+
+
+
 
 
 

@@ -73,72 +73,199 @@
             }
         }
 
+        // // Click Handler: Dropdowns vs Navigation
+        // navLinks.forEach(link => {
+        //     link.addEventListener('click', function(e) {
+        //         const parentLi = this.parentElement;
+        //         const hasSubmenu = parentLi.classList.contains('dropdown');
+        //
+        //         if (hasSubmenu && (window.innerWidth < 1200 || this.getAttribute('href') === '#')) {
+        //             e.preventDefault();
+        //             e.stopPropagation();
+        //
+        //             document.querySelectorAll('.navmenu .dropdown').forEach(other => {
+        //                 if (other !== parentLi) other.classList.remove('active', 'dropdown-active');
+        //             });
+        //
+        //             parentLi.classList.toggle('active');
+        //             parentLi.classList.toggle('dropdown-active');
+        //         } else {
+        //             const targetId = this.getAttribute('href');
+        //             if (targetId && targetId.startsWith('#')) {
+        //                 const target = document.querySelector(targetId);
+        //                 if (target) {
+        //                     e.preventDefault();
+        //                     // Use the dynamic offset calculated above
+        //                     window.scrollTo({
+        //                         top: target.offsetTop - headerOffset,
+        //                         behavior: "smooth"
+        //                     });
+        //                 }
+        //             }
+        //
+        //             // Change URL hash or section id display option
+        //             // const targetId = this.getAttribute('href');
+        //             if (targetId && targetId.startsWith('#')) {
+        //                 const target = document.querySelector(targetId);
+        //
+        //                 // Check if target exists to prevent errors
+        //                 if (target) {
+        //                     e.preventDefault();
+        //
+        //                     // 1. Logic Fix: Compare the string targetId, not the object target
+        //                     if (targetId === "#hero") {
+        //                         // Removes hash when clicking home/hero
+        //                         history.pushState(null, null, window.location.pathname);
+        //                     } else {
+        //                         // Update URL hash for all other sections
+        //                         history.pushState(null, null, targetId);
+        //                     }
+        //
+        //                     // 2. Execute the scroll
+        //                     window.scrollTo({
+        //                         top: target.offsetTop - headerOffset,
+        //                         behavior: "smooth"
+        //                     });
+        //                 } else {
+        //                     console.warn(`Target section ${targetId} not found on this page.`);
+        //                 }
+        //             }
+        //
+        //             if (body.classList.contains('mobile-nav-active')) {
+        //                 body.classList.remove('mobile-nav-active');
+        //                 const toggleBtn = document.querySelector('.header-toggle');
+        //                 if (toggleBtn) { toggleBtn.classList.add('bi-list'); toggleBtn.classList.remove('bi-x'); }
+        //             }
+        //         }
+        //     });
+        // });
+
+
         // Click Handler: Dropdowns vs Navigation
         navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 const parentLi = this.parentElement;
-                const hasSubmenu = parentLi.classList.contains('dropdown');
+                const hasSubmenu =
+                    parentLi.classList.contains('dropdown');
 
-                if (hasSubmenu && (window.innerWidth < 1200 || this.getAttribute('href') === '#')) {
+                const targetId =
+                    this.getAttribute('href');
+
+                /*
+                 * On mobile/tablet, a dropdown parent opens or closes
+                 * its submenu instead of navigating immediately.
+                 *
+                 * A link containing only "#" also acts as a dropdown
+                 * toggle at every screen size.
+                 */
+                if (
+                    hasSubmenu &&
+                    (
+                        window.innerWidth < 1200 ||
+                        targetId === '#'
+                    )
+                ) {
                     e.preventDefault();
                     e.stopPropagation();
 
-                    document.querySelectorAll('.navmenu .dropdown').forEach(other => {
-                        if (other !== parentLi) other.classList.remove('active', 'dropdown-active');
+                    document.querySelectorAll(
+                        '.navmenu .dropdown'
+                    ).forEach(otherDropdown => {
+                        if (otherDropdown !== parentLi) {
+                            otherDropdown.classList.remove(
+                                'active',
+                                'dropdown-active'
+                            );
+                        }
                     });
 
                     parentLi.classList.toggle('active');
-                    parentLi.classList.toggle('dropdown-active');
-                } else {
-                    const targetId = this.getAttribute('href');
-                    if (targetId && targetId.startsWith('#')) {
-                        const target = document.querySelector(targetId);
-                        if (target) {
-                            e.preventDefault();
-                            // Use the dynamic offset calculated above
-                            window.scrollTo({
-                                top: target.offsetTop - headerOffset,
-                                behavior: "smooth"
-                            });
-                        }
-                    }
+                    parentLi.classList.toggle(
+                        'dropdown-active'
+                    );
 
-                    // Change URL hash or section id display option
-                    // const targetId = this.getAttribute('href');
-                    if (targetId && targetId.startsWith('#')) {
-                        const target = document.querySelector(targetId);
+                    return;
+                }
 
-                        // Check if target exists to prevent errors
-                        if (target) {
-                            e.preventDefault();
+                /*
+                 * Normal same-page section navigation.
+                 * This replaces the two duplicated scrolling blocks.
+                 */
+                if (
+                    targetId &&
+                    targetId.startsWith('#') &&
+                    targetId !== '#'
+                ) {
+                    const target =
+                        document.querySelector(targetId);
 
-                            // 1. Logic Fix: Compare the string targetId, not the object target
-                            if (targetId === "#hero") {
-                                // Removes hash when clicking home/hero
-                                history.pushState(null, null, window.location.pathname);
-                            } else {
-                                // Update URL hash for all other sections
-                                history.pushState(null, null, targetId);
-                            }
+                    if (target) {
+                        e.preventDefault();
 
-                            // 2. Execute the scroll
-                            window.scrollTo({
-                                top: target.offsetTop - headerOffset,
-                                behavior: "smooth"
-                            });
+                        const searchParams =
+                            window.location.search;
+
+                        if (targetId === '#hero') {
+                            history.pushState(
+                                null,
+                                '',
+                                window.location.pathname +
+                                    searchParams
+                            );
                         } else {
-                            console.warn(`Target section ${targetId} not found on this page.`);
+                            history.pushState(
+                                null,
+                                '',
+                                window.location.pathname +
+                                    searchParams +
+                                    targetId
+                            );
                         }
-                    }
 
-                    if (body.classList.contains('mobile-nav-active')) {
-                        body.classList.remove('mobile-nav-active');
-                        const toggleBtn = document.querySelector('.header-toggle');
-                        if (toggleBtn) { toggleBtn.classList.add('bi-list'); toggleBtn.classList.remove('bi-x'); }
+                        window.scrollTo({
+                            top:
+                                target.offsetTop -
+                                headerOffset,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        console.warn(
+                            `Target section ${targetId} ` +
+                            'not found on this page.'
+                        );
+                    }
+                }
+
+                /*
+                 * Close the mobile navigation after navigating.
+                 */
+                if (
+                    body.classList.contains(
+                        'mobile-nav-active'
+                    )
+                ) {
+                    body.classList.remove(
+                        'mobile-nav-active'
+                    );
+
+                    const toggleBtn =
+                        document.querySelector(
+                            '.header-toggle'
+                        );
+
+                    if (toggleBtn) {
+                        toggleBtn.classList.remove(
+                            'bi-x'
+                        );
+
+                        toggleBtn.classList.add(
+                            'bi-list'
+                        );
                     }
                 }
             });
         });
+
 
 
         // const runScrollSpy = () => {
