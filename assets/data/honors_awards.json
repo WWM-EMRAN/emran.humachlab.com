@@ -11,7 +11,7 @@
       "title": "Bertelsmann Next Generation Tech Booster Scholarship",
       "icon_class": "bi bi-award",
       "date": "Jun. 09, 2024",
-      "short_description": "Next Generation Tech Booster Scholarship (Phase 1+2) from Bertelsmann for a Udacity Nanodegree program, valued over $1,500",
+      "short_description": "Next Generation Tech Booster Scholarship (Phase 1+2) from Bertelsmann for a Udacity Nanodegree program worth over US$8,000",
       "issuer_organization": {
         "name": "Bertelsmann",
         "location": "",
@@ -22,7 +22,7 @@
         "location": "",
         "link": "https://www.udacity.com/"
       },
-      "description_full": "This scholarship, offered by Bertelsmann in collaboration with Udacity, aims to support emerging tech professionals. In 2023, I was selected for Phase 1 to pursue the Enterprise Security Nanodegree but was not shortlisted for Phase 2. In 2024, I was again selected, this time for the Foundations of Generative AI Nanodegree. The scholarship covered a program worth over $1,500. Completion of the course included a Certification Assessment (CA) which determined eligibility for Phase 2 and awarded a certificate of completion.",
+      "description_full": "This scholarship, offered by Bertelsmann in collaboration with Udacity, aims to support emerging tech professionals. In 2023, I was selected for Phase 1 to pursue the Enterprise Security Nanodegree but was not shortlisted for Phase 2. In 2024, I was again selected, this time for the Foundations of Generative AI Nanodegree. The scholarship covered a program worth over US$8,000. Completion of the course included a Certification Assessment (CA) which determined eligibility for Phase 2 and awarded a certificate of completion. [Fund worth: 8,000 USD]",
       "image_path": "",
       "award_link": "https://www.udacity.com/blog/2023/09/announcing-the-next-generation-tech-booster-a-new-bertelsmann-scholarship.html"
     },
@@ -42,7 +42,7 @@
         "location": "",
         "link": "https://www.udacity.com/"
       },
-      "description_full": "The AWS AI/ML Scholarship, offered in partnership with Udacity, supports learners interested in applying artificial intelligence and machine learning using AWS technologies. I was awarded both Phase 2 of this scholarship, enabling me to pursue a Nanodegree programs worth the value of over $5,000. In Phase 2 shortlisted the top 500 performers in the programm arranged for Phase 1 scholarship. The Udacity Nanodegree entitled 'AWS Machine Learning Foundation' that helped learners to hone their theoretical and practical knowledge in Amazon's AWS technologies available for ML application development.",
+      "description_full": "The AWS AI/ML Scholarship, offered in partnership with Udacity, supports learners interested in applying artificial intelligence and machine learning using AWS technologies. I was awarded both Phase 2 of this scholarship, enabling me to pursue a Nanodegree programs worth the value of over US$5,000. In Phase 2 shortlisted the top 500 performers in the programm arranged for Phase 1 scholarship. The Udacity Nanodegree entitled 'AWS Machine Learning Foundation' that helped learners to hone their theoretical and practical knowledge in Amazon's AWS technologies available for ML application development. [Fund worth: 5,000 USD]",
       "image_path": "",
       "award_link": "https://www.udacity.com/scholarships/aws-ai-ml-scholars"
     },
@@ -51,7 +51,7 @@
       "title": "AWS AI/ML Scholarship (Phase 1)",
       "icon_class": "bi bi-award",
       "date": "Jun. 05, 2023",
-      "short_description": "AWS AI/ML Scholarships (Phases 1) to pursue an Udacity Nanodegree program valued at over $3,000",
+      "short_description": "AWS AI/ML Scholarships (Phases 1) to pursue an Udacity Nanodegree program valued at over US$3,000",
       "issuer_organization": {
         "name": "Amazon Web Services (AWS)",
         "location": "",
@@ -62,7 +62,7 @@
         "location": "",
         "link": "https://www.udacity.com/"
       },
-      "description_full": "The AWS AI/ML Scholarship, offered in partnership with Udacity, supports learners interested in applying artificial intelligence and machine learning using Python programming. I was awarded Phase 1 of this scholarship, enabling me to pursue a Nanodegree programs worth the value of over $3,000. In Phase 1 I was selected selected the top 2,000 global applicants. The Udacity Nanodegree entitled 'AI Programming with Python' that helped learners to hone their theoretical and practical knowledge in Python programming to make them prepare for AI and ML programming.",
+      "description_full": "The AWS AI/ML Scholarship, offered in partnership with Udacity, supports learners interested in applying artificial intelligence and machine learning using Python programming. I was awarded Phase 1 of this scholarship, enabling me to pursue a Nanodegree programs worth the value of over $3,000. In Phase 1 I was selected selected the top 2,000 global applicants. The Udacity Nanodegree entitled 'AI Programming with Python' that helped learners to hone their theoretical and practical knowledge in Python programming to make them prepare for AI and ML programming. [Fund worth: 5,000 USD]",
       "image_path": "",
       "award_link": "https://www.udacity.com/scholarships/aws-ai-ml-scholars"
     },
@@ -102,7 +102,7 @@
         "location": "Coventry, United Kingdom",
         "link": "https://www.coventry.ac.uk/"
       },
-      "description_full": "The Deakin University Postgraduate Research Scholarship (DUPRS) supports my joint doctoral study with Coventry University. The scholarship includes full tuition coverage, health insurance, and a living stipend during the study period at Deakin University",
+      "description_full": "The Deakin University Postgraduate Research Scholarship (DUPRS) supports my joint doctoral study with Coventry University. The scholarship includes full tuition coverage, health insurance, and living expanse stipend during the study period at Deakin University. [Fund worth: ~147,500 AUD total; ~35,000 AUD per annum for 3.5 years]",
       "image_path": "",
       "award_link": "https://www.deakin.edu.au/study/fees-and-scholarships/scholarships/find-a-scholarship/rtp-and-duprs"
     },
@@ -122,7 +122,7 @@
         "location": "",
         "link": ""
       },
-      "description_full": "Received this award for delivering the best presentation at the Annual School Conference organized by the School of IT, Deakin University in 2021. The recognition included a prize of AUD 200.",
+      "description_full": "Received this award for delivering the best presentation at the Annual School Conference organized by the School of IT, Deakin University in 2021. The recognition included a prize of AUD 200. [Prize worth: 200 AUD]",
       "image_path": "",
       "award_link": "https://drive.google.com/file/d/1LEzm1WLVP_XSevjWjaTH4YkkNbu5WXgR/view"
     },
@@ -142,7 +142,7 @@
         "location": "Melbourne, Australia",
         "link": "https://www.deakin.edu.au/"
       },
-      "description_full": "The Science and Technology Fellowship (STF), awarded by the Ministry of Science and Technology in Bangladesh, supports postgraduate study in information technology at globally recognized institutions. Initially awarded for studies at Wageningen University, the fellowship was redirected toward my studies at Deakin University, Australia.",
+      "description_full": "The Science and Technology Fellowship (STF), awarded by the Ministry of Science and Technology in Bangladesh, supports postgraduate study in information technology at globally recognized institutions. Initially awarded for studies at Wageningen University, the fellowship was redirected toward my studies at Deakin University, Australia. [Fund worth: ~356,000 AUD total ; ~2,880,000 BDT stipend + ~320,000 AUD tuition fees]",
       "image_path": "",
       "award_link": ""
     },

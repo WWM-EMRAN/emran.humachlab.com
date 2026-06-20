@@ -54,7 +54,7 @@
       },
       "status": "Phase 1 Completed",
       "short_description": "Prediction of indoor air temperature and quality metrics using meteorological data and deep ensemble machine learning models.",
-      "long_description": "Contributed as a Research Assistant to a MAAP linkage project funded by the Australian Research Council. This project involved collaboration with Monash University and AETMOS, focusing on predicting indoor air temperature and air quality using meteorological data. The work explored deep learning architectures to evaluate health impacts of environmental conditions, and proposed predictive models for smart urban sustainability.",
+      "long_description": "Contributed as a Research Assistant to a MAAP linkage project funded by the Australian Research Council. This project involved collaboration with Monash University and AETMOS, focusing on predicting indoor air temperature and air quality using meteorological data. The work explored deep learning architectures to evaluate health impacts of environmental conditions, and proposed predictive models for smart urban sustainability. [Total fund worth: ~300,500 AUD]",
       "funding": "ARC MAAP linkage project fund",
       "funding_organization": [
         {
@@ -136,7 +136,7 @@
       },
       "status": "Completed",
       "short_description": "Designing a 3-Layer Network Security Technique in Servers for Prevention of DDoS Attack.",
-      "long_description": "This project proposed a novel three-layered security framework to mitigate DDoS attacks targeting server infrastructures. The system design integrated preventive, detection, and response mechanisms to enhance cybersecurity resilience and ensure uninterrupted service availability. The project was funded by HSTU through the IRT Annual Research Grant.",
+      "long_description": "This project proposed a novel three-layered security framework to mitigate DDoS attacks targeting server infrastructures. The system design integrated preventive, detection, and response mechanisms to enhance cybersecurity resilience and ensure uninterrupted service availability. The project was funded by HSTU through the IRT Annual Research Grant. [Fund worth: ~120,000 BDT]",
       "funding": "IRT Annual Research Fund",
       "funding_organization": [
         {
@@ -167,7 +167,7 @@
       },
       "status": "Completed",
       "short_description": "Analysis and Design of a Non-Invasive Way of Measuring and Monitoring Blood-Sodium Concentration Level Using Near-Infrared Spectroscopy.",
-      "long_description": "This project explored the feasibility of developing a non-invasive technique to monitor blood sodium concentration using near-infrared spectroscopy. The research involved signal processing, optical modeling, and preliminary prototype design to assess potential applications in real-time clinical diagnostics. It was supported by HSTU’s IRT Annual Research Fund.",
+      "long_description": "This project explored the feasibility of developing a non-invasive technique to monitor blood sodium concentration using near-infrared spectroscopy. The research involved signal processing, optical modeling, and preliminary prototype design to assess potential applications in real-time clinical diagnostics. It was supported by HSTU’s IRT Annual Research Fund. [Fund worth: ~120,000 BDT]",
       "funding": "IRT Annual Research Fund",
       "funding_organization": [
         {
