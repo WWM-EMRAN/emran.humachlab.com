@@ -49,7 +49,7 @@
       "image_path": "assets/img/gallery/emran-bg5.jpg",
       "title": "The unseen path",
       "description": "A wooden stairs to the ocean",
-      "location": "Phillip Island, Victoria, Australia"
+      "location": "The great ocean road, Victoria, Australia"
     },
     {
       "id_ref": "gal_depth_ocean",
@@ -58,7 +58,7 @@
       "image_path": "assets/img/gallery/emran-bg6.jpg",
       "title": "Depth of the ocean",
       "description": "The deep blue ocean water",
-      "location": "Phillip Island, Victoria, Australia"
+      "location": "The great ocean road, Victoria, Australia"
     },
     {
       "id_ref": "gal_shores_island",
@@ -67,7 +67,7 @@
       "image_path": "assets/img/gallery/emran-bg7.jpg",
       "title": "Shores of the island",
       "description": "The ocean waves touching the island shores",
-      "location": "Phillip Island, Victoria, Australia"
+      "location": "The great ocean road, Victoria, Australia"
     },
     {
       "id_ref": "gal_meeting_point",
@@ -76,7 +76,7 @@
       "image_path": "assets/img/gallery/emran-bg8.jpg",
       "title": "The meeting point",
       "description": "The ocean, the sky and the land meet",
-      "location": "Phillip Island, Victoria, Australia"
+      "location": "The great ocean road, Victoria, Australia"
     },
     {
       "id_ref": "gal_ocean_breeze",
@@ -85,7 +85,7 @@
       "image_path": "assets/img/gallery/emran-bg9.jpg",
       "title": "The ocean breeze",
       "description": "The ocean breeze and the waves",
-      "location": "Phillip Island, Victoria, Australia"
+      "location": "The great ocean road, Victoria, Australia"
     },
     {
       "id_ref": "gal_rocky_shores",
@@ -94,7 +94,7 @@
       "image_path": "assets/img/gallery/emran-bg10.jpg",
       "title": "The rocky shores",
       "description": "The rocky shores of the ocean",
-      "location": "Phillip Island, Victoria, Australia"
+      "location": "The great ocean road, Victoria, Australia"
     },
     {
       "id_ref": "gal_silent_ocean",
@@ -103,7 +103,7 @@
       "image_path": "assets/img/gallery/emran-bg11.jpg",
       "title": "The silent ocean",
       "description": "The silent ocean water",
-      "location": "Phillip Island, Victoria, Australia"
+      "location": "The great ocean road, Victoria, Australia"
     },
     {
       "id_ref": "gal_layers_nature",
@@ -112,7 +112,7 @@
       "image_path": "assets/img/gallery/emran-bg12.jpg",
       "title": "Layers of the nature",
       "description": "The sky, the ocean and the land layers",
-      "location": "Phillip Island, Victoria, Australia"
+      "location": "The great ocean road, Victoria, Australia"
     },
     {
       "id_ref": "gal_blues",
@@ -121,7 +121,7 @@
       "image_path": "assets/img/gallery/emran-bg13.jpg",
       "title": "The blues",
       "description": "The blue ocean meets the blue sky",
-      "location": "Phillip Island, Victoria, Australia"
+      "location": "The great ocean road, Victoria, Australia"
     },
     {
       "id_ref": "gal_protectors",
