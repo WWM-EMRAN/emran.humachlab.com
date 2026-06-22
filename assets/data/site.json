@@ -16,7 +16,8 @@
       "favicon_gif": "./assets/img/Emran_Ali_Logo_Fav.gif",
       "favicon_ico": "./assets/img/Emran_Ali_Logo_Fav.ico",
       "apple_touch_icon": "./assets/img/Emran_Ali_Logo_Fav.ico",
-      "logo_png": "./assets/img/Emran_Ali_Logo_Fav.png"
+      "logo_png": "./assets/img/Emran_Ali_Logo_Fav.png",
+      "logo_ori_png": "./assets/img/Emran_Ali_Logo_Original.png"
     },
     "images": {
       "profile_image_pp": "./assets/img/myimg/emran-ali-pp.jpg",
