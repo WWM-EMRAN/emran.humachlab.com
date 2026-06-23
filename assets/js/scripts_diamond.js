@@ -476,6 +476,13 @@
         let snapTargetRotY = 0;
         let currentSubmenu = [];
         let activeOrbitKey = '';
+
+        // Temporary selection pause: after a face click, keep the chosen face
+        // at the front briefly, then resume normal auto-rotation after 10s
+        // with no further user interaction. Manual Pause still stays paused.
+        const AUTO_RESUME_DELAY = 10000;
+        let rotationPauseReason = '';
+        let autoResumeTimer = null;
         let orbitCleared = false;
         let externalPreviewActive = false;
 
@@ -633,12 +640,57 @@
             }
         }
 
-        function setRotationPaused(paused) {
-            globalPaused = Boolean(paused);
-            auto = !globalPaused;
+        function clearAutoResumeTimer() {
+            if (autoResumeTimer) {
+                window.clearTimeout(autoResumeTimer);
+                autoResumeTimer = null;
+            }
+        }
+
+        function updatePauseButton() {
             if (pauseBtn) {
                 pauseBtn.textContent = globalPaused ? 'Resume rotation' : 'Pause rotation';
                 pauseBtn.setAttribute('aria-pressed', String(globalPaused));
+            }
+        }
+
+        function resumeRotationAfterInactivity() {
+            autoResumeTimer = null;
+            if (rotationPauseReason !== 'temporary') return;
+
+            rotationPauseReason = '';
+            globalPaused = false;
+            auto = true;
+            snapAnimating = false;
+            hoverFace = -1;
+            hoverTable = false;
+            updatePauseButton();
+            syncPanel(currentCenterIndexSafe(), false, false);
+            render();
+        }
+
+        function scheduleAutoResumeAfterInactivity() {
+            if (rotationPauseReason !== 'temporary') return;
+            clearAutoResumeTimer();
+            autoResumeTimer = window.setTimeout(resumeRotationAfterInactivity, AUTO_RESUME_DELAY);
+        }
+
+        function noteRotationActivity() {
+            if (globalPaused && rotationPauseReason === 'temporary') {
+                scheduleAutoResumeAfterInactivity();
+            }
+        }
+
+        function setRotationPaused(paused, reason = 'manual') {
+            globalPaused = Boolean(paused);
+            auto = !globalPaused;
+            rotationPauseReason = globalPaused ? reason : '';
+            updatePauseButton();
+
+            if (globalPaused && rotationPauseReason === 'temporary') {
+                scheduleAutoResumeAfterInactivity();
+            } else {
+                clearAutoResumeTimer();
             }
         }
 
@@ -761,7 +813,7 @@
                 // geometry index to the front even if rotation is currently paused.
                 snapAnimating = false;
                 rotY = -(selectedIndex * (360 / N));
-                setRotationPaused(true);
+                setRotationPaused(true, 'temporary');
             }
 
             syncPanel(selectedIndex, true, false);
@@ -976,6 +1028,7 @@
         }
 
         function onFacetEnter(idx) {
+            noteRotationActivity();
             hoverFace = idx;
             hoverTable = false;
             auto = false;
@@ -984,6 +1037,7 @@
         }
 
         function onFacetLeave() {
+            noteRotationActivity();
             hoverFace = -1;
             if (!dragging && !stage.matches(':hover') && !globalPaused) auto = true;
             syncPanel(currentCenterIndexSafe(), false, false);
@@ -1014,6 +1068,7 @@
         });
         tablePoly.style.cursor = 'pointer';
         tablePoly.addEventListener('mouseenter', () => {
+            noteRotationActivity();
             hoverTable = true;
             hoverFace = -1;
             auto = false;
@@ -1021,6 +1076,7 @@
             render();
         });
         tablePoly.addEventListener('mouseleave', () => {
+            noteRotationActivity();
             hoverTable = false;
             if (!dragging && !stage.matches(':hover') && !globalPaused) auto = true;
             syncPanel(currentCenterIndexSafe(), false, false);
@@ -1035,6 +1091,7 @@
         });
 
         function down(x) {
+            noteRotationActivity();
             dragging = true;
             auto = false;
             snapAnimating = false;
@@ -1046,6 +1103,7 @@
 
         function move(x) {
             if (!dragging) return;
+            noteRotationActivity();
             const dx = x - startX;
             if (Math.abs(dx) > 3) moved = true;
             rotY = startRot + dx * .42;
@@ -1053,14 +1111,17 @@
         }
 
         function up() {
+            noteRotationActivity();
             if (!dragging) return;
             dragging = false;
             scene.style.cursor = 'grab';
             if (!stage.matches(':hover') && hoverFace === -1 && !globalPaused) auto = true;
         }
 
-        stage.addEventListener('mouseenter', () => { if (!globalPaused) auto = false; });
+        stage.addEventListener('mouseenter', () => { noteRotationActivity(); if (!globalPaused) auto = false; });
+        stage.addEventListener('mousemove', noteRotationActivity);
         stage.addEventListener('mouseleave', () => {
+            noteRotationActivity();
             hoverFace = -1;
             hoverTable = false;
             if (!dragging && !globalPaused) auto = true;
@@ -1074,8 +1135,8 @@
         window.addEventListener('touchend', up);
 
         if (orbitArea) {
-            orbitArea.addEventListener('mouseenter', () => { orbitPaused = true; auto = false; });
-            orbitArea.addEventListener('mouseleave', () => { orbitPaused = false; if (!globalPaused && !stage.matches(':hover')) auto = true; });
+            orbitArea.addEventListener('mouseenter', () => { noteRotationActivity(); orbitPaused = true; auto = false; });
+            orbitArea.addEventListener('mouseleave', () => { noteRotationActivity(); orbitPaused = false; if (!globalPaused && !stage.matches(':hover')) auto = true; });
         }
 
         if (openBtn) {
