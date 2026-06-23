@@ -44,8 +44,10 @@
         { label: 'Contact Details', url: '#contact_details', icon_class: 'bi bi-person-lines-fill' }
     ];
 
+    // V23: symmetric card fan positions around the exact deck centre.
+    // The original fan was visually a little right-heavy in the narrower middle panel.
     const CARD_POSITIONS = [
-        [34, 236, -24], [104, 182, -16], [185, 148, -8], [270, 134, 0], [355, 148, 8], [436, 182, 16], [506, 236, 24]
+        [35, 236, -24], [113, 182, -16], [191, 148, -8], [269, 134, 0], [347, 148, 8], [425, 182, 16], [503, 236, 24]
     ];
 
     function $(id) { return document.getElementById(id); }
@@ -371,6 +373,85 @@
         let selectedCardEl = null;
         let currentSubmenu = [];
 
+        let resizeObserver = null;
+
+        function fitDeckToStage() {
+            const stage = deck.closest('.card-stage');
+            if (!stage) return;
+
+            // V26: use a safer scale and then correct the real rendered fan bounds.
+            // This avoids the visual right-drift seen on mobile and gives desktop a
+            // small left bias without allowing either edge to be cropped.
+            const stageWidth = stage.clientWidth || 0;
+            const stageHeight = stage.clientHeight || 0;
+            const isMobile = window.matchMedia('(max-width: 760px)').matches;
+            const isDesktop = window.matchMedia('(min-width: 981px)').matches;
+
+            const visualFanWidth = isMobile ? 820 : 780;
+            const visualFanHeight = isMobile ? 575 : 565;
+            const sideAllowance = isMobile ? 26 : 44;
+            const verticalAllowance = isMobile ? 28 : 24;
+            const minScale = isMobile ? 0.36 : 0.42;
+
+            const availableWidth = Math.max(240, stageWidth - sideAllowance);
+            const availableHeight = Math.max(340, stageHeight - verticalAllowance);
+            const widthScale = availableWidth / visualFanWidth;
+            const heightScale = availableHeight / visualFanHeight;
+            const scale = Math.min(1, Math.max(minScale, Math.min(widthScale, heightScale)));
+
+            const preferredOffset = isDesktop ? -18 : (isMobile ? -10 : -8);
+            deck.style.setProperty('--card-deck-scale', scale.toFixed(3));
+            deck.style.setProperty('--card-deck-render-height', `${Math.ceil(530 * scale)}px`);
+            deck.style.setProperty('--card-deck-x', `${preferredOffset}px`);
+            deck.classList.add('is-fit-ready');
+
+            requestAnimationFrame(() => correctDeckBounds(stage, preferredOffset, isMobile));
+        }
+
+        function correctDeckBounds(stage, preferredOffset, isMobile) {
+            const cards = Array.from(deck.querySelectorAll('.academic-card'));
+            if (!cards.length) return;
+
+            const stageRect = stage.getBoundingClientRect();
+            if (!stageRect.width) return;
+
+            let minLeft = Infinity;
+            let maxRight = -Infinity;
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                minLeft = Math.min(minLeft, rect.left);
+                maxRight = Math.max(maxRight, rect.right);
+            });
+            if (!Number.isFinite(minLeft) || !Number.isFinite(maxRight)) return;
+
+            const buffer = isMobile ? 10 : 14;
+            const targetCenter = (stageRect.left + stageRect.right) / 2 + preferredOffset;
+            const fanCenter = (minLeft + maxRight) / 2;
+            let correction = targetCenter - fanCenter;
+
+            // If the preferred center would crop an edge, containment wins.
+            if (minLeft + correction < stageRect.left + buffer) {
+                correction += (stageRect.left + buffer) - (minLeft + correction);
+            }
+            if (maxRight + correction > stageRect.right - buffer) {
+                correction -= (maxRight + correction) - (stageRect.right - buffer);
+            }
+
+            const finalOffset = Math.round(preferredOffset + correction);
+            deck.style.setProperty('--card-deck-x', `${finalOffset}px`);
+        }
+
+        function startDeckFitObserver() {
+            fitDeckToStage();
+            window.addEventListener('resize', fitDeckToStage, { passive: true });
+            if ('ResizeObserver' in window) {
+                const stage = deck.closest('.card-stage');
+                resizeObserver = new ResizeObserver(fitDeckToStage);
+                if (stage) resizeObserver.observe(stage);
+            }
+            requestAnimationFrame(fitDeckToStage);
+        }
+
         function getPosition(idx) {
             if (idx < CARD_POSITIONS.length) return CARD_POSITIONS[idx];
             const center = 270;
@@ -544,6 +625,7 @@
             });
         }
 
+        startDeckFitObserver();
         selectIndex(0, false);
         return { selectSection: selectIndex, previewMenuItem, clearMenuPreview, selectMenuItem, previewSubmenuItem };
     }
