@@ -279,6 +279,81 @@
         return `<i class="${cls}" aria-hidden="true"></i>`;
     }
 
+    function renderLeftSocialLinks(site) {
+        const socialBox = $('diamondLeftSocial');
+        const links = site?.social_links?.main || [];
+        if (!socialBox || !Array.isArray(links)) return;
+
+        socialBox.innerHTML = links.map(link => {
+            const platform = escapeHtml(link.platform || 'social');
+            const url = escapeHtml(link.url || '#');
+            const icon = iconHtml(link.icon_class || 'bi bi-link-45deg');
+            const label = escapeHtml(link.label || link.platform || 'Social link');
+            const externalAttrs = String(link.url || '').startsWith('http')
+                ? ' target="_blank" rel="noreferrer"'
+                : '';
+            return `<a href="${url}"${externalAttrs} class="${platform}" aria-label="${label}">${icon}</a>`;
+        }).join('');
+    }
+
+    function renderLeftMenuFooter(site) {
+        const footerBox = $('diamondLeftMenuFooter');
+        const meta = site?.footer_meta?.menu_footer;
+        const assets = site?.assets || {};
+        if (!footerBox || !meta) return;
+
+        const rawYear = meta.copyright_year || new Date().getFullYear();
+        const year = (typeof SiteUtil !== 'undefined' && typeof SiteUtil.getCopyrightYear === 'function')
+            ? SiteUtil.getCopyrightYear(rawYear)
+            : (rawYear === 'auto' ? new Date().getFullYear() : rawYear);
+
+        const logoPage = escapeHtml(meta.copyright_logo_url || 'ea_logo');
+        const textPage = escapeHtml(meta.copyright_text_url || 'copyright');
+        const owner = escapeHtml(meta.copyright_owner || '');
+        const logoSrc = escapeHtml(assets?.icons?.logo_png || assets?.icons?.favicon_png || './assets/img/Emran_Ali_Logo_Fav.png');
+        const links = Array.isArray(meta.links) ? meta.links : [];
+
+        footerBox.innerHTML = `
+            <div class="copyright text-center-force">
+                <p>
+                    © Copyright · ${escapeHtml(year)}
+                    <strong>
+                        <span>
+                            <a href="page_details.html?page=${logoPage}">
+                                <img src="${logoSrc}" alt="Logo" class="img-fluid rounded-circle logo-sm">
+                            </a>
+                            <a href="page_details.html?page=${textPage}"> ${owner} </a>
+                        </span>
+                    </strong>
+                </p>
+            </div>
+            <div class="credits text-center-force">
+                ${links.map(link => `<a href="page_details.html?page=${escapeHtml(link.url || '#')}"> ${escapeHtml(link.label || '')} </a>`).join(' | ')}
+            </div>`;
+    }
+
+
+    function cleanupDuplicateHeroTaglines() {
+        const tagline = $('diamondHeroTagline');
+        const leftPanel = document.querySelector('.diamond-left-panel');
+        if (!tagline || !leftPanel) return;
+
+        const text = tagline.textContent.trim().replace(/\s+/g, ' ');
+        if (!text) return;
+
+        // Keep only the official JSON-filled tagline placeholder.
+        // This prevents older hard-coded/fallback copies from appearing beside it.
+        [...leftPanel.querySelectorAll('.diamond-tagline')].forEach(node => {
+            if (node !== tagline) node.remove();
+        });
+
+        [...leftPanel.querySelectorAll('p, div, span')].forEach(node => {
+            if (node === tagline || tagline.contains(node) || node.contains(tagline)) return;
+            const nodeText = (node.textContent || '').trim().replace(/\s+/g, ' ');
+            if (nodeText === text) node.remove();
+        });
+    }
+
     function hydrateHeroText(site, personal) {
         const assets = site?.assets || {};
         const hero = personal?.hero || {};
@@ -314,7 +389,11 @@
             const institutes = [hero.title_institute_primary, hero.title_institute_secondary].filter(Boolean);
             if (institutes.length) heroInstitutes.innerHTML = institutes.map(escapeHtml).join('<br>');
         }
-        if (heroTagline && hero.tagline) heroTagline.textContent = hero.tagline;
+        if (heroTagline && hero.tagline) {
+            heroTagline.textContent = hero.tagline;
+            heroTagline.style.display = '';
+        }
+        cleanupDuplicateHeroTaglines();
     }
 
     function bindSmoothInternalLinks() {
@@ -393,6 +472,8 @@
         let globalPaused = false;
         let orbitInnerPhase = 0;
         let orbitOuterPhase = 0;
+        let snapAnimating = false;
+        let snapTargetRotY = 0;
         let currentSubmenu = [];
         let activeOrbitKey = '';
         let orbitCleared = false;
@@ -528,6 +609,39 @@
             return Math.round(v / step) % N;
         }
 
+        function shortestAngleDelta(target, current) {
+            return ((target - current + 540) % 360) - 180;
+        }
+
+        function frontRotationForFacet(idx) {
+            // Geometry index 0 is front at rotY = 0. For every other facet,
+            // use the nearest equivalent rotation that places that exact
+            // geometry index at the front/centre of the diamond.
+            const step = 360 / N;
+            const baseTarget = -(idx * step);
+            return rotY + shortestAngleDelta(baseTarget, rotY);
+        }
+
+        function snapFacetToFront(idx, animate = true) {
+            snapTargetRotY = frontRotationForFacet(idx);
+            auto = false;
+            if (animate) {
+                snapAnimating = true;
+            } else {
+                rotY = snapTargetRotY;
+                snapAnimating = false;
+            }
+        }
+
+        function setRotationPaused(paused) {
+            globalPaused = Boolean(paused);
+            auto = !globalPaused;
+            if (pauseBtn) {
+                pauseBtn.textContent = globalPaused ? 'Resume rotation' : 'Pause rotation';
+                pauseBtn.setAttribute('aria-pressed', String(globalPaused));
+            }
+        }
+
         function renderIcon(iconClass) {
             if (titleIcon) titleIcon.innerHTML = iconHtml(iconClass);
         }
@@ -638,8 +752,18 @@
 
         function selectSection(idx, snap = true, navigate = false) {
             selectedTable = false;
+            externalPreviewActive = false;
+            hoverTable = false;
             selectedIndex = Math.max(0, Math.min(N - 1, idx));
-            if (snap) rotY = -(selectedIndex * (360 / N));
+
+            if (snap) {
+                // Immediate, deterministic snap: clicking a face must bring that exact
+                // geometry index to the front even if rotation is currently paused.
+                snapAnimating = false;
+                rotY = -(selectedIndex * (360 / N));
+                setRotationPaused(true);
+            }
+
             syncPanel(selectedIndex, true, false);
             render();
             if (navigate) smoothScrollTo(getTargetHash(menu[selectedIndex]), true);
@@ -768,11 +892,11 @@
                 let lRange;
                 let alpha;
                 if (f.type === 'crown') {
-                    h = 196; s = 78; lBase = 16; lRange = 46; alpha = Math.max(0.45, Math.min(0.97, 0.5 + bright * 0.55));
+                    h = 220; s = 12; lBase = 10; lRange = 32; alpha = Math.max(0.48, Math.min(0.97, 0.52 + bright * 0.45));
                 } else if (f.type === 'pavilion') {
-                    h = 246; s = 50; lBase = 4; lRange = 26; alpha = 0.88;
+                    h = 225; s = 10; lBase = 3; lRange = 20; alpha = 0.90;
                 } else {
-                    h = 190; s = 65; lBase = 46; lRange = 42; alpha = 0.95;
+                    h = 220; s = 8; lBase = 34; lRange = 30; alpha = 0.96;
                 }
 
                 let extraL = 0;
@@ -780,11 +904,11 @@
                 let strokeW = 1.1;
                 if (f.type !== 'table') {
                     if (f.idx === selectedIndex) { extraL += 8; strokeCol = 'rgba(255,255,255,.86)'; strokeW = 1.8; }
-                    if (f.idx === hoverFace) { extraL += 18; strokeCol = 'rgba(160,232,255,.98)'; strokeW = 2.5; }
+                    if (f.idx === hoverFace) { extraL += 18; strokeCol = 'rgba(235,238,245,.98)'; strokeW = 2.5; }
                     if (f.idx === hoverFace || f.idx === selectedIndex) alpha = 0.97;
                 } else {
                     if (selectedTable) { extraL += 8; strokeCol = 'rgba(255,255,255,.88)'; strokeW = 1.8; }
-                    if (hoverTable) { extraL += 18; strokeCol = 'rgba(160,232,255,.95)'; strokeW = 2.4; alpha = 0.99; }
+                    if (hoverTable) { extraL += 18; strokeCol = 'rgba(235,238,245,.95)'; strokeW = 2.4; alpha = 0.99; }
                 }
                 const lightness = Math.max(2, Math.min(94, lBase + bright * lRange + extraL));
                 f.el.setAttribute('fill', `hsla(${h},${s}%,${lightness}%,${alpha})`);
@@ -806,7 +930,7 @@
                     const rel = Math.abs(((raw + 180) % 360) - 180);
                     const isHot = f.idx === hoverFace || f.idx === selectedIndex;
                     grp.style.opacity = String(isHot ? 1 : (rel < 38 ? 1 : (rel < 100 ? 0.86 : 0.58)));
-                    grp.style.filter = isHot ? 'drop-shadow(0 0 12px rgba(105,230,255,.82))' : 'drop-shadow(0 0 6px rgba(0,0,0,.62))';
+                    grp.style.filter = isHot ? 'drop-shadow(0 0 12px rgba(235,238,245,.70))' : 'drop-shadow(0 0 6px rgba(0,0,0,.62))';
                     gemSvg.appendChild(grp);
                 }
 
@@ -824,7 +948,7 @@
                     const rel = Math.abs(((raw + 180) % 360) - 180);
                     const isHot = f.idx === hoverFace || f.idx === selectedIndex;
                     grp.style.opacity = String(isHot ? 1 : (rel < 38 ? 1 : (rel < 100 ? 0.82 : 0.54)));
-                    grp.style.filter = isHot ? 'drop-shadow(0 0 12px rgba(105,230,255,.82))' : 'drop-shadow(0 0 6px rgba(0,0,0,.68))';
+                    grp.style.filter = isHot ? 'drop-shadow(0 0 12px rgba(235,238,245,.70))' : 'drop-shadow(0 0 6px rgba(0,0,0,.68))';
                     gemSvg.appendChild(grp);
                 }
             });
@@ -840,7 +964,7 @@
             tableLogoGroup.style.opacity = (hoverTable || selectedTable) ? '1' : '0.96';
             gemSvg.appendChild(tableLogoGroup);
 
-            if (!externalPreviewActive && hoverFace === -1 && !dragging && !hoverTable) syncPanel(currentCenterIndexSafe(), false, false);
+            if (!snapAnimating && !externalPreviewActive && hoverFace === -1 && !dragging && !hoverTable) syncPanel(currentCenterIndexSafe(), false, false);
         }
 
         function placeApexGlow() {
@@ -870,13 +994,23 @@
             poly.style.cursor = 'pointer';
             poly.addEventListener('mouseenter', () => onFacetEnter(idx));
             poly.addEventListener('mouseleave', onFacetLeave);
-            poly.addEventListener('click', () => { if (!moved) selectSection(idx, true, false); });
+            poly.addEventListener('click', event => {
+                event.preventDefault();
+                event.stopPropagation();
+                moved = false;
+                selectSection(idx, true, false);
+            });
         });
         pavPolys.forEach((poly, idx) => {
             poly.style.cursor = 'pointer';
             poly.addEventListener('mouseenter', () => onFacetEnter(idx));
             poly.addEventListener('mouseleave', onFacetLeave);
-            poly.addEventListener('click', () => { if (!moved) selectSection(idx, true, false); });
+            poly.addEventListener('click', event => {
+                event.preventDefault();
+                event.stopPropagation();
+                moved = false;
+                selectSection(idx, true, false);
+            });
         });
         tablePoly.style.cursor = 'pointer';
         tablePoly.addEventListener('mouseenter', () => {
@@ -892,20 +1026,18 @@
             syncPanel(currentCenterIndexSafe(), false, false);
             render();
         });
-        tablePoly.addEventListener('click', () => {
-            if (!moved) {
-                selectedTable = true;
-                selectedIndex = 0;
-                rotY = 0;
-                auto = false;
-                syncPanel(0, true, false);
-                render();
-            }
+        tablePoly.addEventListener('click', event => {
+            event.preventDefault();
+            event.stopPropagation();
+            moved = false;
+            selectedTable = true;
+            selectSection(0, true, false);
         });
 
         function down(x) {
             dragging = true;
             auto = false;
+            snapAnimating = false;
             moved = false;
             startX = x;
             startRot = rotY;
@@ -955,19 +1087,26 @@
 
         if (pauseBtn) {
             pauseBtn.addEventListener('click', () => {
-                globalPaused = !globalPaused;
-                auto = !globalPaused;
-                pauseBtn.textContent = globalPaused ? 'Resume rotation' : 'Pause rotation';
-                pauseBtn.setAttribute('aria-pressed', String(globalPaused));
+                setRotationPaused(!globalPaused);
             });
         }
 
         placeApexGlow();
         selectSection(0, false, false);
-        auto = true;
+        setRotationPaused(false);
 
         (function loop() {
-            if (auto && !dragging && hoverFace === -1 && !orbitPaused && !globalPaused) {
+            if (snapAnimating && !dragging) {
+                const delta = shortestAngleDelta(snapTargetRotY, rotY);
+                if (Math.abs(delta) < 0.2) {
+                    rotY = snapTargetRotY;
+                    snapAnimating = false;
+                    syncPanel(selectedIndex, true, false);
+                } else {
+                    rotY += delta * 0.22;
+                }
+                render();
+            } else if (auto && !dragging && hoverFace === -1 && !orbitPaused && !globalPaused) {
                 rotY += 0.18;
                 render();
             }
@@ -996,6 +1135,8 @@
             const site = SiteCore.get('site') || {};
             const personal = SiteCore.get('personal_information') || {};
             hydrateHeroText(site, personal);
+            renderLeftSocialLinks(site);
+            renderLeftMenuFooter(site);
 
             if (typeof SiteCommon !== 'undefined' && typeof SiteCommon.init === 'function') {
                 SiteCommon.init('main');

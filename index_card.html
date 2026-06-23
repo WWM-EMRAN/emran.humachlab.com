@@ -8,7 +8,7 @@
     <meta name="keywords" content="Emran Ali, Educator, Teacher, Trainer, Researcher, AI, Machine Learning, Data Science, PhD, Projects, Developer, Portfolio, Resume, CV, Personal Website">
     <meta name="author" content="Emran Ali">
 
-    <title>Emran Ali - Diamond Homepage</title>
+    <title>Emran Ali - Academic Card Deck Homepage</title>
 
     <link rel="icon" sizes="32x32" type="image/gif" href="./assets/img/Emran_Ali_Logo_Fav.gif">
     <link rel="icon" sizes="32x32" type="image/png" href="./assets/img/Emran_Ali_Logo_Fav.png">
@@ -30,10 +30,12 @@
 
     <link href="./assets/css/style.css" rel="stylesheet">
     <link href="./assets/css/style_custom.css" rel="stylesheet">
+    <!-- Diamond CSS is the shared visual base; card CSS overrides only the card-deck parts. -->
     <link href="./assets/css/style_diamond.css" rel="stylesheet">
+    <link href="./assets/css/style_card.css" rel="stylesheet">
 </head>
 
-<body class="index-page index-new-page">
+<body class="index-page index-new-page index-card-page">
 
     <div id="preloader">
         <div class="preloader-content">
@@ -44,14 +46,14 @@
         </div>
     </div>
 
-    <section id="hero" class="new-diamond-home section" aria-label="Interactive diamond homepage menu">
+    <section id="hero" class="new-diamond-home section" aria-label="Interactive academic card-deck homepage menu">
         <img alt="Hero Background" src="./assets/img/emran-ali-bg.jpg" class="new-hero-bg" id="newHeroBackground" data-aos="fade-in">
         <div class="new-hero-overlay"></div>
         <div class="diamond-ambient diamond-ambient-one"></div>
         <div class="diamond-ambient diamond-ambient-two"></div>
 
         <div class="new-home-topbar">
-            <a class="new-home-brand" href="./index_diamond.html" aria-label="Emran Ali homepage">
+            <a class="new-home-brand" href="./index_card.html" aria-label="Emran Ali card-deck homepage">
                 <img class="new-brand-photo" id="newBrandPhoto" src="./assets/img/myimg/emran-ali-pp.jpg" alt="Emran Ali profile photo">
                 <span class="new-brand-text">Emran Ali</span>
             </a>
@@ -79,53 +81,40 @@
                     IT @ Deakin University, Australia<br>
                     CSM @ Coventry University, United Kingdom
                 </p>
-<!--                <p class="diamond-tagline" id="diamondHeroTagline"></p>-->
+                <p class="diamond-tagline" id="diamondHeroTagline"></p>
 
                 <div class="diamond-left-menu-footer" id="diamondLeftMenuFooter" aria-label="Website footer links"></div>
             </aside>
 
-            <div class="diamond-stage-wrap glass" data-aos="fade-up" aria-label="3D diamond menu">
-                <div class="diamond-stage-toolbar" aria-label="Selected diamond section controls">
-                    <div class="diamond-selected-card diamond-stage-selected-card">
-                        <div class="diamond-selected-icon" id="diamondTitleIcon"><i class="bx bx-home"></i></div>
+            <div class="card-stage-wrap glass" data-aos="fade-up" aria-label="Transparent academic card deck menu">
+                <div class="card-stage-toolbar" aria-label="Selected card controls">
+                    <div class="diamond-selected-card card-stage-selected-card">
+                        <div class="diamond-selected-icon" id="cardTitleIcon"><i class="bx bx-home"></i></div>
                         <div>
-                            <div class="diamond-selected-label">Selected section</div>
-                            <div class="diamond-selected-title" id="diamondSectionTitle">Home</div>
-                            <div class="diamond-selected-text" id="diamondSectionText">Select a diamond facet to open a dynamic section.</div>
+                            <div class="diamond-selected-label">Selected card</div>
+                            <div class="diamond-selected-title" id="cardSectionTitle">Home</div>
+                            <div class="diamond-selected-text" id="cardSectionText">Select a card to open a dynamic section.</div>
                         </div>
                     </div>
-
-                    <div class="diamond-action-row diamond-stage-action-row">
-                        <button class="diamond-action-btn primary" id="diamondOpenSelected" type="button">Open Section</button>
-                        <button class="diamond-action-btn" id="diamondPauseToggle" type="button" aria-pressed="false">Pause Rotation</button>
+                    <div class="diamond-action-row card-stage-action-row">
+                        <button class="diamond-action-btn primary" id="cardOpenSelected" type="button">Open Section</button>
                     </div>
                 </div>
-                <div class="diamond-stage" id="diamondStage">
-                    <div class="diamond-scene" id="diamondScene">
-                        <div class="diamond-floor"></div>
-                        <div id="diamondGemWrap">
-                            <svg id="diamondGemSvg" role="img" aria-label="Rotating 3D diamond menu"></svg>
-                            <div class="diamond-apex-glow" id="diamondApexGlow"></div>
-                        </div>
-                    </div>
-<!--                    <div class="diamond-hint">Drag to rotate. Hover or click a facet to select. Icons, labels, and submenu links are loaded from <code>assets/data/site.json</code>.</div>-->
-                    <div class="diamond-hint">Drag to rotate. Hover or click a facet to select. Click on the <code>Open Section</code> to scroll to the section.</div>
+                <div class="card-stage" id="cardStage">
+                    <div class="diamond-pill small card-stage-pill">Academic card deck menu</div>
+                    <div class="card-deck" id="cardDeck" aria-label="Seven-card dynamic homepage menu"></div>
+                    <div class="card-hint">Hover a card to preview it. Click a card, then use <code>Open Section</code> to scroll to that section.</div>
                 </div>
             </div>
 
-            <aside class="diamond-orbit-panel glass" data-aos="fade-left" aria-label="Selected section and solar system submenu">
-                <div class="orbit-heading">
-                    <span class="diamond-pill small" id="diamondActivePill">Solar system submenu</span>
-                    <div class="diamond-selected-title" id="orbitPanelTitle">Submenu</div>
-                    <div class="orbit-note" id="orbitPanelNote">Select a diamond section that has submenu items to reveal the rotating planets.</div>
+            <aside class="card-detail-panel glass" data-aos="fade-left" aria-label="Selected card details and submenu tabs">
+                <div class="card-detail-heading">
+                    <span class="diamond-pill small" id="cardActivePill">Selected card • Home</span>
+                    <div class="diamond-selected-title" id="cardPanelTitle">Home</div>
+                    <div class="card-note" id="cardPanelNote">Landing overview and first impression for the personal website.</div>
                 </div>
-                <div class="orbit-area-new" id="diamondOrbitArea" aria-label="Rotating submenu planets">
-                    <div class="orbit-core-new" id="diamondOrbitCore">Submenu<br>Planets</div>
-                    <div class="orbit-ring-new one"></div>
-                    <div class="orbit-ring-new two"></div>
-                    <div id="diamondOrbitNodes"></div>
-                </div>
-                <div class="orbit-detail-new" id="diamondSkillDetail">The submenu is loaded dynamically from the selected menu item in <code>site.json</code>.</div>
+                <div class="card-tab-strip" id="cardExpertiseTabs" aria-label="Expertise submenu tabs"></div>
+                <div class="card-detail-box" id="cardDetailBox">Selection updates content. Card labels, icons, section links, and Expertise tabs are loaded from <code>site.json</code>.</div>
             </aside>
         </div>
     </section>
@@ -3679,7 +3668,7 @@
     <script src="./assets/js/site-common.js"></script>
     <script src="./assets/js/site-index.js"></script>
     <script src="./assets/js/scripts.js"></script>
-    <script src="./assets/js/scripts_diamond.js"></script>
+    <script src="./assets/js/scripts_card.js"></script>
 </body>
 
 </html>
