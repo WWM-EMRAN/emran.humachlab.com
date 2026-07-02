@@ -164,11 +164,17 @@ const SiteCV_Standard = {
         // Helper to clean display text for the links
         const getLabel = (linkObj) => {
             if (!linkObj) return "";
+            // return linkObj.url
+            //     .replace('mailto:', '')
+            //     .replace('https://', '')
+            //     .replace('http://', '')
+            //     .split('?')[0]
+            //     .split('/')[0];
             return linkObj.url
                 .replace('mailto:', '')
                 .replace('https://', '')
                 .replace('http://', '')
-                .split('?')[0]
+                .split('?')[1]
                 .split('/')[0];
         };
 
@@ -184,6 +190,7 @@ const SiteCV_Standard = {
                     <p class="cv-accent-subtitle lead m-0 text-center">${sloganText}</p>
                     <p class="m-0 small text-center text-muted">
                         <strong><i class="${teams?.icon_class || 'bi bi-microsoft-teams'}"></i></strong> 
+<!--                        <a href="${teams?.url || '#'}" target="_blank"> ${teams?.text || 'wwm.emran'} </a> |-->
                         <a href="${teams?.url || '#'}" target="_blank"> ${getLabel(teams) || 'wwm.emran'} </a> |
                         
                         <strong><i class="${email?.icon_class || 'bi bi-envelope'}"></i></strong> 
@@ -2182,7 +2189,8 @@ const SiteCV_TwoPage = {
                         <p class="cv-accent-subtitle lead m-0 text-center">${this.escape_html(sloganText)}</p>
                         <p class="m-0 small text-center text-muted">
                             <strong><i class="${this.escape_attribute(teams?.icon_class || 'bi bi-microsoft-teams')}"></i></strong>
-                            <a href="${this.escape_attribute(teams?.url || '#')}" target="_blank" rel="noopener noreferrer"> ${this.escape_html(label(teams))} </a> |
+                            <a href="${this.escape_attribute(teams?.url || '#')}" target="_blank" rel="noopener noreferrer">  ${this.escape_html(this.format_contact_display(teams.url))} </a> |
+<!--                            <a href="${this.escape_attribute(teams?.url || '#')}" target="_blank" rel="noopener noreferrer"> ${this.escape_html(label(teams))} </a> |-->
                             <strong><i class="${this.escape_attribute(email?.icon_class || 'bi bi-envelope')}"></i></strong>
                             <a href="${this.escape_attribute(email?.url || '#')}" target="_blank" rel="noopener noreferrer"> ${this.escape_html(label(email))} </a> |
                             <strong><i class="${this.escape_attribute(website?.icon_class || 'bi bi-globe')}"></i></strong>
@@ -2700,6 +2708,54 @@ const SiteCV_TwoPage = {
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
+    },
+
+    format_contact_display(value) {
+        const raw = String(value ?? '').trim();
+
+        if (!raw) return '';
+
+        // 1. mailto:emran.ali@research.deakin.edu.au
+        if (raw.startsWith('mailto:')) {
+            return raw.replace(/^mailto:/i, '').trim();
+        }
+
+        // 2. Microsoft Teams URL:
+        // https://teams.microsoft.com/l/chat/0/0?users=wwm.emran@outlook.com
+        if (raw.includes('teams.microsoft.com')) {
+            try {
+                const url = new URL(raw);
+                const users = url.searchParams.get('users');
+
+                if (users) {
+                    const firstUser = users.split(',')[0].trim();
+
+                    // wwm.emran@outlook.com -> wwm.emran
+                    return firstUser.split('@')[0];
+                }
+            } catch (error) {
+                console.warn('Invalid Teams URL:', raw, error);
+            }
+
+            return 'Microsoft Teams';
+        }
+
+        // 3. Normal website:
+        // https://emran.humachlab.com -> emran.humachlab.com
+        if (/^https?:\/\//i.test(raw)) {
+            try {
+                const url = new URL(raw);
+
+                return url.hostname.replace(/^www\./i, '');
+            } catch (error) {
+                return raw
+                    .replace(/^https?:\/\//i, '')
+                    .replace(/^www\./i, '')
+                    .replace(/\/$/, '');
+            }
+        }
+
+        return raw;
     },
 
     escape_attribute(value) {
