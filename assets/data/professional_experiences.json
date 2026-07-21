@@ -232,12 +232,14 @@
               ],
               "course_involvement": [
                 "PYTHON101: Introduction to Programming: Python",
-                "PYTHON203: Data Manipulation and Visualisation",
-                "PYTHON205: Introduction to Machine Learning: Regression",
-                "PYTHON206: Introduction to Machine Learning: Classification",
-                "PYTHON207: Introduction to Machine Learning: Unsupervised Learning"
+                "PYTHON203: Data Manipulation and Visualisation with Python",
+                "PYTHON205: Introduction to Machine Learning with Python: Regression",
+                "PYTHON206: Introduction to Machine Learning with Python: Classification",
+                "PYTHON207: Introduction to Machine Learning with Python: Unsupervised Learning",
+                "R101: Introduction to Programming: R",
+                "R203: Data Manipulation and Visualisation with Python"
               ],
-              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
+              "related_skills": "Research · Health Informatics · Machine Learning · Deep Learning · Signal Processing · Communication · Data Science · Data Analysis · Deep Learning · Python (Programming Language) · R (Programming Language) · LaTeX · Teaching · Training · Programming · Algorithms · GitHub"
             }
           ]
         }
