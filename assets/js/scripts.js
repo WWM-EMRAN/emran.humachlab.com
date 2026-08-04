@@ -684,4 +684,25 @@
     // Expose Navigation behavior to global window for dynamic loaders
     window.initNavigationBehavior = initNavigationBehavior;
 
+
+    // Register service worker for PWA / mobile app installation
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker
+                .register('/service-worker.js')
+                .then(registration => {
+                    console.log(
+                        'Service worker registered successfully:',
+                        registration.scope
+                    );
+                })
+                .catch(error => {
+                    console.warn(
+                        'Service worker registration failed:',
+                        error
+                    );
+                });
+        });
+    };
+
 })();
