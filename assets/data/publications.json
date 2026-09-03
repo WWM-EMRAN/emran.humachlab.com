@@ -13,6 +13,14 @@
       "column": "left",
       "items": [
         {
+          "id_ref": "jour_sleepstp",
+          "title": "Effectiveness of sleep stage transition probability features to detect sleep disorders from single-night hypnogram",
+          "icon_class": "bi bi-file-earmark",
+          "citation_text": "<strong>Ali E</strong>, Karmakar C, Daneshkhah A, Ellis J, Angelova M. Effectiveness of sleep stage transition probability features to detect sleep disorders from single-night hypnogram. Interface Focus. 2026 Aug 28;16(3):20250035.",
+          "abstract": "Sleep patterns offer profound insights into human health, with sleep dynamics playing a pivotal role in discerning patterns in healthy individuals and those with sleep disorders (Sub-SD). This study rigorously investigates sleep stage transition probabilities (STPs) as dynamic biomarkers to detect patterns in healthy subjects and Sub-SD through machine learning (ML) models. The STP features are calculated from the frequency of transitions between sleep stages, which are extracted from sleep hypnograms sourced from four widely used public datasets. The efficacy of these STP features is assessed using a combination of statistical and data-driven ML models. Statistical analysis reveals that the key discriminating features between healthy subjects and Sub-SD are predominantly linked to the transitions between deep and light sleep, as well as wakefulness and light sleep. These STP features also demonstrate great efficacy in the detection of sleep disorders, achieving the F1, sensitivity and specificity scores of 89.34, 96.17 and 69.5%, respectively, for a multi-dataset analysis using the extreme gradient boost model. However, the random forest model is found to be promising in detecting specific sleep disorders. The STP features as a stand-alone biomarker, exhibits significant potential in detecting sleep disorders and can be effectively employed for preliminary diagnostic purposes.",
+          "journal_link": "https://doi.org/10.1098/rsfs.2025.0035"
+        },
+        {
           "id_ref": "jour_mulmodinsdet",
           "title": "A Multi-Modal Biosignal-Based Sleep Analysis Framework for Insomnia Detection",
           "icon_class": "bi bi-file-earmark",
