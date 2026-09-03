@@ -2,47 +2,47 @@
  * SiteCV - Curriculum Vitae Page Controller
  */
 const SiteCV = {
-    init(type = 'standard') {
-        const activeType = type || 'standard';
+    init(type) {
+        console.log(`CV Initializing with '${type}' type...`);
 
-        console.log(`CV Initializing with '${activeType}' type...`);
-
+        // 1. Hook the selector
         const selector = document.getElementById('cvTypeSelector');
+
+        selector.value = type || 'standard';
+
+         // 1. Force the <body> class to match the selected mode
         const body = document.querySelector('body');
 
-        if (body) {
-            body.classList.remove(
-                'mode-standard',
-                'mode-one-page',
-                'mode-two-page',
-                'mode-detailed'
-            );
+        // 1.1. Remove ALL possible mode classes to ensure a clean state
+        body.classList.remove('mode-standard', 'mode-one-page', 'mode-two-page', 'mode-detailed');
 
-            if (activeType === 'onePage') {
-                body.classList.add('mode-one-page');
-            } else if (activeType === 'twoPage') {
-                body.classList.add('mode-two-page');
-            } else if (activeType === 'detailed') {
-                body.classList.add('mode-detailed');
-            } else {
-                body.classList.add('mode-standard');
-            }
+        // 1.2. Add the active mode class
+        if (type === 'onePage') {
+            body.classList.add('mode-one-page');
+        } else if (type === 'twoPage') {
+            body.classList.add('mode-two-page');
+        } else {
+            // Defaults to standard if type is 'standard', 'detailed', etc.
+            body.classList.add('mode-standard');
         }
 
+        // 2. Update the Selector UI
+        // const selector = document.getElementById('cvTypeSelector');
         if (selector) {
-            selector.value = activeType;
-
-            if (!selector.dataset.cvListenerAttached) {
-                selector.addEventListener('change', (e) => {
-                    const newType = e.target.value || 'standard';
-                    window.location.href = `curriculum_vitae.html?type=${newType}`;
-                });
-
-                selector.dataset.cvListenerAttached = 'true';
-            }
+            selector.value = type;
+            // The listener you already have for window.location.href stays here...
+           // Listen for changes and update URL
+           selector.addEventListener('change', (e) => {
+               const newType = e.target.value;
+               window.location.href = `curriculum_vitae.html?type=${newType}`;
+           });
         }
 
-        this.render_all_cv_type(activeType);
+        // --- 0. DATA SYNCHRONIZATION ---
+
+        // --- 1. RENDER ALL SECTIONS ---
+        this.render_all_cv_type(type);
+
 
         console.log("CV Page synchronization complete.");
     },
@@ -164,57 +164,18 @@ const SiteCV_Standard = {
         // Helper to clean display text for the links
         const getLabel = (linkObj) => {
             if (!linkObj) return "";
-
-            const rawUrl = String(linkObj.url || '').trim();
-            const rawText = String(linkObj.text || '').trim();
-
-            if (!rawUrl && rawText) {
-                return rawText;
-            }
-
-            if (!rawUrl) {
-                return "";
-            }
-
-            if (/^mailto:/i.test(rawUrl)) {
-                return rawUrl.replace(/^mailto:/i, '').trim();
-            }
-
-            if (rawUrl.includes('teams.microsoft.com')) {
-                try {
-                    const url = new URL(rawUrl);
-                    const users = url.searchParams.get('users');
-
-                    if (users) {
-                        return users
-                            .split(',')[0]
-                            .trim()
-                            .split('@')[0];
-                    }
-                } catch (error) {
-                    console.warn('Invalid Teams URL:', rawUrl, error);
-                }
-
-                if (rawText.includes('@')) {
-                    return rawText.split('@')[0];
-                }
-
-                return rawText || 'Microsoft Teams';
-            }
-
-            if (/^https?:\/\//i.test(rawUrl)) {
-                try {
-                    const url = new URL(rawUrl);
-                    return url.hostname.replace(/^www\./i, '');
-                } catch (error) {
-                    return rawUrl
-                        .replace(/^https?:\/\//i, '')
-                        .replace(/^www\./i, '')
-                        .replace(/\/$/, '');
-                }
-            }
-
-            return rawText || rawUrl;
+            // return linkObj.url
+            //     .replace('mailto:', '')
+            //     .replace('https://', '')
+            //     .replace('http://', '')
+            //     .split('?')[0]
+            //     .split('/')[0];
+            return linkObj.url
+                .replace('mailto:', '')
+                .replace('https://', '')
+                .replace('http://', '')
+                .split('?')[1]
+                .split('/')[0];
         };
 
         headerSection.innerHTML = `
